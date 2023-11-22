@@ -1,0 +1,282 @@
+<template>	
+	<div>	
+	    <b-carousel
+	        id="carousel-1"
+	        :interval="3000"
+	        indicators
+	        controls
+	        background="#ababab"
+	        img-width="1600"
+	        img-height="340"
+	        style="text-shadow: 1px 1px 2px #333; margin:0; padding: 0;"
+	      >
+	        <!-- Text slides with image -->
+	      <b-carousel-slide
+
+	        img-src="slide-1.jpg"
+	        >
+	      </b-carousel-slide>
+	      <b-carousel-slide 
+	        img-src="slide-2.jpg">
+	      </b-carousel-slide>
+	      <b-carousel-slide>
+	        <template v-slot:img>
+	            <img
+	              class="d-block img-fluid w-100"
+	              width="1024"
+	              height="480"
+	              src="slide-3.jpg"
+	            >
+	        </template>
+	      </b-carousel-slide>
+	    </b-carousel>
+		
+		<b-container id="content-p"  fluid>
+  		<b-row align-h="center">
+    	
+		 <b-col md="12" v-if="historial.length!=0">
+			<div class="super-titulo"><span>Productos Vistos Recientemente</span></div>
+			  <v-carousel>
+			    <template v-for="(item,indx) in historial">  
+			    <v-carousel-slide :index="indx">
+		          <div class="row">
+		            <div class="col-sm-12 col-md-3"  v-for="slider in item">
+		              <producto-carousel
+		              :idproducto="slider.ids"
+		              :img="slider.img"
+		              :name="slider.name"
+		              :precio="slider.precio"
+		              :logeado="logeado"
+		              >
+		              </producto-carousel>
+		            </div>
+		          </div>
+			    </v-carousel-slide>
+			    </template>
+			  </v-carousel>
+			</b-col>
+
+	<b-col md="12" style="padding: 0;margin-bottom: 50px;">
+		<div class="super-titulo" style="padding-left: 15px; display: flex;">
+			<span>Categorias:</span>
+		<b-form-select  class="mb-3" @input="onselected()"  v-model="selected" style="width: 20%;">
+		<!-- <b-form-select-option :value="null">selecciona tu localidad</b-form-select-option> -->
+		
+		<b-form-select-option 
+			v-for="(op,key) in options" 
+			:value="op.id"
+			:key="key"
+			>{{op.name}}
+		</b-form-select-option>
+		</b-form-select>
+					
+			</div>
+		<coleccion-cetgoria 
+		:titulo="coleccion[0].name"
+		:img="coleccion[0].img"
+		:pro="coleccion[0].items"
+		:idc="coleccion[0].ids"
+		:head="true"
+		></coleccion-cetgoria>
+	</b-col>
+	
+		<productos-nuevos :items="productosnuevos"></productos-nuevos>
+		
+
+		<template v-for="pro in productos">	
+			<b-col md="12" v-if="pro.items.length!=0">
+				<div class="super-titulo"><span>Gran variedad en {{pro.categoria.name}}</span></div>
+				  <v-carousel>
+				    <template v-for="(item,indx) in pro.items">  
+				    <v-carousel-slide :index="indx">
+			          <div class="row">
+			            <div class="col-sm-12 col-md-3"  v-for="slider in item">
+			              <producto-carousel
+			              :idproducto="slider.ids"
+			              :img="slider.img"
+			              :name="slider.name"
+			              :precio="slider.precio"
+			              :logeado="logeado"
+			              >
+			              </producto-carousel>
+			            </div>
+			          </div>
+				    </v-carousel-slide>
+				    </template>
+				</v-carousel>
+			</b-col>
+		</template>
+
+
+
+
+	<!-- Historial de navegacion -->
+	
+	<!-- {{promos}} -->
+	<!-- <promociones :promos="promos" :logeado="logeado"></promociones> -->
+
+
+			<b-col md="12">
+				<div class="super-titulo"><span>Categorías </span></div>
+					<welcome-categorias :items="categorias">
+					</welcome-categorias>
+		   	</b-col>
+		</b-row>
+		</b-container>
+	</div>		
+</template>
+<script>
+	import coleccion_categoria  from '../categorias/coleccion_categoria.vue'
+ 	import productosnuevos from '../welcome/productos_nuevos.vue'
+ 	import welcomcategori from '../Generico/welcome_categorias.vue'
+
+	export default {
+		components: {
+			 	'coleccion-cetgoria':coleccion_categoria,
+			 	'productos-nuevos':productosnuevos,
+			 	'welcome-categorias':welcomcategori
+		},
+
+	props:['productos','productosnuevos','categorias','collection','historial','logeado'],
+	data(){
+			return {
+				pro:[],
+				mdruta:"/middlecarrito",
+				// ismobil:false,
+				selected:'MNL6841',
+				coleccion:[],
+				// swiperOption: {
+			 //          navigation: {
+			 //            nextEl: '.swiper-button-next',
+			 //            prevEl: '.swiper-button-prev'
+			 //          }
+			 //        },
+			        options:[
+			        {name:'Despensa',id:'MNL6841'},
+			        {name:'Hogar y Lavanderia',id:'MNL1636'},
+			        {name:'Higiene Personal',id:'MNL7890'}]
+			}
+		},
+		created() {
+			this.coleccion=this.collection;
+		},
+
+
+	methods:{
+
+	 // onSwiper(swiper) {
+  //       console.log(swiper);
+  //     },
+      onselected(){
+      	
+      	axios.post(url+"api/coleccion",{id:this.selected}).then(data => {
+             
+
+ 		    if(data.status==200){
+		    	if(data.data.length!=0){    
+		        	this.coleccion=data.data;   
+		    	}
+			}else {
+				const toast = swal.mixin({
+	            toast: true,
+	            position: 'top-end',
+	            showConfirmButton: false,
+	            timer: 3000
+	          	});
+
+		         toast.fire({
+		          icon:'Error',
+		          title: '¡error intente de nuevo!'
+	        	})
+			}
+		          
+		}).catch(error => {
+               
+    	});
+		// console.log(this.coleccion)
+
+      }
+      // onSlideChange() {
+      //   console.log('slide change');
+      // },
+	}
+}
+</script>
+
+<style>
+
+
+
+.carousel-indicators {
+  left: none;
+}
+    
+body #wrapper {
+  width: 100%;
+}
+body #wrapper ul {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 0;
+  height: 118px;
+  background-color: #fff;
+  font-size: 0px;
+}
+
+
+body #wrapper ul li {
+  display: inline-block;
+  float: left;
+  width: 16.66667%;
+  -moz-transition: all 0.1s;
+  -o-transition: all 0.1s;
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
+  text-align: center;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  text-shadow: 0px 1px 3px white;
+  border-right: thin solid lightgray;
+  border-bottom: thin solid lightgray;
+  background-color: white;
+height: 170px;
+}
+body #wrapper ul li:last-child {
+  border-right: none;
+}
+body #wrapper ul li:hover {
+  
+}
+
+body #wrapper ul li a:hover {
+   background-color: #3483fa;
+   color: #fff !important;
+}
+
+
+body #wrapper ul li a {
+  display: flex;
+-moz-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+text-decoration: none;
+font-size: 38px;
+outline: 1px solid #eae6e6;
+padding: 50px;
+flex-direction: column;
+height: 100%;
+}
+body #wrapper ul li a:visited {
+  color: gray;
+}
+body #wrapper ul li div {
+  margin-top: 5px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+</style>
+

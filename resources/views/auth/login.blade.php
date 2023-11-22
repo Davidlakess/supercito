@@ -27,7 +27,7 @@
             <b-form-input type="email"
               name="email" required
               autofocus value="{{ old('email') }}" 
-              placeholder="example@hotmail.com">
+              placeholder="example@gmail.com">
               </b-form-input>
           </b-form-group>
           <b-form-group label="Contraseña" label-for="password">

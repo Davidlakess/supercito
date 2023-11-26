@@ -14,12 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/',[App\Http\Controllers\WelcomeController::class,'welcome']);
 Auth::routes();
-
+    
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
     Route::get('/usuarios',[App\Http\Controllers\AdminController::class,'usuarios']);
     Route::get('categorias',[App\Http\Controllers\AdminController::class,'categorias']);
@@ -31,3 +31,18 @@ Auth::routes();
     Route::post('create/categoria',[App\Http\Controllers\AdminController::class,'addcategoria']);
     Route::post('create/usuario',[App\Http\Controllers\AdminController::class,'addusuario']);
     Route::post('/autorizarpedido',[App\Http\Controllers\AdminController::class,'autorizar_pedido']);
+
+    Route::get('/misproductos', [App\Http\Controllers\MisProductosController::class,'index'])->name('misproductos');
+
+    Route::get('/perfil',[App\Http\Controllers\Userscontroller::class,'get_info_user'])->name('perfil');
+Route::get('/miscompras', [App\Http\Controllers\MisComprasController::class,'index'])->name('miscompras');
+    Route::get('/carrito', [App\Http\Controllers\CarritoController::class,'index'])->name('carrito');
+    Route::post('/coleccion',[App\Http\Controllers\WelcomeController::class,'cambiar_collection']);
+    Route::get('item/{id}',[App\Http\Controllers\DetalleController::class,'index'])->name('item');
+    Route::get('/carrito',[App\Http\Controllers\CarritoController::class,'index'])->name('carrito');
+
+Route::post('getcategorias',[App\Http\Controllers\Categorias::class,'getcategorias'])->name('getcategorias');
+
+Route::get('/middlecarrito', function () {
+    return view('middlecarrito');
+})->middleware('mdcarrito')->name('middlecarrito');

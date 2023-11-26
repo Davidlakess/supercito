@@ -25,5 +25,12 @@ class Categorias extends Controller
         ->get();
         return response()->json($localidades);
     }
+    public function getcategorias(){
+       
+           $categorias = CategoriasModel::getcategoriasmenu();
+
+        echo json_encode($categorias);
+      
+    }
 
 }

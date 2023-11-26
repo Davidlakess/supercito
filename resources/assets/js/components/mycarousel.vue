@@ -13,7 +13,7 @@
                             :class="['thumbnail-image', (activeImage == index) ? 'active' : '']"
                             @mouseover="activateImage(index)"
                         >
-                            <img :src="image.thumb">
+                            <img :src="ruta+image.thumb">
                         </div>
                     </div>
                 </b-col>
@@ -23,7 +23,7 @@
                 <div v-for="(image, index) in  images" class="card-img" v-if="(activeImage == index) ? true: false"  :key="image.id">               
                     <figure  id="thumb" class="thumbnail-area card-product">
                         <div class="img-wrap"> 
-                           <img :src="image.img" :style="thumbnailStyle" :data-zoom="image.big" alt="" style="cursor: crosshair;" id="img-r">
+                           <img :src="ruta+image.img" :style="thumbnailStyle" :data-zoom="ruta+image.big" alt="" style="cursor: crosshair;" id="img-r">
                          
                            <!-- <div :style="pointerBoxStyle" ></div>     -->
                         </div>
@@ -53,7 +53,8 @@ export default {
     name: 'mycarousel',
     data() {
         return {
-            img:'',
+            ruta: url,
+            img: '',
             //Index of the active image
             activeImage: 0,
             //Hold the timeout, so we can clear it when it is needed

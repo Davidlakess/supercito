@@ -9,6 +9,15 @@ class CategoriasModel extends Model
 {
     use HasFactory;
     protected $table = "categorias";
+public static function getcategoriasmenu(){
+     // $categorias=CategoriasModel::
+     //         selectRaw("categorias.name AS padre,GROUP_CONCAT(child.name,'-',child.ids SEPARATOR ',') AS hijos")
+     //        ->Join('categorias as child', 'categorias.ids', '=','child.parent_id' ,'left')
+     //        ->whereIn('categorias.ids',['MNL5523'])
+     //        ->limit(4)->orderBy('child.name', 'asc')->get();
+            return [];
+    }
+
     public static function getallcategorias(){
         $categorias=CategoriasModel::select('name','ids')
         ->where('status',1)

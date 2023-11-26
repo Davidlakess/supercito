@@ -6,7 +6,7 @@
         	<!-- IMAGEN DE LA CATEGORIA -->
           <div class='card__image'>
             <a :href="formaturl(titulo,idc)">
-              <img :src="'/uploads/'+img" loading="lazy" >
+              <img :src="ruta+'/uploads/'+img" loading="lazy" >
             </a>
           
           </div>
@@ -32,12 +32,17 @@
 </template>
  <script type="text/javascript">
 export default {
+  data () {
+    return {
+      ruta:url
+    }
+  },
 	props:['img','titulo','pro','idc','head'],
   methods:{
     formaturl(value,id){
         let aux= value.split(" ").join("-");
         
-        let result=url+'c/'+aux+'/'+id;
+        let result=this.ruta+'c/'+aux+'/'+id;
 
         return result;
     },

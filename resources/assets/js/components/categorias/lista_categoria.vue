@@ -49,7 +49,7 @@
 
         //  this.categorias=JSON.parse(localStorage.categorias);
         // }else{
-          axios.post(this.ruta+"api/getcategorias").then(data => {
+          axios.post(this.ruta+"getcategorias").then(data => {
             this.makearray(data.data);
             // console.log(data.data)
             localStorage.categorias=JSON.stringify(this.categorias);

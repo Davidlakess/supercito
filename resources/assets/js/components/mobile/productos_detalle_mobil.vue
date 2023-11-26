@@ -28,11 +28,7 @@
 
             </b-col>
             <!-- {{producto}}	 -->
-      <CoolLightBox 
-      :items="getimgs()" 
-      :index="index"
-      @close="index = null">
-    </CoolLightBox>
+      
 
         </b-card>
       <b-card class="c">
@@ -148,13 +144,9 @@
  
 <script>
  
-import CoolLightBox from 'vue-cool-lightbox'
-import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css'
  
   export default {
-components: {
-    CoolLightBox,
-  },
+
 props:['características','logeado','producto','extras'],
     data() {
       return {

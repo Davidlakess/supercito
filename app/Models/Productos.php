@@ -22,6 +22,92 @@ class Productos extends Model
 
         return $result;
     }
+    public static function getcollection_categoria($id){
+            $categorias=CategoriasModel::from('categorias as c')
+            ->select('c.ids','name','img')
+            ->where('c.ids',$id)->get();
+
+         $categorias[0]->items= Productos::get_productos_de_categoria($categorias[0]->ids);
+            // return Productos::get_productos_de_categoria($categorias[0]->ids);
+
+        return $categorias;
+    }
+    public static function getcategoriaspopular($limit){
+        return $categorias=CategoriasModel::from('categorias as c')
+            ->select('c.ids','c.name')
+            ->where('c.nivel','3')
+            ->inRandomOrder()->limit($limit)->get();
+    }
+    public static function get_productos_de_categoria($id,$mobi=false,$limit=8){
+
+        $catego=CategoriasModel::from("categorias as c")
+              ->select(DB::raw('c.ids AS padre, GROUP_CONCAT(hijos.ids SEPARATOR ",") AS hijos'))
+              ->Join('categorias as hijos', 'c.ids', '=','hijos.parent_id' ,'left')
+              ->where('c.parent_id',$id)
+              ->groupBy('c.ids')
+              ->get();
+
+
+
+             $pro=[];
+             $ids='';   
+             if(isset($catego[0])){
+
+                $cadena='';
+                foreach ($catego as $key => $cat) {
+                    if($key==count($catego)-1){
+                        $cadena.=$cat->padre;
+                    }else if($cat->padre!=''){
+                        $cadena.=$cat->padre.',';
+                    }
+                    $str=explode(',', $cat->hijos);
+
+                    foreach ($str as $key => $hijo) {
+                        if($hijo!=null){
+                            $cadena.=$hijo.',';
+                        }
+                    }
+
+
+
+                }
+             $ids=explode(',', $cadena);
+        // $ids=$cadena;
+            }else{
+
+                $ids=$id;
+            }
+
+            // return $ids;
+            if($mobi){
+
+            $pro=Productos::from('productos as p')
+            ->select('p.id as ids','imgs.src as img','p.name','p.precio')
+            ->Join('imgs', 'p.id', '=','imgs.id_producto' ,'left')
+            ->whereIn('p.id_categoria',$ids)
+            ->inRandomOrder()->where('status','=',1)->limit($limit)->get();
+            
+            }else{
+
+                if(isset($catego[0])){      
+                    $pro=Productos::from('productos as p')
+                    ->select('p.id as ids','imgs.src as img','p.name','p.precio')
+                    ->Join('imgs', 'p.id', '=','imgs.id_producto' ,'left')
+                    ->whereIn('p.id_categoria',$ids)
+                    ->inRandomOrder()->where('status','=',1)->limit($limit)->get();
+                }else{
+
+                    $pro=Productos::from('productos as p')
+                    ->select('p.id as ids','imgs.src as img','p.name','p.precio')
+                    ->Join('imgs', 'p.id', '=','imgs.id_producto' ,'left')
+                    ->where('p.id_categoria',$ids)
+                    ->inRandomOrder()->where('status','=',1)->limit($limit)->get();
+                }
+            }
+
+        return $pro;
+
+    }
     public static function get_parents_category($id){
             $parents=[];            
             $i=0;       

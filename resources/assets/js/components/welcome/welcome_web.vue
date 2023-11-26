@@ -1,31 +1,27 @@
 <template>	
 	<div>	
 	    <b-carousel
-	        id="carousel-1"
+	        id="carousel-slide"
 	        :interval="3000"
 	        indicators
 	        controls
 	        background="#ababab"
-	        img-width="1600"
-	        img-height="340"
 	        style="text-shadow: 1px 1px 2px #333; margin:0; padding: 0;"
 	      >
 	        <!-- Text slides with image -->
 	      <b-carousel-slide
 
-	        img-src="slide-1.jpg"
+	        :img-src="ruta+'slide-1.jpg'"
 	        >
 	      </b-carousel-slide>
 	      <b-carousel-slide 
-	        img-src="slide-2.jpg">
+	        :img-src="ruta+'slide-2.jpg'">
 	      </b-carousel-slide>
 	      <b-carousel-slide>
 	        <template v-slot:img>
 	            <img
 	              class="d-block img-fluid w-100"
-	              width="1024"
-	              height="480"
-	              src="slide-3.jpg"
+	              :src="ruta+'slide-3.jpg'"
 	            >
 	        </template>
 	      </b-carousel-slide>
@@ -140,18 +136,19 @@
 	props:['productos','productosnuevos','categorias','collection','historial','logeado'],
 	data(){
 			return {
-				pro:[],
-				mdruta:"/middlecarrito",
+				pro: [],
+				ruta: url,
+				mdruta: "/middlecarrito",
 				// ismobil:false,
-				selected:'MNL6841',
-				coleccion:[],
+				selected: 'MNL6841',
+				coleccion: [],
 				// swiperOption: {
 			 //          navigation: {
 			 //            nextEl: '.swiper-button-next',
 			 //            prevEl: '.swiper-button-prev'
 			 //          }
 			 //        },
-			        options:[
+			        options: [
 			        {name:'Despensa',id:'MNL6841'},
 			        {name:'Hogar y Lavanderia',id:'MNL1636'},
 			        {name:'Higiene Personal',id:'MNL7890'}]
@@ -169,7 +166,7 @@
   //     },
       onselected(){
       	
-      	axios.post(url+"api/coleccion",{id:this.selected}).then(data => {
+      	axios.post(url+"coleccion",{id:this.selected}).then(data => {
              
 
  		    if(data.status==200){
@@ -210,7 +207,11 @@
 .carousel-indicators {
   left: none;
 }
-    
+
+#carousel-slide img {
+	width: auto !important;
+	height: auto !important;  
+}   
 body #wrapper {
   width: 100%;
 }

@@ -62,37 +62,3 @@
 		}
 	}
 </script>
-<style>
-
-.carousel .carouse-indicators {
-  	position: inherit;
-	z-index: 15;
-	display: flex;
-	justify-content: end;
-	list-style: none;
-	width: 100%;
-	padding: 0;
-	margin-bottom: 5px;
-}
-.carouse-indicators li.active {
-  border-radius: 50%;
-  width: 10px !important;
-  height: 10px !important;
-  margin: 4px;
-  border-radius: 50%;
-  border-color: transparent;
-  background-color: #3483fa !important;
-}
-.carouse-indicators li{
-	background-color: #bababa;
-	border-radius: 50%;
-	display: inline;
-	height: 6px;
-	padding: 1px;
-	width: 6px;
-	margin-top: 6px;
-	cursor: pointer;
-	margin-right: 4px;
-}
-
-</style>

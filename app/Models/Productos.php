@@ -178,7 +178,7 @@ class Productos extends Model
 public static function getproductos_nuevos(){
        
         $fecha_actual = date("Y-m-d");
-        $nuevafecha = strtotime ( "-5 day" , strtotime ( $fecha_actual ));
+        $nuevafecha = strtotime ( "-10 day" , strtotime ( $fecha_actual ));
         $nuevafecha =date ( "Y-m-j" , $nuevafecha );
         $fechahoy=strtotime ( "+1 day" , strtotime ( $fecha_actual ));
         $fechahoy=date ( "Y-m-j" , $fechahoy );

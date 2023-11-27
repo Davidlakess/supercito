@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
 <div class="container">
@@ -74,4 +74,7 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+  document.title ='Crear Mi Usuario de Supercito';
+</script>
 @endsection

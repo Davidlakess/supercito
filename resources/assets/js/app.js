@@ -40,6 +40,11 @@ Vue.component('producto-card-btn', require('./components/Generico/producto_card_
 Vue.component('wishlist', require('./components/generico/wishlist.vue').default);
 Vue.component('wishview', require('./components/generico/wishview.vue').default);
 Vue.component('btn-addcarrito', require('./components/Generico/btn_addcarrito.vue').default);
+Vue.component('v-carousel-item', require('./components/Carousel/carousel_generico.vue').default);
+Vue.component('v-carousel-item-slide', require('./components/Carousel/carousel_item_slider.vue').default);
+Vue.component('v-carousel', require('./components/Carousel/carousel.vue').default)
+Vue.component('v-carousel-slide', require('./components/Carousel/carousel_slide.vue').default)
+Vue.component('producto-carousel', require('./components/Generico/producto_carousel.vue').default)
 Vue.use(BootstrapVue)
 import * as VueGoogleMaps from 'vue2-google-maps'
  

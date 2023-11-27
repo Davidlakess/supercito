@@ -30,6 +30,38 @@ body{
   margin-left: 60px !important;
   margin-top: 10px !important;
 }
+/*carousel*/
+.carousel .carouse-indicators {
+    position: inherit;
+  z-index: 15;
+  display: flex;
+  justify-content: end;
+  list-style: none;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 5px;
+}
+.carouse-indicators li.active {
+  border-radius: 50%;
+  width: 10px !important;
+  height: 10px !important;
+  margin: 4px;
+  border-radius: 50%;
+  border-color: transparent;
+  background-color: #3483fa !important;
+}
+.carouse-indicators li{
+  background-color: #bababa;
+  border-radius: 50%;
+  display: inline;
+  height: 6px;
+  padding: 1px;
+  width: 6px;
+  margin-top: 6px;
+  cursor: pointer;
+  margin-right: 4px;
+}
+
 .confirm_correo{
 margin-left: 30px !important;
 border: 3px solid rgb(255, 255, 255) !important;
@@ -369,7 +401,8 @@ header h1 {
                 <!-- <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:20px;"></i> -->
                 <!-- <span class="badge bg-secondary">9</span> -->
             <!-- </b-button> -->
-            <img src="/shopi.png" style="height: 34px;width: 54px;" title="ver el Carrito de Compras" width="29">
+            <img src="{{ url('/shopi.png')}}" style="height: 34px;width: 54px;" title="ver el Carrito de Compras" width="29">
+
             </b-nav-item>
 
           <b-nav-item href="{{route('middlecarrito')}}" class="d-lg-none">

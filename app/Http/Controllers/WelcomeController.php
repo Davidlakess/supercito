@@ -33,6 +33,7 @@ class WelcomeController extends Controller
             $limithistory=16;
               $datos= $this->set_datos_welcome($limit,$limitcat,$limithistory,0);    
          
+            // dd($datos);
             return view('welcome')->with('data',$datos);
 
         }
@@ -70,25 +71,13 @@ class WelcomeController extends Controller
                       ->orderBy('historial.created_at', 'desc')
                       ->limit($limithistory)
                       ->get();
+            }else{
+                $historial = false;
             }
          
           // $promos=$this->getpromociones();
             // $datos=[];
-             if ($ismobil==1) {
-              
-              $pro=$this->get_productos_categoria(null,$ismobil,$limit,false);
-              $productos_nuevos=$this->getproductos_nuevos();
-              $pro_nuevo=(isset($productos_nuevos[0]))?json_encode($productos_nuevos):'false';
-              $pro_2=$this->get_productos_categoria_dif([$pro['categoria']->ids]);
-              $ax=[$pro['categoria']->ids,$pro_2['categoria']->ids];
-              $pro_3=$this->get_productos_categoria_dif($ax);
-
-              $datos=array(
-                 'productos'=>json_encode(array($pro,$pro_2,$pro_3)),
-                 'historial'=>json_encode($historial),
-                 'pronuevos'=>$pro_nuevo,
-              );
-             }else{
+          
                 // MNL6841
                   $pro=$this->get_productos_categoria('MNL7890',$ismobil,12);
                   $categoriaspopulares=Productos::getcategoriaspopular($limitcat);
@@ -98,7 +87,6 @@ class WelcomeController extends Controller
                   $pro_2=$this->get_productos_categoria('MNL8293',$ismobil,12);
                   $pro_3=$this->get_productos_categoria('MNL5278',$ismobil,12);
 
-
                 $datos=array(
                  'productos'=>json_encode(array($pro,$pro_2,$pro_3)),
                  'historial'=>json_encode($historial),
@@ -106,8 +94,7 @@ class WelcomeController extends Controller
                  'categorias'=>json_encode($categoriaspopulares),
                  'collection'=>json_encode($collection)
                 );
-            }
-
+          
             // dd($collection);
         return $datos;
     

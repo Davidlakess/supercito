@@ -1,65 +1,72 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+<b-container fluid style="height: 100%">
+  <b-row align-h="center">
+    <b-col cols="12" md="6" style="margin-top: 7%;margin-left: 1px;margin-right: 10px;">
+<b-card title="Restablecer Contraseña" class="my-3" >
+    <b-form method="POST" action="{{ route('password.request') }}">
+        {{ csrf_field() }}
+        <input type="hidden" name="token" value="{{ $token }}">
+            <b-form-group
+      label="Email"
+      label-for="email">
+          
+          <b-form-input    id="email" type="email" readonly name="email" value="{{ $email or old('email') }}" required>
+          </b-form-input>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
-                        @csrf
+          @if ($errors->has('email'))
+              <b-alert show variant="danger">
+                  <strong>{{ $errors->first('email') }}</strong>
+              </b-alert>
+          @endif
+        </b-form-group>
+        
+          <b-form-group
+      label="Nueva Contraseña"
+      label-for="password">
+          <b-form-input  
+            autofocus 
+            id="password" type="password" name="password" required
+            placeholder="">
+        </b-form-input>
+            @if ($errors->has('password'))
+                <b-alert show variant="danger">
+                    {{ $errors->first('password') }}
+                </b-alert>
+            @endif
+      </b-form-group>
 
-                        <input type="hidden" name="token" value="{{ $token }}">
+          <b-form-group
+      label="Confirmar Contraseña"
+      label-for="password-confirm">
+          
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+        <b-form-input  
+          id="password-confirm" 
+          type="password"
+          name="password_confirmation" 
+          required>
+        </b-form-input>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+            @if ($errors->has('password_confirmation'))
+                <span class="help-block">
+                    <strong></strong>
+                </span>
+                <b-alert show variant="danger">{{ $errors->first('password_confirmation') }}</b-alert>
+            @endif
+        </b-form-group>
+        <b-form-group style="text-align: end;">
+            <button type="submit" class="btn btn-primary">
+                Cambiar clave
+            </button>
+        </b-form-group>
+    </b-form>
+  </b-card>
+    </b-col>  
+  </b-row> 
+</b-container>
 @endsection
+<script type="text/javascript">
+     document.title ='Nueva Contraseña';
+</script>

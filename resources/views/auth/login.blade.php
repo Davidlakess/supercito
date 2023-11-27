@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
 <b-container fluid>
@@ -63,4 +63,7 @@
 
 
 </b-container>
+<script type="text/javascript">
+  document.title ='Iniciar Sesion';
+</script>
 @endsection

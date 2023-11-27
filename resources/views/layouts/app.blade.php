@@ -366,7 +366,7 @@ header h1 {
         </b-navbar-nav>
           <div style="width: 34%;margin-left: 20px;"> 
 
-            <!-- <input-search></input-search> -->
+            <input-search></input-search>
           </div>        
           @if (Auth::guest())
           <b-navbar-nav class="ml-auto">

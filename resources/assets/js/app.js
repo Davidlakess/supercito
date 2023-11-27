@@ -8,6 +8,8 @@ require('./bootstrap');
 import  BootstrapVue from 'bootstrap-vue'
 import VueSweetalert2 from "vue-sweetalert2"
 import Vue from 'vue' 
+import autocomplete from '@trevoreyre/autocomplete-vue'
+Vue.use(autocomplete)
 window.moment = require('moment')
 const swal = window.swal = require('sweetalert2')
 Vue.component('telefono', require('./componentes/verifyphone.vue').default)

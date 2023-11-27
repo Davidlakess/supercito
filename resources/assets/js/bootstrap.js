@@ -1,5 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import "drift-zoom/src/css/drift-basic.css";
+import '@trevoreyre/autocomplete-vue/dist/style.css'
 
 
 // import "node_modules/font-awesome/scss/font-awesome.scss";

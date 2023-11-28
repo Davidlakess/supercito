@@ -54,6 +54,7 @@ Vue.component('producto-solo', require('./components/categorias/producto_solo.vu
 Vue.component('listar-categorias', require('./components/categorias/listar_categorias.vue').default); 
 Vue.component('productos-extra', require('./components/categorias/productos_extra.vue').default);
 Vue.component('notifications', require('./components/notificacion/notifications.vue').default);
+
 Vue.use(BootstrapVue)
 import * as VueGoogleMaps from 'vue2-google-maps'
  

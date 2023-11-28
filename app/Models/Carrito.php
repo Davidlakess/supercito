@@ -5,7 +5,7 @@ use App\Models\DetalleCarritos;
 use App\Models\Productos;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\DB;
 class Carrito extends Model
 {
     use HasFactory;
@@ -26,7 +26,19 @@ class Carrito extends Model
             return array('status'=>false,'cant'=>$stock->stock);
         }
     }
-
+    public static function getcarrito($id_carrito){
+       return  CarritoModel::from('detallecarritos')->select(DB::raw(
+            'detallecarritos.id_carrito,
+            detallecarritos.id_detalle,
+            productos.name as producto,
+            detallecarritos.precio,
+            CONVERT(detallecarritos.cantidad,UNSIGNED INTEGER) as cantidad,
+            detallecarritos.img,
+            detallecarritos.id_producto,
+            CONVERT(productos.stock,UNSIGNED INTEGER) as stock'))
+            ->Join('productos', 'productos.id', '=', 'detallecarritos.id_producto','left')
+            ->where('detallecarritos.id_carrito',$id_carrito)->get();
+    }
     public static function addCarrito($id_producto, $cantidad){
 
         $id=Carrito::select('id_carrito')->where('id_usuario',auth()->id())->get();

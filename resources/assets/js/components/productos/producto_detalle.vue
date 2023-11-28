@@ -1,13 +1,5 @@
 <template>		
-    <div v-if="isMobil()" >  
-        <productos-detallemobil 
-          :características="características"
-          :producto="producto"
-          :extras="extras"
-          :logeado="logeado"
-        ></productos-detallemobil>
-    </div>
-      <div v-else class="ancho-ideal" >  
+      <div class="ancho-ideal" >  
         <productos-detalleweb
           :producto="producto"
           :nav="nav"
@@ -20,13 +12,9 @@
 </template>
 <script>
     import detalleweb from './producto_detalle_web.vue'
-    import detallemobil from '../mobile/productos_detalle_mobil.vue'
-    
   export default {
     components:{
     'productos-detalleweb':detalleweb,
-    'productos-detallemobil':detallemobil
-    
     },
     props:[
     'producto',
@@ -70,13 +58,6 @@
         let result=this.ruta+'c/'+value+'/'+id;
         return result;
     },
-      isMobil() {
-          if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-             return true
-           } else {
-             return false
-           }
-      } 
 	// 
  //           ,{
  //            id:"1",

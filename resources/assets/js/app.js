@@ -4,7 +4,7 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-require('./bootstrap');
+require('./bootstrap');          
 import  BootstrapVue from 'bootstrap-vue'
 import VueSweetalert2 from "vue-sweetalert2"
 import Vue from 'vue' 
@@ -27,7 +27,6 @@ Vue.component('component-detalle-producto', require('./components/admin/Ventas/c
 
 // APP
 Vue.component('a-img', require('./components/generico/a_img.vue').default)
-Vue.component('navbar-mobil', require('./components/mobile/navbar_mobil.vue').default);
 Vue.component('logo-app', require('./components/generico/logo_app.vue').default);
 Vue.component('welcome', require('./components/welcome.vue').default);
 Vue.component('input-search', require('./components/Generico/input_search.vue').default);
@@ -47,9 +46,23 @@ Vue.component('v-carousel-item-slide', require('./components/Carousel/carousel_i
 Vue.component('v-carousel', require('./components/Carousel/carousel.vue').default)
 Vue.component('v-carousel-slide', require('./components/Carousel/carousel_slide.vue').default)
 Vue.component('producto-carousel', require('./components/Generico/producto_carousel.vue').default)
+Vue.component('table-carrito', require('./components/carrito/table-carrito.vue').default)
+
+Vue.component('buscar-producto', require('./components/categorias/buscar_producto.vue').default);
+Vue.component('message-error-busqueda', require('./components/Generico/message_error_busqueda.vue').default);
+Vue.component('producto-solo', require('./components/categorias/producto_solo.vue').default);
+Vue.component('listar-categorias', require('./components/categorias/listar_categorias.vue').default); 
+Vue.component('productos-extra', require('./components/categorias/productos_extra.vue').default);
+Vue.component('notifications', require('./components/notificacion/notifications.vue').default);
 Vue.use(BootstrapVue)
 import * as VueGoogleMaps from 'vue2-google-maps'
  
+ const toast = window.toast= swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+          });
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyBCKiIqCdZGrVxx06LSbe7uG3zXOq1Cz5k',

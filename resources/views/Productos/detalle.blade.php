@@ -2,26 +2,13 @@
 
 @section('content')
 <div>
-@if (Auth::guest())
    <producto-detalle  
    :producto="{{$data['producto']}}"  
    :extras="{{$data['extra']}}"  
    :nav="{{$data['nav']}}"
    :características="{{$data['caracteristicas']}}"
-   :logeado="false" 
-   >
+   :logeado="{{(Auth::guest()== 1) ? 'false' : 'true'}}" >
     </producto-detalle>
-  @else
-      <producto-detalle 
-    :producto="{{$data['producto']}}"  
-    :extras="{{$data['extra']}}"  
-    :nav="{{$data['nav']}}"
-    :características="{{$data['caracteristicas']}}"
-    :logeado="true" 
-
-    >
-    </producto-detalle>
-  @endif    
 </div>
 @endsection
 <style>

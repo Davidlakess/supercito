@@ -53,7 +53,7 @@
     methods: {
       addcarrito(){
         
-    		axios.post(url+"api/addcarrito",{id:this.id,cant:this.cant}).then(data => {
+    		axios.post(url+"addcarrito",{id_producto:this.id,cant:this.cant}).then(data => {
           if(data.data.res){
 
            toast.fire({

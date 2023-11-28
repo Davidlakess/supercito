@@ -310,39 +310,6 @@ header h1 {
   </form>
 
   <div id="app">
-  <template v-if="isMobil()">  
-    <div>
-      
-      
-            <!-- tiendas="route('tiendas')" -->
-           @if (Auth::guest())
-                   <navbar-mobil
-           rutalogin="{{ route('login') }}"
-           rutaregistrar="{{ route('register') }}"
-           misproductos="{{route('misproductos')}}"
-            perfil="{{ route('perfil') }}"
-            miscompras="{{ route('miscompras') }}"
-            carrito="{{route('middlecarrito')}}"
-            :logeado="false"
-             name="'-'"
-          ></navbar-mobil>
-          @else
-          <!-- tiendas=" route('tiendas')" -->
-          <navbar-mobil
-          rutalogin="{{ route('login') }}"
-          rutaregistrar="{{ route('register') }}"
-          misproductos="{{route('misproductos')}}"
-          perfil="{{ route('perfil') }}"
-          miscompras="{{ route('miscompras') }}"
-          carrito="{{route('middlecarrito')}}"
-          name="{{auth()->user()->name}}"
-          :logeado="true"
-          ></navbar-mobil>
-          @endif  
-
-    </div>
-  </template>
-  <template v-else> 
   <b-navbar toggleable="lg"  class="menu" id="menu" style="background-color: rgb(236, 2, 2);">
     <b-navbar-brand style="margin-left: 25px;color: #fff;" href="{{ url('/') }}">
       <!-- <img alt="" style="width: 50px;" src="/my.png"> -->
@@ -411,8 +378,7 @@ header h1 {
           </b-nav-item>
         </b-navbar-nav>
     </b-collapse>
-  </b-navbar>           
-   </template>
+  </b-navbar>   
     @yield('content')
    
 

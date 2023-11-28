@@ -122,7 +122,7 @@
       }
     },
     mounted(){
-    	this.getnotificaciones()
+    	// this.getnotificaciones()
     },
 		methods: {
 

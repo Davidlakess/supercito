@@ -23,7 +23,7 @@
         <b-col md="10" style="margin-top: 10px; padding-left: 75px">
   					<b-row align-h="center">
       				<template v-for="pro in paginatedItems">
-               <b-col md="4" col="12" style="margin-bottom: 18px;padding-left: 0px;">
+               <b-col md="4" style="margin-bottom: 18px;padding-left: 0px;">
                   <producto-solo
                   :img="pro.img"
                   :name="pro.name"

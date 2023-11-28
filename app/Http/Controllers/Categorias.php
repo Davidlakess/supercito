@@ -7,7 +7,12 @@ use App\Models\CategoriasModel;
 use Illuminate\Http\JsonResponse;
 class Categorias extends Controller
 {
-    
+    public function buscar_producto_descripcion($q){
+        
+            $res = CategoriasModel::buscar_descripcion($q);
+            return view('categorias/buscar_producto')->with('result',$res);         
+}
+
     public static function getAllCategorias(){
 
          $categorias = CategoriasModel::getallcategorias();

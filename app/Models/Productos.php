@@ -22,6 +22,16 @@ class Productos extends Model
 
         return $result;
     }
+    public static function get_productodetalle($id){
+            $id_user=auth()->id();
+
+            return Productos::from('productos as p')->select(DB::raw('p.id as ids,p.name,p.descripcion AS des,p.precio,p.stock,p.id_categoria AS id_c ,GROUP_CONCAT(imgs.src SEPARATOR ",") AS imgs,( SELECT w.id_producto FROM wishlist as w WHERE w.id_producto= p.id AND w.id_usuario='.$id_user.') AS wish'))
+                ->Join('imgs', 'p.id', '=','imgs.id_producto' ,'left')
+              ->where('p.id','=',$id)
+              ->where('p.status','=',1)
+              ->groupBy('p.id')->get();
+               
+    }
     public static function getcollection_categoria($id){
             $categorias=CategoriasModel::from('categorias as c')
             ->select('c.ids','name','img')

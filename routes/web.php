@@ -39,10 +39,13 @@ Route::get('/miscompras', [App\Http\Controllers\MisComprasController::class,'ind
     Route::get('/carrito', [App\Http\Controllers\CarritoController::class,'index'])->name('carrito');
     Route::post('/coleccion',[App\Http\Controllers\WelcomeController::class,'cambiar_collection']);
     Route::get('item/{id}',[App\Http\Controllers\DetalleController::class,'index'])->name('item');
-    Route::get('/carrito',[App\Http\Controllers\CarritoController::class,'index'])->name('carrito');
-
+    Route::get('/carrito',[App\Http\Controllers\Carrito::class,'index'])->name('carrito');
+Route::post('addcarrito', [App\Http\Controllers\Carrito::class, 'addcarrito']);
+Route::post('addcantidad',[App\Http\Controllers\Carrito::class, 'addcantidad']);
 Route::post('getcategorias',[App\Http\Controllers\Categorias::class,'getcategorias'])->name('getcategorias');
 
+Route::get('search/{q}',[App\Http\Controllers\Categorias::class,'buscar_producto_descripcion']);
+Route::get('/favoritos', 'CarritoController@favoritos')->name('favoritos');
 Route::get('/middlecarrito', function () {
     return view('middlecarrito');
 })->middleware('mdcarrito')->name('middlecarrito');

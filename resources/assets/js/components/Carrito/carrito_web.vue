@@ -24,7 +24,7 @@
                   <td colspan="2">
                      <figure class="card card-product" style="width: 125px;">
                         <div class="img-wrap"> 
-                          <img :src="'/uploads/'+item.img">
+                          <img :src="ruta+'/uploads/'+item.img">
                         </div>
                       </figure>        
                     </td>   
@@ -130,6 +130,7 @@ export default {
     ],
     data(){
       return {
+          ruta: url,
           propina:5,
           total:0,
           id:this.data[0].id_carrito,
@@ -214,27 +215,24 @@ export default {
                             showConfirmButton: false,
                             timer: 3000
                           });
-            axios.post("api/addcantidad",dat).then(data => {
+
+            axios.post("addcantidad",dat).then(data => {
               
               // Actualizar el stock del producto tambien
-
+              console.log(data.data)
               var cant = data.data.cant;
-              var cant = data.data.stock;
+              var stock = data.data.stock;
               
               if(data.data.status){
                   this.items[index].cantidad=parseInt(cant);  
                   this.items[index].stock=parseInt(stock);  
-                  
-                  Vue.nextTick().then(() =>{ 
-
-                    toast.fire({
-                      icon:'success',
-                      title: '¡Cantidad Actualizada!'
+                    this.$nextTick(() => {
+                      toast.fire({
+                        icon:'success',
+                        title: '¡Cantidad Actualizada!'
+                      })
+                      this.sumproductos();
                     })
-                    // this.disable=true;
-                    this.sumproductos();
-                });
-
               }else{
 
                 this.items[index].cantidad=parseInt(cant);
@@ -249,13 +247,11 @@ export default {
               }
 
             }).catch(error => {
-                  
-                  this.$bvToast.toast('Error al Actualizar!', {
-                    title:'Intenta Mas tarde',
-                    variant: 'error',
-                    solid: true
+
+                   toast.fire({
+                    icon:'error',
+                    title:error + 'Error al Actualizar! ,Intenta Mas tarde'
                   })
-              
               });
       },
       removeitemcarrito(id_detalle){

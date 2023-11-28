@@ -7,7 +7,19 @@ use App\Models\CarritoModel;
 
 class Carrito extends Controller
 {
-    
+        public function index()
+    {
+
+        $id_carrito=CarritoModel::select('id_carrito')
+        ->where('id_usuario',auth()->id())->get();                 
+        $carrito=[];
+        if(isset($id_carrito[0])){
+            $carrito = CarritoModel::getCarrito($id_carrito[0]->id_carrito);       
+        }
+        // dd($carrito);
+                return view('carrito')->with('carrito',$carrito);
+    }
+
     public function addcarrito(Request $request)
     {       
             if ($request->id_producto != '' && $request->cant != ''){
@@ -45,7 +57,8 @@ class Carrito extends Controller
     public function addcantidad(Request $request){
 
         $result = CarritoModel::addCantidad($request->id_detalle, $request->cantidad);
-        echo json_encode($result);
+         // json_encode($result);
+        return response()->json($result);
     }
 
     public function remove_carrito_item(Request $request){

@@ -7,8 +7,6 @@
       :query="query"
       >
       </buscar-productoweb>
-
-
       <productos-extra 
       :prodm="prodm" 
       :prodo="prodo"

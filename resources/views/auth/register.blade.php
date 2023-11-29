@@ -78,3 +78,8 @@
   document.title ='Crear Mi Usuario de Supercito';
 </script>
 @endsection
+<style>
+#foot1 {
+    position: absolute !important;
+}
+</style>

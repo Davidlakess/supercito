@@ -1,10 +1,5 @@
 <template>
 	<div>
-		<template v-if="isMobil()">
-			<compras-mobil :compras="compras" :domicilio="domicilio" ></compras-mobil>
-		</template>
-		<template v-else>
-			
 	<b-container  class="mc-content" fluid>
 		<b-row align-h="center" style="margin-bottom: 15px;">
 		  <b-col cols="11" >
@@ -24,20 +19,15 @@
 			>
 			</compras-items>
 		</template>
-  
   		</b-row>
   	</b-container>
-		</template>
-
 	</div>
 </template>
 <script type="text/javascript">
   import comprasweb from '../compras/compras_items.vue'
-  import comprasmobil from '../mobile/mis_compras_mobil.vue'
 	export default {
 		  components:{
-		    'compras-items':comprasweb,
-		    'compras-mobil':comprasmobil
+		    'compras-items':comprasweb
 		    },
 		props:['compras','domicilio'],
 		 data() {  	

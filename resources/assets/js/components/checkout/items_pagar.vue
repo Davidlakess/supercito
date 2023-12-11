@@ -15,7 +15,7 @@
 			<template v-for="item in items">
 				<item-pagar
 				 :name="item.name"
-				 :img="'/uploads/'+item.img"
+				 :img="ruta+'/uploads/'+item.img"
 				 :cantidad="item.cantidad"
 				 :precio="item.precio"
 				></item-pagar>
@@ -42,7 +42,8 @@
 		props:['items'],
 		data(){
 			return{
-				btn:false
+				btn:false,
+				ruta: url
 			}
 		},
 		created() {

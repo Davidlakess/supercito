@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html >
 <head>
     <meta charset="utf-8">
@@ -74,6 +74,7 @@ color: #fff !important;
 .confirm_correo:hover{
   color:white;
 }
+
 .mc-content{
   padding: 30px 60px 30px 60px;
   height: 100%;

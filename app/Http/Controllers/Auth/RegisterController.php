@@ -59,7 +59,8 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'telefono' => ['required', 'string', 'min:10']
+            'telefono' => ['required', 'string', 'min:10'],
+            'pass' => ['required', 'string', 'min:8']
         ]);
     }
     public function registrar(Request $request){
@@ -68,7 +69,8 @@ class RegisterController extends Controller
         $validator = Validator::make($datap, [
             'name' => ['required', 'string', 'max:50'],
             'email' => ['required', 'string', 'email', 'max:100', 'unique:users'],
-            'telefono' => ['required', 'string', 'min:10','unique:users']
+            'telefono' => ['required', 'string', 'min:10','unique:users'],
+            'pass' => ['required', 'string', 'min:8']
         ]);
         
         if ($validator->fails()) {
@@ -87,11 +89,11 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        $pass = $this->generatePassword(8);
+        // $pass = $this->generatePassword(8);
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' =>Hash::make($pass),
+            'password' =>Hash::make($data['pass']),
             'telefono' => $data['telefono'] 
         ]);
         
@@ -117,20 +119,20 @@ class RegisterController extends Controller
         event(new Registered($user));
         
         // Enviar SMS
-        $token = getenv("TWILIO_TOKEN");
-        $twilio_sid = getenv("TWILIO_SID");
-        $twilio_verify_sid = getenv("TWILIO_VERIFY_SID");
-        $twilio = new Client($twilio_sid, $token);
-        $twilio->verify->v2->services($twilio_verify_sid)
-        ->verifications->create('+52'.$data['telefono'], "sms");
+        // $token = getenv("TWILIO_TOKEN");
+        // $twilio_sid = getenv("TWILIO_SID");
+        // $twilio_verify_sid = getenv("TWILIO_VERIFY_SID");
+        // $twilio = new Client($twilio_sid, $token);
+        // $twilio->verify->v2->services($twilio_verify_sid)
+        // ->verifications->create('+52'.$data['telefono'], "sms");
         
         // FIN
 
-        $email = new \stdClass();
-        $email->email = $data['email'];
-        $email->receiver =$data['name'];
-        $email->password = $pass;
-        Mail::to($data['email'])->send(new verificarCorreo($email));
+        // $email = new \stdClass();
+        // $email->email = $data['email'];
+        // $email->receiver =$data['name'];
+        // $email->password = $pass;
+        // Mail::to($data['email'])->send(new verificarCorreo($email));
      }
 
     protected function generatePassword($length)

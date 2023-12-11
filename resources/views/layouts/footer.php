@@ -6,11 +6,13 @@
     </footer>
 <style>
 footer {
-    background-color: #f2f2f2 !important;
+    text-align: center;
+    background-color: #fff !important;
   color: #000;
   padding: 2rem 0;
   bottom: 0;
   position: relative;
+  margin-top: 10px;
   width: 100%;
 }  
 

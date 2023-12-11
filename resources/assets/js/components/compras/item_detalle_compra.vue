@@ -16,7 +16,7 @@
 
   		 <b-row align-h="justify">
 				<b-col cols="12" lg="2">
-  		 	   <img width="90" height="90" :src="'/uploads/'+img" alt="">
+  		 	   <img width="90" height="90" :src="ruta+'/uploads/'+img" alt="">
   		 </b-col>
   		 <b-col cols="12" lg="5">
   		 		<div style=" height: 100%;display: inline-grid;">

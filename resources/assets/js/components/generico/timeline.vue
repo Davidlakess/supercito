@@ -112,10 +112,6 @@ export default {
 </script>
 
 <style>
-  body {
-  background: #e8eeff;
-}
-
 /*#ap {
   padding: 50px 0;
 }

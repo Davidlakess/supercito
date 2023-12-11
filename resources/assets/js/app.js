@@ -8,11 +8,15 @@ require('./bootstrap');
 import  BootstrapVue from 'bootstrap-vue'
 import VueSweetalert2 from "vue-sweetalert2"
 import Vue from 'vue' 
+window.eventBus = new Vue()
+import Vuetify from 'vuetify'
+
+// import 'vuetify/dist/vuetify.min.css'
+Vue.use(Vuetify)
 import autocomplete from '@trevoreyre/autocomplete-vue'
 Vue.use(autocomplete)
 window.moment = require('moment')
 const swal = window.swal = require('sweetalert2')
-Vue.component('telefono', require('./componentes/verifyphone.vue').default)
 // Vue.component('register', require('./components/auth/register.vue').default)
 Vue.component('usuarios', require('./components/admin/usuarios.vue').default)
 Vue.component('c-table', require('./components/c-table.vue').default)
@@ -41,23 +45,36 @@ Vue.component('producto-card-btn', require('./components/Generico/producto_card_
 Vue.component('wishlist', require('./components/generico/wishlist.vue').default);
 Vue.component('wishview', require('./components/generico/wishview.vue').default);
 Vue.component('btn-addcarrito', require('./components/Generico/btn_addcarrito.vue').default);
-Vue.component('v-carousel-item', require('./components/Carousel/carousel_generico.vue').default);
-Vue.component('v-carousel-item-slide', require('./components/Carousel/carousel_item_slider.vue').default);
-Vue.component('v-carousel', require('./components/Carousel/carousel.vue').default)
-Vue.component('v-carousel-slide', require('./components/Carousel/carousel_slide.vue').default)
+// Vue.component('v-carousel-item', require('./components/Carousel/carousel_generico.vue').default);
+// Vue.component('v-carousel-item-slide', require('./components/Carousel/carousel_item_slider.vue').default);
+// Vue.component('v-carousel', require('./components/Carousel/carousel.vue').default)
+// Vue.component('v-carousel-slide', require('./components/Carousel/carousel_slide.vue').default)
 Vue.component('producto-carousel', require('./components/Generico/producto_carousel.vue').default)
 Vue.component('table-carrito', require('./components/carrito/table-carrito.vue').default)
-
 Vue.component('buscar-producto', require('./components/categorias/buscar_producto.vue').default);
 Vue.component('message-error-busqueda', require('./components/Generico/message_error_busqueda.vue').default);
 Vue.component('producto-solo', require('./components/categorias/producto_solo.vue').default);
 Vue.component('listar-categorias', require('./components/categorias/listar_categorias.vue').default); 
 Vue.component('productos-extra', require('./components/categorias/productos_extra.vue').default);
 Vue.component('notifications', require('./components/notificacion/notifications.vue').default);
+Vue.component('productocategoria', require('./components/categorias/producto_por_categoria.vue').default);
+Vue.component('child-categoria-producto', require('./components/categorias/child_categoria_producto.vue').default);
+
+// Chekout
+Vue.component('registrodomicilio', require('./components/checkout/registrodomicilio.vue').default);
+Vue.component('resumen-compra', require('./components/checkout/resumen_compra.vue').default);
+Vue.component('content-domicilio', require('./components/checkout/content_domicilio.vue').default);
+Vue.component('items-pagar', require('./components/checkout/items_pagar.vue').default);
+Vue.component('item-pagar', require('./components/checkout/item_pagar.vue').default);
+
+Vue.component('detalle-compra', require('./components/compras/detalle_compra.vue').default);
+Vue.component('compras', require('./components/compras/compras.vue').default);
+Vue.component('verificar-email', require('./components/generico/verificar_correo.vue').default);
+
+Vue.component('register', require('./components/auth/register.vue').default)
 
 Vue.use(BootstrapVue)
 import * as VueGoogleMaps from 'vue2-google-maps'
- 
  const toast = window.toast= swal.mixin({
             toast: true,
             position: 'top-end',
@@ -70,6 +87,18 @@ Vue.use(VueGoogleMaps, {
     libraries: 'places',
   },
 })
+// new Vue({
+//   el: '#app',
+//   head: {
+//     meta: [
+//       {
+//         name: 'viewport',
+//         content: 'width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover'
+//       }
+//     ]
+//   },
+//   ...App
+// })
 
 const app = new Vue({
     el: '#app',

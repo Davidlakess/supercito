@@ -33,7 +33,7 @@
         <hr style="font-weight: bold;"> 
   <!-- Mas Productos -->
   <template v-if="extras.length!=0">
-      <div class="super-titulo"><span>Productos relacionados..</span></div>
+ <div class="super-titulo"><span>Productos relacionados..</span></div>
       <carousel-mini>
           <template v-for="(item,indx) in extras">  
           <carousel-slider-mini :index="indx">
@@ -193,7 +193,49 @@
       </b-col>
     </b-row> 
  	</b-card>
+  <v-carousel class="carousel-producto" :interval="5000" height="auto"  light hide-delimiters Default style="box-shadow: none;">
 
+          <v-carousel-item v-for="(pro, n) in productos" :key = "n" >
+              <v-container fluid grid-list-sm>
+                <v-layout>
+                <v-flex xs4 md4 v-for="(item, s) in pro" :key = "s">
+                <v-card height="auto" style="padding: 10px; box-shadow: none;"> 
+                  <v-flex xs12 md12>
+                    <wishlist :idproducto="item.ids" :logeado="true"></wishlist>
+                  </v-flex>
+                  <v-flex xs12 md12>
+                    <div class="img-wrap-p" style="width: 300px;">
+                      <a-img :to="item.ids" :src="item.img" :name="item.name"></a-img>
+                    </div>
+                  </v-flex>
+                  <v-flex xs12 md12>
+                    <div class="divpro" style="padding-top: 6px;">
+                      <v-subheader style="padding: 0;text-align: center;">{{item.name}}</v-subheader>
+                      <div class="item-precio"><span>${{item.precio}}</span></div>
+                      <div style="text-align: center;">
+                        <div v-if=" parseFloat(item.stock) !== 0 ">
+                        </div>
+                        <div v-if=" parseFloat(item.stock) !== 0 ">
+                          <btn-addcarrito
+                            :id_producto = "item.ids"
+                            :logeado = "logeado"
+                            :cant = "1"
+                            :block = "true"
+                            >
+                          </btn-addcarrito>
+                          </div>
+                        <div v-else>
+                          <b-alert show variant="danger">Agotado</b-alert>
+                        </div>
+                      </div>
+                    </div>
+                  </v-flex>
+                </v-card>
+              </v-flex>
+            </v-layout>
+          </v-container>
+          </v-carousel-item>
+        </v-carousel>
 </b-container>
 </template>
 
@@ -213,7 +255,55 @@ export default{
           ruta:url,
           selected:'1',
           cantextra:1,
-          options: []
+          options: [],
+          productos: [
+            [
+          {
+            ids: 1,
+            img: 'MNL0b742Tj_1638082561.jpg',
+            name: 'rico pollo sobre 100gr',
+            precio: 10,
+            stock: 2
+          },
+          {
+            ids: 2,
+            img: 'MNL0DmEs7J_1638083022.webp',
+            name: 'algun producto por ahi',
+            precio: 30,
+            stock: 3
+          },
+          {
+            ids: 2,
+            img: 'MNL1O2harq_1638082939.webp',
+            name: 'precios',
+            precio: 30,
+            stock: 3
+          }
+          ],
+          [
+            {
+            ids: 1,
+            img: 'MNL2D10Fcq_1626468106.jpg',
+            name: 'rico pollo sobre 100gr',
+            precio: 10,
+            stock: 2
+          },
+          {
+            ids: 2,
+            img: 'MNL2jthb8H_1628461484.jpg',
+            name: 'algun producto por ahi',
+            precio: 30,
+            stock: 3
+          },
+          {
+            ids: 2,
+            img: 'MNL4Hg0CDT_1638082934.jpg',
+            name: 'precios',
+            precio: 30,
+            stock: 3
+          }
+          ]
+        ]
       }
     },
 
@@ -355,8 +445,21 @@ font-weight: 600;
 .custom-select:focus {
     box-shadow:none;
 }
-  .custom-select{
+.custom-select{
     padding-right: 20px;
-  }
-  
+}
+   
+
+ .wish-icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 99;
+  cursor: pointer;
+  font-size: 25px;
+  color: #abb0b8;
+}
+.wish-icon .fa-heart {
+  color: #ff6161;
+}
 </style>

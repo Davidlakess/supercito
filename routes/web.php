@@ -43,9 +43,12 @@ Route::get('/miscompras', [App\Http\Controllers\MisComprasController::class,'ind
 Route::post('addcarrito', [App\Http\Controllers\Carrito::class, 'addcarrito']);
 Route::post('addcantidad',[App\Http\Controllers\Carrito::class, 'addcantidad']);
 Route::post('getcategorias',[App\Http\Controllers\Categorias::class,'getcategorias'])->name('getcategorias');
-
+Route::post('registrar',[App\Http\Controllers\Auth\RegisterController::class, 'registrar']);
 Route::get('search/{q}',[App\Http\Controllers\Categorias::class,'buscar_producto_descripcion']);
-Route::get('/favoritos', 'CarritoController@favoritos')->name('favoritos');
+Route::get('/favoritos', [App\Http\Controllers\Categorias::class, 'favoritos'])->name('favoritos');
+Route::get('c/{categoria}/{c}',[App\Http\Controllers\Categorias::class,'producto_por_categoria']);
+Route::get('checkout/pagarview/', [App\Http\Controllers\Carrito::class, 'checkoutweb']);
+Route::get('detallecompra/{id}/', [App\Http\Controllers\MisComprasController::class,'detalle_compras']);
 Route::get('/middlecarrito', function () {
     return view('middlecarrito');
 })->middleware('mdcarrito')->name('middlecarrito');

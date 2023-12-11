@@ -4,7 +4,7 @@
 	<b-card no-body class="text-justify static" id="resumencontent" 
 				  style="background-color: #f5f5f5; z-index: -1;" > 
 
-		<b-container style="margin-top: 20px; padding-top: 45px;padding-right: 30px;padding-left: 30px;">
+		<b-container style="margin-top: 20px; padding-top: 45px">
 			<span style="margin-bottom: 20px; font-weight: 600;"> Resumen de compra</span>
 		    <hr>
 			<b-row>

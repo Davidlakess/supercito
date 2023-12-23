@@ -22,7 +22,7 @@
                  <!-- <b-form-spinbutton id="sb-inline" inline v-model="total" ></b-form-spinbutton>  -->
                 <tr v-for="(item,key) in paginatedItems" :key="key">
                   <td colspan="2">
-                     <figure class="card card-product" style="width: 125px;">
+                     <figure class="" style="width: 150px;">
                         <div class="img-wrap"> 
                           <img :src="ruta+'/uploads/'+item.img">
                         </div>
@@ -50,12 +50,12 @@ margin-right: 15px">$ {{item.precio}}</span>
                             style="margin-left: 11px;"><i class="fa fa-undo i-carrito"></i></button> 
                           </template> 
                           <template v-else>
-                                <b-alert show variant="danger">
-                  Producto Agotado
-                </b-alert>
-
-                        <button @click="remove_carrito_item(item.id_detalle)" class="btn btn-sm btn-danger" style="margin-left:4px;"><i class="fa fa-trash i-carrito"></i></button> 
+                            <b-alert show variant="danger">
+                              Producto Agotado
+                            </b-alert>
                           </template>   
+                        <button @click="remove_carrito_item(item.id_detalle)" class="btn btn-sm btn-danger" style="margin-left:4px;"><i class="fa fa-trash i-carrito"></i></button> 
+
                       </div>
                   </td>    
                 </tr>
@@ -373,40 +373,24 @@ export default {
     padding: 10px 25px 10px 25px;
     background: #fff;
     }
-.card-product .img-wrap {
+.img-wrap {
     border-radius: 3px 3px 0 0;
     overflow: hidden;
     position: relative;
-    height: 100px;
+    height: 150px;
     text-align: center; 
   }
-  .card-fixed{
-    width: 100%;
-    position: fixed !important;
-    top: 72%;
-    padding: 10px;
-    background: #fff;
-
-  }
-    .card-product:after {
-    content: "";
-    display: table;
-    clear: both;
-    visibility: hidden; 
-  }
-
-    .card-product .img-wrap img {
+    .img-wrap img {
       max-height: 100%;
       max-width: 100%;
       object-fit: cover; 
     }
-
   .i-carrito{
     padding-left: 1px;
     padding-right: 1px;
     font-size: 14px;
-
   }
+
 .carrito .w-100 {
     /*width: 100% !important;*/
     min-width: 1.5em !important;

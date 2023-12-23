@@ -76,8 +76,6 @@
     margin: 0 0 0 8px;
 }
 
-
-
 .carousel .item {
   color: #747d89;
   min-height: 325px;
@@ -92,29 +90,13 @@
   position: relative;
   box-shadow: 0 2px 3px rgba(0,0,0,0.2);
 }
-.carousel .item .img-box {
-  height: 170px;
-  margin-bottom: 20px;
-  width: 100%;
-  position: relative;
-}
-.carousel .item img { 
-  max-width: 100%;
-  max-height: 100%;
-  display: inline-block;
-  position: absolute;
-  bottom: 0;
-  margin: 0 auto;
-  left: 0;
-  right: 0;
-}
 .carousel .item h4 {
   font-size: 18px;
 }
 .carousel .item h4, .carousel .item p, .carousel .item ul {
   margin-bottom: 5px;
 }
-.carousel .thumb-content .btn {
+/*.carousel .thumb-content .btn {
   color: #7ac400;
     font-size: 11px;
     text-transform: uppercase;
@@ -125,17 +107,17 @@
     margin-top: 5px;
     line-height: 16px;
     border-radius: 20px;
-}
-.carousel .thumb-content .btn:hover, .carousel .thumb-content .btn:focus {
+}*/
+/*.carousel .thumb-content .btn:hover, .carousel .thumb-content .btn:focus {
   color: #fff;
   background: #7ac400;
   box-shadow: none;
-}
-.carousel .thumb-content .btn i {
+}*/
+/*.carousel .thumb-content .btn i {
   font-size: 14px;
     font-weight: bold;
     margin-left: 5px;
-}
+}*/
 .carousel .carousel-control {
  height: 44px;
 width: 44px;
@@ -167,8 +149,9 @@ margin-top: 12%;
 font-size: 15px;
 font-weight: 300;
 line-height: 1.3;
-height: 32px;
+/*height: 32px;*/
 text-transform: capitalize;
+padding: 10px;
 }
 /*.carousel .carousel-control:hover {
   background: #78bf00;

@@ -7,6 +7,7 @@ use App\Models\CarritoModel;
 use App\Models\domicilio_envio;
 
 class Carrito extends Controller
+
 {
         public function index()
     {
@@ -35,7 +36,9 @@ class Carrito extends Controller
         )
         ->Join('detallecarritos', 'detallecarritos.id_carrito', '=', 'carritos.id_carrito','left')
         ->Join('productos', 'productos.id', '=', 'detallecarritos.id_producto','left')
-        ->where('carritos.id_carrito',$id)->get();
+        ->where('carritos.id_carrito',$id)
+        ->where('productos.stock','>','0')
+        ->get();
 
         if(isset($carrito[0])){
 
@@ -83,6 +86,12 @@ class Carrito extends Controller
             } else {
                  return response()->json(array('res' => false));
             }
+    }
+
+    public function favoritos(){
+        $result = CarritoModel::getFavoritos();
+        return view('wishlist')->with('wish',$result);;
+            // dd($lista);
     }
 
     public function getcarrito(){

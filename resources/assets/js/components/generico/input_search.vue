@@ -3,7 +3,7 @@
 	    :search="search"
 	    placeholder="Buscar en MynegocioLocal"
 	    @submit="handleSubmit"
-	   
+	    v-on:keyup.enter="handleSubmit({name: value})"
 	    :get-result-value="getResultValue"
   ></autocomplete>
  
@@ -45,7 +45,6 @@ export default {
 	    },
 	    handleSubmit(result) {
 	    	if(result){
-
 	      		let val=result.name.split(" ").join("+");
 	      		window.location.href=this.ruta+'search/'+val;
 	    	}else{

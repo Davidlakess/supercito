@@ -32,9 +32,9 @@
     	
 		 <b-col md="12" v-if="historial.length!=0">
 			<div class="super-titulo"><span>Productos Vistos Recientemente</span></div>
-			  <v-carousel>
+			  <s-carousel>
 			    <template v-for="(item,indx) in historial">  
-			    <v-carousel-slide :index="indx">
+			    <s-carousel-slide :index="indx">
 		          <div class="row">
 		            <div class="col-sm-12 col-md-3"  v-for="slider in item">
 		              <producto-carousel
@@ -47,9 +47,9 @@
 		              </producto-carousel>
 		            </div>
 		          </div>
-			    </v-carousel-slide>
+			    </s-carousel-slide>
 			    </template>
-			  </v-carousel>
+			  </s-carousel>
 			</b-col>
 
 	<b-col md="12" style="padding: 0;margin-bottom: 50px;">
@@ -78,15 +78,16 @@
 	
 		<productos-nuevos :items="productosnuevos"></productos-nuevos>
 		
-
+<!-- 
 		<template v-for="pro in productos">	
 			<b-col md="12" v-if="pro.items.length!=0">
 				<div class="super-titulo"><span>Gran variedad en {{pro.categoria.name}}</span></div>
-				  <v-carousel>
+				  <s-carousel>
 				    <template v-for="(item,indx) in pro.items">  
-				    <v-carousel-slide :index="indx">
+				    <s-carousel-slide :index="indx">
 			          <div class="row">
 			            <div class="col-sm-12 col-md-3"  v-for="slider in item">
+			            	
 			              <producto-carousel
 			              :idproducto="slider.ids"
 			              :img="slider.img"
@@ -97,12 +98,39 @@
 			              </producto-carousel>
 			            </div>
 			          </div>
-				    </v-carousel-slide>
+				    </s-carousel-slide>
 				    </template>
-				</v-carousel>
+				</s-carousel>
 			</b-col>
-		</template>
-
+		</template> -->
+		
+		<template v-for="(pro,k) in productos">	
+		<div class="super-titulo"><span>Gran variedad en {{pro.categoria.name}}</span></div>
+		<v-carousel  class ="carousel-pro" :interval="6000+k"  light hide-delimiters Default style="box-shadow: none;">
+			  <template v-for="(item,indx) in pro.items"> 
+      <v-carousel-item :key="indx">
+        <v-container fluid grid-list-sm>
+          <v-layout>
+          	<template v-for="(slider,key) in item">
+          	<v-flex xs3 md3 :key="key">
+            	<v-card height="auto" style="padding: 10px; margin: 9px; box-shadow: none;"> 
+         		    <producto-carousel
+	              :idproducto="slider.ids"
+	              :img="slider.img"
+	              :name="slider.name"
+	              :precio="slider.precio"
+	              :logeado="logeado"
+	              >
+	              </producto-carousel>
+            	</v-card>
+        		</v-flex>
+          	</template>
+      		</v-layout>
+    		</v-container>
+      </v-carousel-item>
+    </template>
+    </v-carousel>
+  </template>
 
 
 
@@ -138,16 +166,8 @@
 			return {
 				pro: [],
 				ruta: url,
-				mdruta: "/middlecarrito",
-				// ismobil:false,
 				selected: 'MNL6841',
 				coleccion: [],
-				// swiperOption: {
-			 //          navigation: {
-			 //            nextEl: '.swiper-button-next',
-			 //            prevEl: '.swiper-button-prev'
-			 //          }
-			 //        },
 			        options: [
 			        {name:'Despensa',id:'MNL6841'},
 			        {name:'Hogar y Lavanderia',id:'MNL1636'},
@@ -157,18 +177,9 @@
 		created() {
 			this.coleccion=this.collection;
 		},
-
-
 	methods:{
-
-	 // onSwiper(swiper) {
-  //       console.log(swiper);
-  //     },
-      onselected(){
-      	
+      onselected(){	
       	axios.post(url+"coleccion",{id:this.selected}).then(data => {
-             
-
  		    if(data.status==200){
 		    	if(data.data.length!=0){    
 		        	this.coleccion=data.data;   
@@ -190,12 +201,7 @@
 		}).catch(error => {
                
     	});
-		// console.log(this.coleccion)
-
-      }
-      // onSlideChange() {
-      //   console.log('slide change');
-      // },
+      },
 	}
 }
 </script>

@@ -60,7 +60,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'telefono' => ['required', 'string', 'min:10'],
-            'pass' => ['required', 'string', 'min:8']
+            'password' => ['required', 'string', 'min:8']
         ]);
     }
     public function registrar(Request $request){
@@ -70,14 +70,18 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:50'],
             'email' => ['required', 'string', 'email', 'max:100', 'unique:users'],
             'telefono' => ['required', 'string', 'min:10','unique:users'],
-            'pass' => ['required', 'string', 'min:8']
+            'password' => ['required', 'string', 'min:8']
         ]);
         
         if ($validator->fails()) {
             return response()->json(array('errors' => $validator->errors(), 'res' =>false));
         }else{
-            $this->create($datap);
-            return response()->json(array('res' =>true));
+           if($datap['tel_verify']){
+                $this->create($datap);
+                return response()->json(array('errors' => $validator->errors(), 'res' =>true));
+           }else {
+                return response()->json(array('errors' => $validator->errors(),'res' =>'verify'));
+           }
         }
     }
     /**
@@ -93,8 +97,9 @@ class RegisterController extends Controller
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' =>Hash::make($data['pass']),
-            'telefono' => $data['telefono'] 
+            'password' =>Hash::make($data['password']),
+            'telefono' => $data['telefono'],
+            'telefono_confirm' => $data['tel_verify']
         ]);
         
 

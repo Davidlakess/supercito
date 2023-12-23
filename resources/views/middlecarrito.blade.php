@@ -33,6 +33,9 @@
     </div>
   </b-container>
 @endsection
+<script>
+    window.eventBus.$emit('register',true)
+</script>
 <style>
 #foot1 {
     position: absolute !important;

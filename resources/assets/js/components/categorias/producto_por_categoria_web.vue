@@ -1,68 +1,46 @@
 <!-- PONER UNA FECHA DE ENTREGA PARA ENTREGAR LA MERCANCIA -->
 <template>	
-  <b-container class="ancho-ideal" fluid>
-      <b-row align-h="center" style="margin-top: 10px; margin-bottom: 20px;">
+    <b-container id="content-p" class="ancho-ideal" fluid>
+      <b-row align-h="center">
         <b-col md="3" style="margin-top: 10px;">
           <b-row align-h="center">
             <b-col md="12" >
-              <div class="break-word">
-                
-              <ol class="andes-breadcrumb">
-                
-                <template v-for="(n,key) in nav">  
-                  <li class="li-sin-decoracion" v-if="key!=0">
-                    <i class="fa fa-angle-right icon-category"></i>
-                    <a :href="formaturl(n.name,n.id)" :title="n.name" class="link-category">
-                      <span class="text-category">{{n.name}}</span>
-                    </a>
-                  </li>
-                  <li class="li-sin-decoracion" v-else> 
-                    <a href="#" :title="n.name" class="link-category">
-                      <span class="text-category">{{n.name}}</span>
-                    </a>
-                  </li>
-                </template>
-              </ol>
-              <h1 class="titulo-breadcrumb"><span>{{query}}</span></h1>
+              <h1 class="titulo-breadcrumb"><span>{{query}} </span></h1>
               <small>{{productos.length}} Resultados</small>
-            
-              </div>
             </b-col>
-              <listar-categorias :categorias="categorias" ></listar-categorias>
-          </b-row>
-        </b-col>  
 
-        <b-col md="9" style="margin-top: 35px; padding-left: 20px">
-          <b-card no-body class="overflow-hidden" style="width: 900px;" >
-            <b-card-body style="padding:15px 0px 20px;">
-              <template v-for="(p,key) in paginatedItems">         
-                <child-categoria-producto
-                  :key="key"
-                  :id="p.ids"
-                  :name="p.name"
-                  :img="p.img"
-                  :precio="p.precio"
-                  :logeado='logeado'
-                  >
-                  </child-categoria-producto>        
+              <listar-categorias :categorias="categorias" :productoscount="false" ></listar-categorias>
+          
+          </b-row>
+        </b-col>
+
+        <b-col md="9" style="margin-top: 10px; padding-left: 75px">
+            <b-row align-h="center" style="width: 100%;">
+              <template v-for="pro in paginatedItems">
+               <b-col md="4" style="margin-bottom: 18px;padding-left: 0px;">
+                  <producto-solo
+                  :img="pro.img"
+                  :name="pro.name"
+                  :precio="pro.precio"
+                  :id="pro.ids"
+                  :wish="pro.wish"
+                  :logeado="logeado"
+                  ></producto-solo>
+                </b-col>
               </template>
-            </b-card-body>
-          </b-card>
-          <b-col md="11"  class="my-1" style="display: block ruby;text-align:center;">
-          <b-pagination
-            @change="onPageChanged"
-            :total-rows="totalRows"
-            :per-page="perPage"
-            v-model="currentPage"
-            class="my-0"
-          />
-          </b-col>  
-       
+            </b-row>
+            <b-col md="12"  class="my-1" style="display: block ruby;text-align:center;">
+              <b-pagination
+                @change="onPageChanged"
+                :total-rows="totalRows"
+                :per-page="perPage"
+                v-model="currentPage"
+                class="my-0"
+              />
+            </b-col>  
         </b-col>
       </b-row>
-      </b-container>
-</template>
-
+    </b-container>
 </template>
 <script type="text/javascript">
 
@@ -110,7 +88,7 @@
 
 
 <style>
-  .andes-breadcrumb {
+  /*.andes-breadcrumb {
     margin: 0 0 24px;
     font-family: Proxima Nova,-apple-system,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;
     font-size: 14px;
@@ -137,5 +115,5 @@ margin-right: 1px;
 
 .text-category{
   text-transform: capitalize;
-}
+}*/
 </style>

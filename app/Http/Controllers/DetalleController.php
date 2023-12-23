@@ -39,7 +39,7 @@ class DetalleController extends Controller
             ->Join('atributos as att', 'atc.id_atributo', '=','att.id_atributo' ,'left')
             ->where('atp.id_producto','=',$producto[0]->ids)->get();
 
-            $proextra= Productos::select('id as ids','name','src as img' ,'precio','id_categoria')
+            $proextra= Productos::select('id as ids','name','stock','src as img' ,'precio','id_categoria')
             ->Join('imgs', 'id', '=','id_producto' ,'left')
             ->where('id','!=',$producto[0]->ids)
             ->where('id_categoria','=',$producto[0]->id_c)

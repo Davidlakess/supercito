@@ -1,15 +1,15 @@
 <template>
 
     <li style="margin-left: 30px;" :class="(open)?'dropdown dropdown-large open':'dropdown dropdown-large'" @click="open=!open">
-        <a href="#" style="text-decoration: none;color:#fff;" class="dropdown-toggle" data-toggle="dropdown">Categorias</a>
+        <a href="#" style="text-decoration: none;color:#fff !important;" class="dropdown-toggle" data-toggle="dropdown">Categorias</a>
         
-        <ul class="dropdown-menu dropdown-menu-large row">
+        <ul class="dropdown-menu dropdown-menu-large row" v-on:mouseleave="open=false">
           <template v-for="cat in categorias">
             <li class="col-sm-3">
               <ul>
-                <li class="dropdown-header" style="text-transform: capitalize;">{{cat.nombre}}</li>
+                <li class="dropdown-header" style="text-transform: capitalize;">{{cat.name}}</li>
                 <template v-for="subcat in cat.items">
-                  <li><a :href="formaturl(subcat.name,subcat.id)" style="text-transform: capitalize;">{{subcat.name}}</a>
+                  <li><a :href="formaturl(subcat.name,subcat.ids)" style="text-transform: capitalize;">{{subcat.name}}</a>
                   </li>
                 </template>
                 
@@ -24,7 +24,7 @@
             </li>
           </template>
             <div style="text-align: center; width: 100%;">
-              <li><a :href="ruta+'categorias/AllCategorias'">Todas las Categorias</a></li>
+              <li><a :href="ruta+'AllCategorias'">Todas las Categorias</a></li>
             </div>
         </ul>
       </li>        
@@ -34,10 +34,7 @@
      data() {   
        return {
         ruta:url,
-          categorias:[
-              
-               
-          ],
+          categorias:[],
 
           open:false
        }
@@ -45,12 +42,11 @@
      mounted() {
       // this.getcategorias();
 
-        // if (localStorage.categorias.length==0) {
-
-        //  this.categorias=JSON.parse(localStorage.categorias);
+        // if ('categorias' in localStorage) {
+         // this.categorias=JSON.parse(localStorage.categorias);
         // }else{
-          axios.post(this.ruta+"getcategorias").then(data => {
-            this.makearray(data.data);
+          axios.get(this.ruta+"getcategorias").then(data => {
+            this.categorias = data.data
             // console.log(data.data)
             localStorage.categorias=JSON.stringify(this.categorias);
           

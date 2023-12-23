@@ -64,7 +64,7 @@ class WelcomeController extends Controller
             $historial=[];
 
             if($id){
-                  $historial =Productos::from('historial')->select('p.id as ids','p.name','imgs.src as img','p.precio')
+                  $historial =Productos::from('historial')->select('p.id as ids','p.name','imgs.src as img','p.precio','p.stock')
                       ->Join('productos as p', 'historial.id_producto', '=','p.id' ,'left')
                       ->Join('imgs', 'p.id', '=','imgs.id_producto' ,'left')
                       ->where('historial.id_usuario','=',$id)
@@ -115,7 +115,7 @@ class WelcomeController extends Controller
                 ->inRandomOrder()
                 ->where('c.status','=','1')
                 ->where('c.nivel','=','1')
-                ->limit(1)->get()[0];
+                ->first();
             }
 
          // descomentar esta linea dinamico

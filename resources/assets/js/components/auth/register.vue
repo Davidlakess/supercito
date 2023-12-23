@@ -223,8 +223,9 @@
   </v-layout>
 </template>
 <script>
-  import * as firebaseui from 'firebaseui'
+import * as firebaseui from 'firebaseui'
 import 'firebaseui/dist/firebaseui.css'
+
 import firebase from 'firebase/compat/app';
 firebase.initializeApp({
       apiKey: "AIzaSyAUhiNd9lLFuj7xDYbR4K9BZXaydWWSOd0",
@@ -251,19 +252,19 @@ export default {
     error: false,
     errortel: false,
     newUser: {
-      name: '',
+      name: 'Alex david',
       ubicacion: {lat: '', long: ''},
-      email: '',
-      codigo: '+52',
-      telefono: '',
+      email: 'lakess00511@gmail.com',
+      telefono: '4434126238',
       id_localidad: null,
-      password: '',
-      referencia: '',
-      calle: '',
-      calle_1: '',
-      calle_2: '',
-      numero_e: '',
-      numero_i: ''
+      password: 'alfa1*33',
+      referencia: 'casa amarilla porton negro',
+      calle: 'pipila',
+      calle_1: 'benito juarez',
+      calle_2: 'niños heroes',
+      numero_e: '13',
+      numero_i: '',
+      tel_verify: false
     },
     terminos: false,
     valid: true
@@ -275,11 +276,21 @@ export default {
     })
     window.eventBus.$on('register', () => {
         // PONER EL CAMPO TELEFONO_CONFIRM PARA INSERTARLO A LA BASE DE DATOS
-        this.dialog=false
+        this.dialog = false
+        this.newUser.tel_verify = true
         this.register()
     })
   },
-  mounted() {},
+  mounted() {
+    if ("geolocation" in navigator){ 
+          navigator.geolocation.getCurrentPosition((position) => { 
+               this.newUser.ubicacion.lat = position.coords.latitude
+               this.newUser.ubicacion.long = position.coords.longitude
+          });
+      }else{
+        alert('no se puede obtener tu ubicacion intenta nuevamente con otro navegador')
+      }
+  },
   methods: {
     verificartelefono () {
         this.dialog=true
@@ -291,7 +302,7 @@ export default {
           }
         },
         signInOptions: [{
-            provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+            provider: window.FirebasePlugin.auth.PhoneAuthProvider.PROVIDER_ID,
             defaultCountry: 'MX',
             defaultNationalNumber: this.newUser.telefono,
           }
@@ -308,29 +319,41 @@ export default {
 
     validate () {
       if (this.$refs.formregister.validate()) {
-
-          this.verificartelefono()
-      } 
+          this.register();
+      }else {
+        window.scrollTo(0, 0)
+      }
     },
     register () {
+
       axios.post(this.ruta + 'registrar', this.newUser).then((data) => {
-        if (data.status === 200) {
+        if (data.status == 200) {
             this.errortel = false
             this.error = false
+            
             if ('email' in data.data.errors) {
-              this.$refs.emailregister.$el.focus()
-              this.error = true
+              // this.$nextTick(()=>{
+                this.$refs.emailregister.$refs.input.focus()
+                this.error = true
+              // })
             }
+
             if ('telefono' in data.data.errors) {
-              this.$refs.telregister.$el.focus()
+              this.$refs.telregister.$refs.input.focus()
               this.errortel = true
             }
-            window.scrollTo(0, 0)
+
+            if(data.data.res == 'verify'){
+             this.verificartelefono()
+             // alert('correcto') 
+            }
         } else {
           alert('hubo un error')
         }
-      }).catch(() => {
-        alert('revisa tu conexion a internet')
+      }).catch((e) => {
+
+        alert(e + 'revisa tu conexion a internet')
+      
       })
    }
   } 

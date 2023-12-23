@@ -22,7 +22,17 @@
 					</ul>
 				</div>
 			-->
-			<btn-addcarrito  :logeado="logeado" :id="id" :style="{display:(showbtn)?'block':'none'}"> </btn-addcarrito>
+		
+			<p class="item-price" v-if="logeado"> <!-- <strike>$400.00</strike>--><b>${{precio}}</b></p>
+        <p v-else><a :href="ruta+'item/'+id+'-'+name">Ver Precio...</a></p>
+  
+        <!-- <btn-addcarrito  :logeado="logeado" :id="id"> </btn-addcarrito>  -->
+         <div v-if=" parseFloat(stock) !== 0 ">
+          	<btn-addcarrito  :logeado="logeado" :id="id" small="true" :style="{display:(showbtn)?'block':'none'}" :block="false"> </btn-addcarrito>
+          </div>
+          <div v-else>
+            <b-alert show variant="danger">Agotado</b-alert>
+          </div>
 		</div>            
 	</div>
 </template>
@@ -30,7 +40,8 @@
 	export default {
 		data(){
 			return{
-				showbtn:false
+				showbtn:false,
+				ruta: url
 			}
 		},
 		props: {
@@ -39,6 +50,7 @@
 	    		precio: {type: String},
 	    		img: {type: String},
 	    		raiting: {type:String},
+	    		stock: {type:String},
 	    		logeado: {type:Boolean,default:false}
   		}
 	}

@@ -16,7 +16,7 @@
 		  </table-carrito>
 	    
 @else
-   	<div id="empti">
+   	<div class="empti">
 		<h1>¡Carrito Vacio!</h1>
 		<b-button href="{{ url('/')}}" variant="link">Continuar comprando</b-button>
 	</div>
@@ -25,13 +25,7 @@
 @endsection
 
 <style>
-#empti{
-	 height: 77%;
-	text-align: center;
-	display: inline-block;
-	margin-top: 20px;
-	width: 100%;
-}
+
 .shopping-cart{
 	padding-bottom: 50px;
 	font-family: 'Montserrat', sans-serif;

@@ -31,6 +31,7 @@
                   :id="pro.id_producto"
                   :wish="pro.wish"
                   :logeado="logeado"
+                  :stock="pro.stock"
                   ></producto-solo>
                 </b-col>
       		    </template>

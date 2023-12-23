@@ -10,6 +10,7 @@
     <meta name="base_url" content="{{ url('/') }}">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <link rel="shortcut icon" href="{{ url('/my.ico') }}" />
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -19,18 +20,18 @@
     
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body id="body2">
+<body>
     <v-app id="app">
       <b-navbar style="padding-bottom: 0;padding-top: 0;" toggleable="lg"  class="menu" id="menu">
     <b-navbar-brand href="{{ url('/') }}">
       <logo-app></logo-app>
     </b-navbar-brand>
 </b-navbar>
-        <main >
+        <main  style="margin-bottom: 15%;">
             @yield('content')
+        <s-footer></s-footer>
         </main>
     </v-app>
-     @extends('layouts.footer')
     <script type="text/javascript">
         var url= document.head.querySelector('meta[name="base_url"]').content+'/';
     </script>

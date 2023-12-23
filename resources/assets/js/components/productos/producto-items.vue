@@ -165,7 +165,7 @@
   max-width: 100%;
   display: inline-block;
 }
-.carousel .item .btn {
+/*.carousel .item .btn {
   border-radius: 0;
   font-size: 12px;
   text-transform: uppercase;
@@ -174,15 +174,15 @@
   background: #a177ff;
   padding: 6px 15px;
   margin-top: 5px;
-}
-.carousel .item .btn:hover {
+}*/
+/*.carousel .item .btn:hover {
   background: #8c5bff;
-}
-.carousel .item .btn i {
+}*/
+/*.carousel .item .btn i {
   font-size: 14px;
     font-weight: bold;
     margin-left: 5px;
-}
+}*/
 .carousel .thumb-wrapper {
   margin: 5px;
   text-align: left;

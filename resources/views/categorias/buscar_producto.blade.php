@@ -62,7 +62,7 @@
  .item h4,  .item p,  .item ul {
   margin-bottom: 5px;
 }
- .thumb-content .btn {
+ /*.thumb-content .btn {
   color: #7ac400;
     font-size: 11px;
     text-transform: uppercase;
@@ -83,7 +83,7 @@
   font-size: 14px;
     font-weight: bold;
     margin-left: 5px;
-}
+}*/
 
  .item-price {
   font-size: 20px;

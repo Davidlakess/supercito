@@ -92,7 +92,7 @@ class Productos extends Model
             if($mobi){
 
             $pro=Productos::from('productos as p')
-            ->select('p.id as ids','imgs.src as img','p.name','p.precio')
+            ->select('p.id as ids','imgs.src as img','p.name','p.precio','p.stock')
             ->Join('imgs', 'p.id', '=','imgs.id_producto' ,'left')
             ->whereIn('p.id_categoria',$ids)
             ->inRandomOrder()->where('status','=',1)->limit($limit)->get();
@@ -101,14 +101,14 @@ class Productos extends Model
 
                 if(isset($catego[0])){      
                     $pro=Productos::from('productos as p')
-                    ->select('p.id as ids','imgs.src as img','p.name','p.precio')
+                    ->select('p.id as ids','imgs.src as img','p.name','p.precio','p.stock')
                     ->Join('imgs', 'p.id', '=','imgs.id_producto' ,'left')
                     ->whereIn('p.id_categoria',$ids)
                     ->inRandomOrder()->where('status','=',1)->limit($limit)->get();
                 }else{
 
                     $pro=Productos::from('productos as p')
-                    ->select('p.id as ids','imgs.src as img','p.name','p.precio')
+                    ->select('p.id as ids','imgs.src as img','p.name','p.precio','p.stock')
                     ->Join('imgs', 'p.id', '=','imgs.id_producto' ,'left')
                     ->where('p.id_categoria',$ids)
                     ->inRandomOrder()->where('status','=',1)->limit($limit)->get();
@@ -224,7 +224,7 @@ public static function getproductos_nuevos(){
        // ->limit(50)
        // ->get();
 
-       $slq ="select precio,name,id as id_producto,src as img,id_categoria, match (name,descripcion) against (?  IN BOOLEAN MODE) as relevancia from productos left join imgs on productos.id=imgs.id_producto  where match( name,descripcion) against (?  IN BOOLEAN MODE) and status=? order by relevancia desc  limit ?";
+       $slq ="select precio,name,stock,id as id_producto,src as img,id_categoria, match (name,descripcion) against (?  IN BOOLEAN MODE) as relevancia from productos left join imgs on productos.id=imgs.id_producto  where match( name,descripcion) against (?  IN BOOLEAN MODE) and status=? order by relevancia desc  limit ?";
            
         return  DB::select($slq, array($str, $str,1,'30'));    
     

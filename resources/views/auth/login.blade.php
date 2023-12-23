@@ -60,10 +60,10 @@
       </b-card>
     </b-col>  
   </b-row>
-
-
 </b-container>
+@endsection
 <script type="text/javascript">
+  
+  // window.eventBus.$emit('register',true)
   document.title ='Iniciar Sesion';
 </script>
-@endsection

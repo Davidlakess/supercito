@@ -16,7 +16,7 @@ export default {
   },
     data(){
       return {
-        allcategory:'categorias/AllCategorias',
+        allcategory:'AllCategorias',
         ruta:url,
         // paths:"",
       }

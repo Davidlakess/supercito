@@ -14,6 +14,26 @@ use Auth;
 class Users extends Controller
 {
 
+    public function get_info_user(){
+        $perfil=User::select('id','name','email','avatar')
+        ->where('id',auth()->id())->get();
+        return view('perfil')->with('perfil',(isset($perfil[0]))?$perfil[0]:0);
+        // $perfil=User::select('id','name','email','avatar')
+        // ->where('id',auth()->id())->first();
+        // $domicilio = domicilio_envio::select(
+        //         'domicilio_envio.calle',
+        //         'domicilio_envio.numero_e',
+        //         'domicilio_envio.numero_i',
+        //         'domicilio_envio.telefono',
+        //         'domicilio_envio.calle_1',
+        //         'domicilio_envio.calle_2',
+        //         'domicilio_envio.id_localidad'  
+        //     )
+        //     ->Join('localidades', 'domicilio_envio.id_localidad', '=', 'localidades.id_localidad','left')
+        //     ->where('domicilio.envio.id_usuario',auth()->id())->first();
+        // return view('perfil')->with('perfil',);
+    }
+
     public function UserUpdate (Request $request) {
         // ['cantidad' =>$cant_total] Como poner la informacion clave + valor
         User::where('id',auth()->id())->update(['f_token' => $request->f_token]);

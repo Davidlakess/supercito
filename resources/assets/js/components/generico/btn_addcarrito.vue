@@ -1,61 +1,43 @@
 <template>
-  <div >
-	<b-button 
-    v-if="logeado"
-    :class="(block)?'btn-block':''"
-    variant="outline-primary" 
-    @click="addcarrito()">
+  <div>
+ <v-btn 
+  @click="addcarrito()"
+  style="background-color: #1867c0  !important;"
+  round
+  :block="block"
+:small="(small)?true:false"
+  v-if="logeado"
+   color="success"
+   dark
+  >
     Agregar al carrito
-  </b-button>
-
-  <b-button 
-    v-else
-    :class="(block)?'btn-block':''"
-    variant="outline-primary" 
-    :href="mdruta">
+  </v-btn>
+  <v-btn 
+  style="background-color: #1867c0  !important;"
+  round
+  :block="block"
+  :small="(small)?true:false"
+  v-else
+  :href="ruta+ 'carrito'"
+   color="success"
+   dark
+  >
     Agregar al carrito
-  </b-button>
-
+  </v-btn>
 </div>
 </template>
 <script>
   export default {
-    props:['id','logeado','block','cant'],
-    // props:{
-    //   id: {
-    //     type: Number,
-    //     default: 4
-    //   },
-
-    //   logeado: {
-    //     type: Boolean,
-    //     default: false
-    //   },
-
-    //   block: {
-    //     type: Boolean,
-    //     default: false
-    //   },
-
-    //   cant: {
-    //     type: String,
-    //     default: '1'
-    //   }
-    // },
+    props:['id','logeado','block','cant','small'],
     data(){
       return{
-        mdruta:"/middlecarrito"
+        ruta:url
       }
     },
-    mounted() {
-    
-    },
     methods: {
-      addcarrito(){
-        
+      addcarrito(){  
     		axios.post(url+"addcarrito",{id_producto:this.id,cant:this.cant}).then(data => {
           if(data.data.res){
-
            toast.fire({
             icon:'success',
             title: 'Producto agregado!'
@@ -66,14 +48,11 @@
               title: 'Sin Stock!'
             })
           }
-      
         }).catch(error => {
-          // console.log(error);  
           toast.fire({
             icon:'error',
             title: 'Hubo un error!'
           })
-        
         });
       }
     }

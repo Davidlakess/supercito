@@ -1,7 +1,7 @@
 <template>	
-  <v-carousel-item>
+  <v-carousel class ="" :interval="6000" light hide-delimiters Default style="box-shadow: none;">
     <template v-for="cat in items">
-      <v-carousel-item-slide>
+      <v-carousel-item>
         <div id="wrapper">
           <ul>
             <li v-for="item in cat">
@@ -15,9 +15,9 @@
             </li>
           </ul>
         </div>
-      </v-carousel-item-slide>
+      </v-carousel-item>
     </template>
-  </v-carousel-item>
+  </v-carousel>
 </template>
 <script>
   export default {
@@ -35,3 +35,15 @@
 
 
 </script>
+
+<style>
+
+
+
+.v-btn:not(.v-btn--depressed):not(.v-btn--flat) {
+  background-color: #c9f0c9 !important;
+}
+.v-carousel__prev .v-btn:hover, .v-carousel__next .v-btn:hover {
+ background-color: #e1e1e1 !important;
+}
+</style>

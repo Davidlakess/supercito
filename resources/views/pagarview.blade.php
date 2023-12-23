@@ -89,22 +89,21 @@
       object-fit: cover;
 
 }
-@media only screen and (min-width: 1264px) {
 
 	.static{
 
 		position:absolute;
 		height: 100vh !important;
-/*		width: 103% !important;*/
+		width: 103% !important;
 		
 	}
 	.card-fix{
 		height: 100vh !important;
-/*		width: 30% !important;*/
+		width: 30% !important;
 		position: fixed !important;
 		top: 0 !important;
 	}
-}
+
 
 
 

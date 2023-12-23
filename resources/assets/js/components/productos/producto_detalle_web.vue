@@ -45,6 +45,7 @@
                   :precio="i.precio"
                   :img="i.img"
                   :raiting="i.raiting"
+                  :stock="i.stock"
                   :logeado="logeado"
                   >
                   </producto-card-btn>
@@ -179,22 +180,12 @@
               </btn-addcarrito>
             </div>
           </b-col>
-
-          
         </b-card>
-<!-- 
-        <b-card class="card-detalle-producto" style="margin-top: 68px;">
-          <b-col md="12" lg="12" >
-            <div style="display: flex; flex-direction: column;"> 
-            </div>
-          </b-col>
-           
-        </b-card> -->
       </b-col>
     </b-row> 
  	</b-card>
-  <v-carousel class="carousel-producto" :interval="5000" height="auto"  light hide-delimiters Default style="box-shadow: none;">
-
+  
+  <!-- <v-carousel class="carousel-producto" :interval="5000" height="auto"  light hide-delimiters Default style="box-shadow: none;">
           <v-carousel-item v-for="(pro, n) in productos" :key = "n" >
               <v-container fluid grid-list-sm>
                 <v-layout>
@@ -235,7 +226,33 @@
             </v-layout>
           </v-container>
           </v-carousel-item>
-        </v-carousel>
+        </v-carousel> -->
+      <v-carousel  class ="carousel-pro" :interval="6000"  light hide-delimiters Default style="box-shadow: none;">
+        <template v-for="(item,indx) in  productos"> 
+      <v-carousel-item :key="indx">
+        <v-container fluid grid-list-sm>
+          <v-layout>
+            <template v-for="(slider,key) in item">
+            <v-flex xs3 md3 :key="key">
+              <v-card height="auto" style=" margin: 9px; box-shadow: none;"> 
+                <producto-carousel
+                :idproducto="slider.id_producto"
+                :img="slider.img"
+                :name="slider.name"
+                :precio="slider.precio"
+                :stock ="slider.stock"
+                :logeado="logeado"
+                >
+                </producto-carousel>
+              </v-card>
+            </v-flex>
+            </template>
+          </v-layout>
+        </v-container>
+      </v-carousel-item>
+    </template>
+    </v-carousel>
+
 </b-container>
 </template>
 
@@ -278,6 +295,13 @@ export default{
             name: 'precios',
             precio: 30,
             stock: 3
+          },
+          {
+            ids: 2,
+            img: 'MNL1O2harq_1638082939.webp',
+            name: 'precios',
+            precio: 30,
+            stock: 3
           }
           ],
           [
@@ -298,7 +322,14 @@ export default{
           {
             ids: 2,
             img: 'MNL4Hg0CDT_1638082934.jpg',
-            name: 'precios',
+            name: 'pros y contras',
+            precio: 30,
+            stock: '0.00'
+          },
+          {
+            ids: 2,
+            img: 'MNL4Hg0CDT_1638082934.jpg',
+            name: 'productos',
             precio: 30,
             stock: 3
           }

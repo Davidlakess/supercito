@@ -22,8 +22,9 @@
     	<!-- PRODUCTOS DE LA CATEGORIA MAXIMO 8 -->
       <div class='card' v-for="item in pro">
         <div class='card__image'>
-
-          <a-img :to="item.ids" :src="item.img" :name="item.name"></a-img>
+          <a :href="formaturlItem(item.name,item.ids)">
+              <img :src="ruta+'/uploads/'+item.img" loading="lazy" >
+          </a>
           <!-- <a-img :to="id" :src="img" :name="name"></a-img> -->
         </div>
       </div>
@@ -46,6 +47,11 @@ export default {
 
         return result;
     },
+    formaturlItem(value,id){
+          let aux= value.split(" ").join("-");
+          let result=this.ruta+'item/'+id+'-'+aux;
+          return result;
+    }
   }
 }
 </script>

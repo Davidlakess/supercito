@@ -8,19 +8,21 @@
           <b-card-body>
             <table style="width: 100%;">
               <tbody>
-                 <!-- <b-form-spinbutton id="sb-inline" inline v-model="total" ></b-form-spinbutton>  -->
+                 <!-- <b-form-spinbutton id="sb-inline" inline v-model="total" ></b-form-spinbutton>
+                   -->
+                   <!-- {{paginatedItems}} -->
                 <tr v-for="(item,key) in paginatedItems" :key="key">
                   <td colspan="2">
-                     <figure class="card card-product" style="width: 125px;">
-                        <div class="img-wrap"> 
-                            <a-img :to="item.id_pro" :src="item.img" :name="item.producto"></a-img>
+                     <figure class="" style="width: 150px;">
+                        <div class="img-wrap-f"> 
+                          <a-img :to="item.id_producto" :src="item.img" :name="item.name"></a-img>
                         </div>
                       </figure>        
                     </td>   
                     <td  colspan="2" style="font-weight: 500;
 vertical-align: middle;
 font-size: 18px;
-text-transform: capitalize;">{{item.producto}}</td>    
+text-transform: capitalize;">{{item.name}}</td>    
                 
                   <td colspan="3">
                       <div style="display: flex; margin-bottom: 10px;">
@@ -28,9 +30,9 @@ text-transform: capitalize;">{{item.producto}}</td>
 font-weight: 600;
 margin-right: 15px">$ {{item.precio}}</span>       
                         
-                          <b-button variant="success" @click="addcarrito(item.id_pro)" v-b-tooltip.hover title="Agregar al Carrito" 
+                          <b-button variant="success" @click="addcarrito(item.id_producto)" v-b-tooltip.hover title="Agregar al Carrito" 
                           style="margin-left: 11px;"><i class="fa fa-shopping-cart i-carrito"></i></b-button> 
-                          <b-button variant="danger" @click="removewhislist(item.id_pro)" v-b-tooltip.hover title="Eliminar de Favoritos" style="margin-left:4px;"><i class="fa fa-trash i-carrito"></i></b-button>
+                          <b-button variant="danger" @click="removewhislist(item.id_producto)" v-b-tooltip.hover title="Eliminar de Favoritos" style="margin-left:4px;"><i class="fa fa-trash i-carrito"></i></b-button>
                       </div>
                   </td>    
                 </tr>
@@ -73,7 +75,7 @@ margin-right: 15px">$ {{item.precio}}</span>
  },
     methods: {
        addcarrito(id){
-        axios.post(url+"api/addcarrito",{id:id,cant:1}).then(data => {
+        axios.post(url+"addcarrito",{id:id,cant:1}).then(data => {
           if(data.data.res){
            toast.fire({
             icon:'success',
@@ -96,7 +98,7 @@ margin-right: 15px">$ {{item.precio}}</span>
         });
       },
       removewhislist(id){
-                axios.post(url+"api/delfavoritos",{id:id}).then(data => {     
+                axios.post(url+"delfavoritos",{id:id}).then(data => {     
                     if(data.status=200){
                           toast.fire({
                             icon:'success',
@@ -147,11 +149,11 @@ margin-right: 15px">$ {{item.precio}}</span>
 </script>
 <style>
 
-.card-product .img-wrap {
+.card-product .img-wrap-f {
     border-radius: 3px 3px 0 0;
     overflow: hidden;
     position: relative;
-    height: 100px;
+    height: 150px ;
     text-align: center; 
   }
   .card-fixed{

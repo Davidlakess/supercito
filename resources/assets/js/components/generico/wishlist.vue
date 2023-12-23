@@ -45,7 +45,7 @@
 // 	          });
          
 		
-		    	axios.post(url+"api/delfavoritos",{id:this.idproducto}).then(data => {
+		    	axios.post(url+"delfavoritos",{id:this.idproducto}).then(data => {
 		          
 		          if(data.status=200){
 		
@@ -80,19 +80,20 @@
 	            timer: 3000
 	          });
          
-		    	axios.post(url+"api/addfavoritos",{id:this.idproducto}).then(data => {
+		    	axios.post(url+"addfavoritos",{id:this.idproducto}).then(data => {
 		          
 		    		// console.log(data);
 		          if(data.status=200){
-
-		        
-					this.isactive=true;
-		          
+		        		toast.fire({
+		              icon:'success',
+		              title: '¡Exito! Agregado Tus Favoritos'
+		            })
+								this.isactive=true;
 		          }else{
 
 		            toast.fire({
-		              icon:'Ooops!',
-		              title: 'Algo Salio Mal!'
+		              icon:'error',
+		              title: 'Ooops! Algo Salio Mal!'
 		            })
 		          
 		          }

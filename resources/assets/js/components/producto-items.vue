@@ -165,7 +165,7 @@
   max-width: 100%;
   display: inline-block;
 }
-.carousel .item .btn {
+/*.carousel .item .btn {
   border-radius: 0;
   font-size: 12px;
   text-transform: uppercase;
@@ -182,7 +182,7 @@
   font-size: 14px;
     font-weight: bold;
     margin-left: 5px;
-}
+}*/
 .carousel .thumb-wrapper {
   margin: 5px;
   text-align: left;

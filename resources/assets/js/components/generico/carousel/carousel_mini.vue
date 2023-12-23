@@ -60,12 +60,6 @@
 	}
 </script>
 <style>
-	.carousel {
-  margin-bottom: 30px;
-/*margin-top: 22px;*/
-  /*margin: 50px auto;*/
-  /*padding: 0 70px;*/
-}
 .section-header h1{
     font-size: 26px;
     font-weight: 300;
@@ -91,7 +85,7 @@
   outline: 1px solid;
   outline-color: #d7d5d5b3;
 }
-.carousel .item .img-box {
+/*.carousel .item .img-box {
   height: 170px;
   margin-bottom: 20px;
   width: 100%;
@@ -106,7 +100,7 @@
   margin: 0 auto;
   left: 0;
   right: 0;
-}
+}*/
 .carousel .item h4 {
   font-size: 18px;
 }

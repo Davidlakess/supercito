@@ -10,7 +10,6 @@ import VueSweetalert2 from "vue-sweetalert2"
 import Vue from 'vue' 
 window.eventBus = new Vue()
 import Vuetify from 'vuetify'
-
 // import 'vuetify/dist/vuetify.min.css'
 Vue.use(Vuetify)
 import autocomplete from '@trevoreyre/autocomplete-vue'
@@ -32,6 +31,7 @@ Vue.component('component-detalle-producto', require('./components/admin/Ventas/c
 // APP
 Vue.component('a-img', require('./components/generico/a_img.vue').default)
 Vue.component('logo-app', require('./components/generico/logo_app.vue').default);
+Vue.component('s-footer', require('./components/generico/footer.vue').default);
 Vue.component('welcome', require('./components/welcome.vue').default);
 Vue.component('input-search', require('./components/Generico/input_search.vue').default);
 Vue.component('select-categoria', require('./components/categorias/lista_categoria.vue').default);
@@ -45,10 +45,10 @@ Vue.component('producto-card-btn', require('./components/Generico/producto_card_
 Vue.component('wishlist', require('./components/generico/wishlist.vue').default);
 Vue.component('wishview', require('./components/generico/wishview.vue').default);
 Vue.component('btn-addcarrito', require('./components/Generico/btn_addcarrito.vue').default);
-// Vue.component('v-carousel-item', require('./components/Carousel/carousel_generico.vue').default);
-// Vue.component('v-carousel-item-slide', require('./components/Carousel/carousel_item_slider.vue').default);
-// Vue.component('v-carousel', require('./components/Carousel/carousel.vue').default)
-// Vue.component('v-carousel-slide', require('./components/Carousel/carousel_slide.vue').default)
+Vue.component('s-carousel-item', require('./components/Carousel/carousel_generico.vue').default);
+Vue.component('s-carousel-item-slide', require('./components/Carousel/carousel_item_slider.vue').default);
+Vue.component('s-carousel', require('./components/Carousel/carousel.vue').default)
+Vue.component('s-carousel-slide', require('./components/Carousel/carousel_slide.vue').default)
 Vue.component('producto-carousel', require('./components/Generico/producto_carousel.vue').default)
 Vue.component('table-carrito', require('./components/carrito/table-carrito.vue').default)
 Vue.component('buscar-producto', require('./components/categorias/buscar_producto.vue').default);
@@ -72,6 +72,9 @@ Vue.component('compras', require('./components/compras/compras.vue').default);
 Vue.component('verificar-email', require('./components/generico/verificar_correo.vue').default);
 
 Vue.component('register', require('./components/auth/register.vue').default)
+
+Vue.component('all-categorias', require('./components/categorias/all_categorias.vue').default)
+Vue.component('perfil', require('./components/perfil.vue').default);
 
 Vue.use(BootstrapVue)
 import * as VueGoogleMaps from 'vue2-google-maps'

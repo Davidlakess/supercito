@@ -8,20 +8,52 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="base_url" content="{{ url('/') }}">
-    <link rel="shortcut icon" href="/my.ico" />
+    <link rel="shortcut icon" href="{{ url('/my.ico') }}" />
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
      <link href='https://fonts.googleapis.com/css?family=Roboto:400,700|Material+Icons' rel="stylesheet" type="text/css">
-    <!-- Styles --> 
-  
+    <!-- Styles -->
     <style>
-/*////////////////TOP NAV BAR////////////////*/
-  /*@import url("https://fonts.googleapis.com/css?family=Amiri:300,400");*/
+/*  Carousel precio y descripcion*/
+.item-price {
+  font-size: 26;
+  padding: 2px 0;
+  font-weight: 600;
+}
+.item-price strike {
+  opacity: 0.7;
+  margin-right: 5px;
+}
+/*.carousel-pro .item {
+  color: #747d89;
+  min-height: 325px;
+    text-align: center;
+  overflow: hidden;
+}*/
+.card-descripcion{
+font-size: 15px;
+font-weight: 300;
+line-height: 1.3;
+/*height: 32px;*/
+text-transform: capitalize;
+padding: 10px;
+}
+.thumb-content{
+  display: grid;
+  color: #747d89;
+  text-align: center;
+}
+.thumb-wrapper {
+  padding: 25px 15px;
+  background: #fff;
+  text-align: center;
 
-  /*@import url("../../sass/Amiri");*/
+}
+/*FIN*/
 
-body{
+  
+  body{
   background: rgb(235, 235, 235) none repeat scroll 0% 0% !important;
   overflow-x: hidden;
 }
@@ -303,14 +335,23 @@ header h1 {
   z-index: 9999 !important;
 }
 
-</style>
+
+.empti{
+/*   height: 77%;*/
+  text-align: center;
+/*  display: inline-block;*/
+  margin-top: 20px;
+/*  width: 100%;*/
+}
+    </style> 
 </head>
 <body id="bd">
   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
     {{ csrf_field() }}
   </form>
 
-  <div id="app">
+  <v-app id="app">
+
   <b-navbar toggleable="lg"  class="menu" id="menu" style="background-color: rgb(236, 2, 2);">
     <b-navbar-brand style="margin-left: 25px;color: #fff;" href="{{ url('/') }}">
       <!-- <img alt="" style="width: 50px;" src="/my.png"> -->
@@ -363,7 +404,7 @@ header h1 {
             </div>
           @endif      
           <!-- <b-nav-item href="route('tiendas')">Tiendas</b-nav-item> -->
-          <b-nav-item href="{{route('middlecarrito')}}" class="d-lg-block" style="display: none;"> 
+          <b-nav-item href="{{route('carrito')}}" class="d-lg-block" style="display: none;"> 
             <!-- <b-button  style=""> -->
             <!-- <button type="button" class="btn btn-primary"> -->
                 <!-- <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:20px;"></i> -->
@@ -373,18 +414,19 @@ header h1 {
 
             </b-nav-item>
 
-          <b-nav-item href="{{route('middlecarrito')}}" class="d-lg-none">
+          <b-nav-item href="{{route('carrito')}}" class="d-lg-none">
               Mi Carrito 
             <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:17px;"></i>
           </b-nav-item>
         </b-navbar-nav>
     </b-collapse>
-  </b-navbar>   
-    @yield('content')
-   
+    </b-navbar> 
+      <div style="margin-bottom: 10%;">
+      @yield('content')
+      </div>
 
-  </div>
-  @extends('layouts.footer')
+    <s-footer></s-footer>
+  </v-app>
     <!-- Scripts -->
 
 <script type="text/javascript">

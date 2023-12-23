@@ -1,7 +1,7 @@
 <template>
 		<a :href="formaturl()">
 			<v-img  
-		:src="ruta+'/uploads/'+this.src"
+		:src="ruta+'uploads/'+this.src"
 		aspect-ratio="1"
 		class="grey lighten-2"
 		>

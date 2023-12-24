@@ -2,7 +2,7 @@
 	<b-row align-h="center">
 
 		<div class="super-titulo"><span>Productos que te Pueden Interesar</span></div>
-		<v-carousel  class ="carousel-pro" :interval="6000+k"  light hide-delimiters Default style="box-shadow: none;">
+		<v-carousel  class ="carousel-pro" :interval="6000"  light hide-delimiters Default style="box-shadow: none;">
 			  <template v-for="(item,indx) in  prodm"> 
       <v-carousel-item :key="indx">
         <v-container fluid grid-list-sm>
@@ -28,7 +28,7 @@
     </v-carousel>
 	
 		<div class="super-titulo"><span>Otros Productos</span></div>
-		<v-carousel  class ="carousel-pro" :interval="6001+k"  light hide-delimiters Default style="box-shadow: none;">
+		<v-carousel  class ="carousel-pro" :interval="6001"  light hide-delimiters Default style="box-shadow: none;">
 			  <template v-for="(item,indx) in prodo"> 
       <v-carousel-item :key="indx">
         <v-container fluid grid-list-sm>

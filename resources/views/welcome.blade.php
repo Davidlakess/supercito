@@ -2,50 +2,14 @@
 
 @section('content')
 <div style="background: #ebebeb">
-            
-@if (Auth::guest())
-      @if(isset($data['collection']))
-            <welcome 
+           <welcome 
             :categorias="{{$data['categorias']}}"
             :productos="{{$data['productos']}}" 
-            :productosnuevos="{{$data['pronuevos']}}" 
-            :collection="{{$data['collection']}}" 
-            :historial="{{$data['historial']}}"
-            :logeado="false"  
-           ></welcome>
-        @else
-           <welcome 
-            :categorias="[]"
-            :productos="{{$data['productos']}}" 
-            :productosnuevos="{{$data['pronuevos']}}" 
-            :collection="[]" 
+            :pronuevos="{{$data['pronuevos']}}" 
+            :collection="{{(isset($data['collection'])) ? $data['collection'] : []}}" 
             :historial="{{$data['historial']}}"  
-            :logeado="false" 
+            :logeado="{{(Auth::guest()== 1) ? 'false' : 'true'}}" 
            ></welcome>
-        @endif  
-@else
-
-@if(isset($data['collection']))
-            <welcome 
-            :categorias="{{$data['categorias']}}"
-            :productos="{{$data['productos']}}" 
-            :productosnuevos="{{$data['pronuevos']}}" 
-            :collection="{{$data['collection']}}" 
-            :historial="{{$data['historial']}}"  
-            :logeado="true" 
-           ></welcome>
-        @else
-           <welcome 
-            :categorias="[]"
-            :productos="{{$data['productos']}}" 
-            :productosnuevos="{{$data['pronuevos']}}" 
-            :collection="[]" 
-            :historial="{{$data['historial']}}"  
-            :logeado="true" 
-           ></welcome>
-        @endif 
-@endif    
-
 </div>
 @endsection
 <style>

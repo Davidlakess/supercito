@@ -37,13 +37,21 @@
       		    </template>
   	        </b-row>
             <b-col md="12"  class="my-1" style="display: block ruby;text-align:center;">
-              <b-pagination
+              <!-- <b-pagination
                 @change="onPageChanged"
                 :total-rows="totalRows"
                 :per-page="perPage"
                 v-model="currentPage"
                 class="my-0"
-              />
+              /> -->
+           <v-pagination
+          @input="PageChanged"
+          :length="pages"
+          v-model="currentPage"
+          :total-visible="7"
+          circle
+          color="red"
+        ></v-pagination>
             </b-col>  
         </b-col>
       </b-row>
@@ -51,22 +59,37 @@
 </div>
 </template>
 <script>
-
+import listarcategoria from './listar_categorias.vue'
+import productosolo from './producto_solo.vue'
+import productosextra from './productos_extra.vue'
 export default {
+    components:{
+      'listar-categorias':listarcategoria,
+      'producto-solo':productosolo,
+      'productos-extra': productosextra
+    },
     props:['productos','categorias','logeado','query'],
     data(){
       return {
         ruta:url,
+        perPage: 15,
         currentPage: 1,
-        perPage: 45,
-        totalRows: 0,
+        totalRows: 1,
+        pages: 0,
         paginatedItems:[],
       }
     },
     mounted() {
-        this.paginatedItems=this.productos ;
-          this.totalRows= this.paginatedItems.length;
-          this.paginate(this.perPage, 0);
+
+        this.paginatedItems = this.productos 
+        this.totalRows = this.paginatedItems.length
+        if (this.perPage == null || this.totalRows == null) {
+          this.pages = 0
+        } else {
+          this.pages = Math.ceil(this.totalRows / this.perPage)
+        }
+        this.paginate(this.perPage, 0)
+        this.show = true
     },
   methods:{
     formaturl(value,id){
@@ -76,16 +99,19 @@ export default {
 
       return result;
     },
-    paginate(page_size, page_number) {
-      let itemsToParse = this.productos;
-      this.paginatedItems = itemsToParse.slice(
-        page_number * page_size,
-        (page_number + 1) * page_size
-      );
-    },
-    onPageChanged(page) {
-      this.paginate(this.perPage, page - 1);
-    },
+     paginate (PageSize, PageNumber) {
+        let itemsToParse = this.productos 
+        this.paginatedItems = itemsToParse.slice(
+          PageNumber * PageSize,
+          (PageNumber + 1) * PageSize
+        )
+      },
+      // cerrar () {
+      //   window.eventBus.$emit('close-buscar')
+      // },
+      PageChanged (page) {
+        this.paginate(this.perPage, page - 1)
+      },
   }
 }
 </script>

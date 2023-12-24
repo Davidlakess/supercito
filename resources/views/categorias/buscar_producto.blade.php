@@ -3,22 +3,13 @@
 	@if ($result['productos'])
 <div style="background: #ebebeb">
 	      
-  @if (Auth::guest())
         <buscar-producto :productos="{{$result['productos']}}" 
           :categorias="{{$result['categorias']}}"
           query="{{$result['q'] }}"    :prodm="{{$result['prodmiscate']}}" 
         :prodo="{{$result['prodotracate']}}" 
-        :logeado="false"
+        :logeado="{{(Auth::guest()== 1) ? 'false' : 'true'}}" 
         ></buscar-producto>
 
-        @else
-          <buscar-producto :productos="{{$result['productos']}}" 
-            :categorias="{{$result['categorias']}}"
-            query="{{$result['q'] }}"    :prodm="{{$result['prodmiscate']}}" 
-            :prodo="{{$result['prodotracate']}}" 
-            :logeado="true"
-        ></buscar-producto>
-        @endif     
 
 </div>
           @else

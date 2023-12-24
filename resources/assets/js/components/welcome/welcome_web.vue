@@ -29,7 +29,6 @@
 		
 		<b-container id="content-p"  fluid>
   		<b-row align-h="center">
-    	
 		 <b-col md="12" v-if="historial.length!=0">
 			<div class="super-titulo"><span>Productos Vistos Recientemente</span></div>
 			  <s-carousel>
@@ -103,8 +102,11 @@
 				</s-carousel>
 			</b-col>
 		</template> -->
-		
-		<template v-for="(pro,k) in productos">	
+		<pre>
+		{{productos[0]}}
+			
+		</pre>
+		<!-- <template v-for="(pro,k) in productos[0]" v-if='active'>	
 		<div class="super-titulo"><span>Gran variedad en {{pro.categoria.name}}</span></div>
 		<v-carousel  class ="carousel-pro" :interval="6000+k"  light hide-delimiters Default style="box-shadow: none;">
 			  <template v-for="(item,indx) in pro.items"> 
@@ -130,7 +132,7 @@
       </v-carousel-item>
     </template>
     </v-carousel>
-  </template>
+  </template> -->
 
 
 
@@ -166,6 +168,7 @@
 			return {
 				pro: [],
 				ruta: url,
+				active: false,
 				selected: 'MNL6841',
 				coleccion: [],
 			        options: [
@@ -177,6 +180,9 @@
 		created() {
 			this.coleccion=this.collection;
 		},
+		mounted(){
+			this.active = true
+		},
 	methods:{
       onselected(){	
       	axios.post(url+"coleccion",{id:this.selected}).then(data => {
@@ -184,24 +190,24 @@
 		    	if(data.data.length!=0){    
 		        	this.coleccion=data.data;   
 		    	}
-			}else {
-				const toast = swal.mixin({
-	            toast: true,
-	            position: 'top-end',
-	            showConfirmButton: false,
-	            timer: 3000
-	          	});
+				}else {
+					const toast = swal.mixin({
+		            toast: true,
+		            position: 'top-end',
+		            showConfirmButton: false,
+		            timer: 3000
+		          	});
 
-		         toast.fire({
-		          icon:'Error',
-		          title: '¡error intente de nuevo!'
-	        	})
-			}
+			         toast.fire({
+			          icon:'Error',
+			          title: '¡error intente de nuevo!'
+		        	})
+				}
 		          
-		}).catch(error => {
-               
-    	});
-      },
+			}).catch(error => {
+	      alert('error'+ error)         
+	    });
+    },
 	}
 }
 </script>

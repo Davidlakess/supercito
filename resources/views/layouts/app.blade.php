@@ -16,6 +16,9 @@
     <!-- Styles -->
     <style>
 /*  Carousel precio y descripcion*/
+.producto-carousel-layout{
+  width: 100%; text-align: center;
+}
 .item-price {
   font-size: 26;
   padding: 2px 0;
@@ -32,13 +35,15 @@
   overflow: hidden;
 }*/
 .card-descripcion{
-font-size: 15px;
-font-weight: 300;
-line-height: 1.3;
-/*height: 32px;*/
-text-transform: capitalize;
-padding: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.3;
+    text-transform: capitalize;
+    color: #a5a5a5;
+    width: 100%;
+    margin: 15px 0px 10px 0px
 }
+
 .thumb-content{
   display: grid;
   color: #747d89;
@@ -121,10 +126,12 @@ font-weight: 300;
 display: block;*/
 
 /*text-transform: uppercase;*/
-text-align: justify;
+text-align: center;
 font-size: 22px;
+margin: 20px 0 4px;
 font-weight: 600;
-margin-bottom: 20px;
+width: 100%;
+/*display: block;*/
 
 }
 .super-titulo-m{
@@ -434,17 +441,10 @@ header h1 {
 
  // var url="http://192.168.1.72:8080/"; 
  
-function myFunction(x) {
-  x.classList.toggle("change");
-}
+// function myFunction(x) {
+//   x.classList.toggle("change");
+// }
 
-function isMobil() {
-          if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-             return true
-           } else {
-             return false
-           }
-      }
 </script>
      <script src="{{ asset('js/app.js') }}"></script>
 </body>

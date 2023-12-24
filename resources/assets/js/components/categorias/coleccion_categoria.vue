@@ -1,35 +1,39 @@
 <template>
-	<div class='main-container'>
-  	<div class='grid-container'>
-      <div class='card card--2x' v-if="head">
-        <div>
-        	<!-- IMAGEN DE LA CATEGORIA -->
-          <div class='card__image'>
+  <v-container fluid>
+      <v-layout wrap style="width: 100%;">
+          <!-- IMAGEN DE LA CATEGORIA -->
+        <v-flex md4 style="padding-right: 15px;">
+            <v-card height="auto"> 
             <a :href="formaturl(titulo,idc)">
-              <img :src="ruta+'/uploads/'+img" loading="lazy" >
-            </a>
-          
-          </div>
-        </div>
-        <!-- TITULO DE LA CATEGORIA -->
-        
-         <div class="ui-card foot-main">
-          <!-- <span class="main-item-label">{{etiqueta}}</span> -->
-          <span class="main-item-title">{{titulo}}</span>
-        </div>
-      </div>
+                <img :src="ruta+'/uploads/'+img" loading="lazy" >
+              </a>
+          <!-- TITULO DE LA CATEGORIA -->
+          <v-card-actions>
+              <span class="main-item-title">{{titulo}}</span>
+          </v-card-actions>
+        </v-card>
+      </v-flex>
+      <!-- </div> -->
       
     	<!-- PRODUCTOS DE LA CATEGORIA MAXIMO 8 -->
-      <div class='card' v-for="item in pro">
-        <div class='card__image'>
-          <a :href="formaturlItem(item.name,item.ids)">
-              <img :src="ruta+'/uploads/'+item.img" loading="lazy" >
-          </a>
-          <!-- <a-img :to="id" :src="img" :name="name"></a-img> -->
-        </div>
-      </div>
-    </div>
-  </div>
+      <v-flex md8>
+      <v-layout row wrap>
+        <template v-for="(item,key) in pro" >
+            <v-flex style="margin:3px; max-width: 24%;">
+              <v-card height="auto" class="card-collection" :key="key"> 
+                  <div>
+                    <!-- <a :href="formaturlItem(item.name,item.ids)">
+                        <img style="height: 215px;" :src="ruta+'/uploads/'+item.img" loading="lazy" >
+                    </a> -->
+                    <a-img height="215" :to="item.ids" :src="item.img" :name="item.name"></a-img>
+                  </div>
+              </v-card>
+            </v-flex>
+        </template>
+      </v-layout>
+    </v-flex>
+</v-layout>
+</v-container>
 </template>
  <script type="text/javascript">
 export default {
@@ -63,3 +67,8 @@ export default {
       </div>
     </div>
  -->
+ <style>
+   .card-collection{
+    width: 200px;
+   }
+ </style>

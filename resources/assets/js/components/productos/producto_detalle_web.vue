@@ -22,11 +22,9 @@
       </ol>
   	</b-col>
  	</b-row>
-
   <b-card>
     <b-row align-h="center">
     	<b-col md="8" lg="8" >
-        <!-- <producto-zoomer :imgs="getimgs" ></producto-zoomer> -->
         <carousel
           :images="getimgs">
         </carousel>
@@ -70,20 +68,6 @@
       :fields="fields"
     ></b-table>
 
-      <!-- OTRAS CARACTEERISTICAS -->
-     
-      <!-- <div style="margin-bottom: 20px; margin-top: 20px; font-size: 23px;font-weight: 400;">
-          <span>Otras Características</span>
-          <div style="margin-top: 15px;">
-            <ul class="ul-car">
-              <li v-for="e in 4" style="width: 50%;margin-bottom: 15px;">
-                 <span style="font-weight: 500;">Tipo de agarre</span>: <span>
-                   Elastico
-                 </span>
-              </li>
-            </ul>
-          </div>
-        </div> -->
       <hr>
       </div>         
 
@@ -184,49 +168,6 @@
       </b-col>
     </b-row> 
  	</b-card>
-  
-  <!-- <v-carousel class="carousel-producto" :interval="5000" height="auto"  light hide-delimiters Default style="box-shadow: none;">
-          <v-carousel-item v-for="(pro, n) in productos" :key = "n" >
-              <v-container fluid grid-list-sm>
-                <v-layout>
-                <v-flex xs4 md4 v-for="(item, s) in pro" :key = "s">
-                <v-card height="auto" style="padding: 10px; box-shadow: none;"> 
-                  <v-flex xs12 md12>
-                    <wishlist :idproducto="item.ids" :logeado="true"></wishlist>
-                  </v-flex>
-                  <v-flex xs12 md12>
-                    <div class="img-wrap-p" style="width: 300px;">
-                      <a-img :to="item.ids" :src="item.img" :name="item.name"></a-img>
-                    </div>
-                  </v-flex>
-                  <v-flex xs12 md12>
-                    <div class="divpro" style="padding-top: 6px;">
-                      <v-subheader style="padding: 0;text-align: center;">{{item.name}}</v-subheader>
-                      <div class="item-precio"><span>${{item.precio}}</span></div>
-                      <div style="text-align: center;">
-                        <div v-if=" parseFloat(item.stock) !== 0 ">
-                        </div>
-                        <div v-if=" parseFloat(item.stock) !== 0 ">
-                          <btn-addcarrito
-                            :id_producto = "item.ids"
-                            :logeado = "logeado"
-                            :cant = "1"
-                            :block = "true"
-                            >
-                          </btn-addcarrito>
-                          </div>
-                        <div v-else>
-                          <b-alert show variant="danger">Agotado</b-alert>
-                        </div>
-                      </div>
-                    </div>
-                  </v-flex>
-                </v-card>
-              </v-flex>
-            </v-layout>
-          </v-container>
-          </v-carousel-item>
-        </v-carousel> -->
       <v-carousel  class ="carousel-pro" :interval="6000"  light hide-delimiters Default style="box-shadow: none;">
         <template v-for="(item,indx) in  productos"> 
       <v-carousel-item :key="indx">
@@ -255,9 +196,20 @@
 
 </b-container>
 </template>
+<script>
+import carousel from '../mycarousel.vue'
+import carouselmini from '../generico/carousel/carousel_mini.vue'
+import carouselslidermini from '../generico/carousel/carousel_slider_mini.vue'
+import productocardbtn from '../generico/producto_card_btn.vue'
 
-<script>	
+// Vue.component('producto-card-btn', require('./components/Generico/').default);
 export default{
+  components: {
+    'carousel':carousel,
+    'carousel-mini':carouselmini,
+    'carousel-slider-mini':carouselslidermini,
+    'producto-card-btn': productocardbtn
+  },
     props:[
     'producto',
     'extras',

@@ -99,33 +99,33 @@ public $categoria;
         // echo json_encode($cat);
         
 
-        //  $categorias=CategoriasModel::select('*')
-        // ->where('status',1)
-        // ->where('ids','!=','0')
-        // ->get();
-        // $categorias_total=[];
-        // $subcategorias =[];
-        // foreach ($categorias as $key => $categoriaid) {
-        //     if($categoriaid->nivel == 1){
-        //         foreach ($categorias as $k => $categoria) { 
-        //             if($categoria->parent_id == $categoriaid->ids ){
-        //                 $subcategorias[] = $categoria;
-        //             }
-        //         } 
-        //         $Categorias_total[]=
-        //         array(
-        //             'name'=>$categoriaid->name,
-        //             'id'=>$categoriaid->ids,
-        //             'items'=>$subcategorias
-        //         );
-        //         $subcategorias = [];
-        //     }
-        // }
-        //  return response()->json($Categorias_total);
+         $categorias=CategoriasModel::select('*')
+        ->where('status',1)
+        ->where('ids','!=','0')
+        ->get();
+        $categorias_total=[];
+        $subcategorias =[];
+        foreach ($categorias as $key => $categoriaid) {
+            if($categoriaid->nivel == 1){
+                foreach ($categorias as $k => $categoria) { 
+                    if($categoria->parent_id == $categoriaid->ids ){
+                        $subcategorias[] = $categoria;
+                    }
+                } 
+                $Categorias_total[]=
+                array(
+                    'name'=>$categoriaid->name,
+                    'id'=>$categoriaid->ids,
+                    'items'=>$subcategorias
+                );
+                $subcategorias = [];
+            }
+        }
+         return response()->json($Categorias_total);
 
         // $this->sendSMS('+524434126238',
             // 'Su Codigo de verificacion para Supercitomx es: 123456');
-        echo $this->generatePassword(6);
+        // echo $this->generatePassword(6);
     }
     public function logMsg($msg) {
         if ($this->getDebug()===true){

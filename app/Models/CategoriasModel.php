@@ -131,12 +131,16 @@ public  static function buscar_descripcion($q){
         $id_user=auth()->id();
         $sql="";
         if($id_user){
-            $slq ="select precio,stock,name,id as id_producto,src as img,id_categoria,( select w.id_producto from wishlist as w where w.id_producto= productos.id and w.id_usuario=?) AS wish , match (name,descripcion) against (?  IN BOOLEAN MODE) as relevancia from productos left join imgs on productos.id=imgs.id_producto  where match( name,descripcion) against (?  IN BOOLEAN MODE) and status=? order by relevancia desc  limit ?";
-            $pro = DB::select($slq, array($id_user,$palabra, $palabra,1,'50'));
+            // $slq ="select precio,stock,name,id as id_producto,src as img,id_categoria,( select w.id_producto from wishlist as w where w.id_producto= productos.id and w.id_usuario=?) AS wish , match (name,descripcion) against (?  IN NATURAL LANGUAGE MODE) as relevancia from productos left join imgs on productos.id=imgs.id_producto  where match( name,descripcion) against (?  IN NATURAL LANGUAGE MODE) and status=? order by relevancia desc  limit ?";
+            // $pro = DB::select($slq, array($id_user,$palabra, $palabra,1,'30'));
+               $slq ="select precio,name,stock,id as id_producto,src as img,id_categoria, match (name,descripcion) against (?  IN NATURAL LANGUAGE MODE) as relevancia from productos left join imgs on productos.id=imgs.id_producto  where match( name,descripcion) against (?  IN NATURAL LANGUAGE MODE) and status=? order by relevancia desc  limit ?";
+           
+            $pro = DB::select($slq, array($palabra, $palabra,1,'30'));  
         }else{
-            $slq ="select precio,stock,name,id as id_producto,src as img,id_categoria, match (name,descripcion) against (?  IN BOOLEAN MODE) as relevancia from productos left join imgs on productos.id=imgs.id_producto  where match( name,descripcion) against (?  IN BOOLEAN MODE) and status=? order by relevancia desc  limit ?";
-            $pro = DB::select($slq, array($palabra, $palabra,1,'50'));
+            $slq ="select precio,stock,name,id as id_producto,src as img,id_categoria, match (name,descripcion) against (?  IN NATURAL LANGUAGE MODE) as relevancia from productos left join imgs on productos.id=imgs.id_producto  where match( name,descripcion) against (?  IN NATURAL LANGUAGE MODE) and status=? order by relevancia desc  limit ?";
+            $pro = DB::select($slq, array($palabra, $palabra,1,'30'));
         }
+        // dd($pro);
         
         if(isset($pro[0])){   
         $promisma = Productos::select('precio','name','id as id_producto','src as img')->where('id_categoria',$pro[0]->id_categoria)
@@ -145,9 +149,9 @@ public  static function buscar_descripcion($q){
         $prootra = Productos::select('precio','name','id as id_producto','src as img')->where('id_categoria','!=',$pro[0]->id_categoria)
             ->Join('imgs', 'productos.id', '=','imgs.id_producto' ,'left')
             ->inRandomOrder()->where('status','=','1')->limit(12)->get();
-            // $child_categorias=$this->get_count_all_producto_per_category($categorias);
             $categorias=CategoriasModel::count_categoria_general_per_producto();
             
+
             return $res = array(
                 'productos'=>json_encode($pro),
                 'prodmiscate'=>json_encode( array_chunk( $promisma->toArray(),4)),

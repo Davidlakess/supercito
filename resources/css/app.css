@@ -60,18 +60,20 @@ color: #fff !important;
 }   
 
 .super-titulo{
- /* margin: 20px 0 4px;
+ /* 
 padding: 0;
 text-align: justify;
 font-size: 19px;
 font-weight: 300;
-display: block;*/
+*/
 
 /*text-transform: uppercase;*/
 text-align: justify;
 font-size: 22px;
+margin: 20px 0 4px;
 font-weight: 600;
-margin-bottom: 20px;
+display: block;
+/*margin-bottom: 20px;*/
 
 }
 .super-titulo-m{

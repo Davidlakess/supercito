@@ -4,6 +4,7 @@
 		:src="ruta+'uploads/'+this.src"
 		aspect-ratio="1"
 		class="grey lighten-2"
+		:height="height"
 		>
 			<template v-slot:placeholder>
 				<v-layout
@@ -22,7 +23,13 @@
 
 <script type="text/javascript">
   export default {
-    props:['to','src','name'],
+    props:
+	    {
+		    height: {type: String,default: 'auto'},
+		    src: {type: String},
+		    name: {type: String},
+		    to: {type: String,default: '#'}
+		  },
     data () {
 	    return {
 	      ruta:url

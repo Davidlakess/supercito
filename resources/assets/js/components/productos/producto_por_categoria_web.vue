@@ -43,8 +43,13 @@
     </b-container>
 </template>
 <script type="text/javascript">
-
+import listarcategoria from '../categorias/listar_categorias.vue'
+import productosolo from './producto_solo.vue'
   export default {
+      components:{
+      'listar-categorias':listarcategoria,
+      'producto-solo':productosolo,
+      },
       props:['productos','categorias','query','nav','logeado'],
         data(){
       return {

@@ -67,6 +67,7 @@ Vue.component('item-pagar', require('./components/checkout/item_pagar.vue').defa
 Vue.component('detalle-compra', require('./components/compras/detalle_compra.vue').default);
 Vue.component('ckeckoutmobil', require('./components/mobile/ckeckoutmobil.vue').default);
 Vue.component('wiewpagar', require('./components/viewpagar.vue').default);
+Vue.component('productocategoria', require('./components/productos/producto_por_categoria.vue').default);
 
 // detalle
 // Vue.component('carousel', require('./components/mycarousel.vue').default);
@@ -82,7 +83,7 @@ Vue.component('wiewpagar', require('./components/viewpagar.vue').default);
 // Vue.component('listar-categorias', require('./components/categorias/listar_categorias.vue').default); 
 // Vue.component('producto-solo', require('./components/categorias/producto_solo.vue').default);
 // Vue.component('productos-extra', require('./components/categorias/productos_extra.vue').default);
-// Vue.component('productocategoria', require('./components/categorias/producto_por_categoria.vue').default);
+
 // Vue.component('child-categoria-producto', require('./components/categorias/child_categoria_producto.vue').default);
 
 // Chekout

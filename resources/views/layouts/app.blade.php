@@ -16,6 +16,31 @@
     <!-- Styles -->
     <style>
 /*  Carousel precio y descripcion*/
+@media (max-width: 768px) {
+  .input-class{
+    width: 90% !important;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  .notify-mb{
+    display: block !important;
+  }
+  .miperfil{
+    display: block !important;
+  }
+  #page-container {
+    min-height: 100% !important;
+  }
+}
+
+.miperfil{
+  font-weight: bold;
+  display: flex;
+}
+.input-class{
+  width: 34%;
+  margin-left: 20px;
+}
 .producto-carousel-layout{
   width: 100%; text-align: center;
 }
@@ -350,6 +375,21 @@ header h1 {
   margin-top: 20px;
 /*  width: 100%;*/
 }
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
+
+#footer {
+/*  position: absolute;*/
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;            /* Footer height */
+}
     </style> 
 </head>
 <body id="bd">
@@ -365,23 +405,13 @@ header h1 {
     <!-- {{ config('app.name', 'Laravel') }} -->
       <logo-app></logo-app>
     </b-navbar-brand>
-    <b-navbar-toggle target="nav-collapse" onclick="myFunction(this)">
-      <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
+    <b-navbar-toggle style="border: none;" target="nav-collapse" onclick="myFunction(this)">
+      <v-toolbar-side-icon  style="background-color: white !important;">
+      </v-toolbar-side-icon>
     </b-navbar-toggle>
     <b-collapse id="nav-collapse" is-nav type="dark">
-      <b-navbar-nav  style="display: contents;">
-          <!-- <li class="nav-item" style="cursor: pointer;" id="btn-departamentos">
-            <span>Categorias</span>
-             <i class="fa fa-caret-down"></i> -->
            <select-categoria ></select-categoria>
-          <!-- </li>       -->
-          <!-- <b-nav-item href="route('middlevender')">Vender</b-nav-item>    -->
-          <!-- <b-nav-item style="margin-left: 10px;" href=" route('supermercado')">SuperMercado</b-nav-item>    -->
-        </b-navbar-nav>
-          <div style="width: 34%;margin-left: 20px;"> 
-
+          <div class="input-class"> 
             <input-search></input-search>
           </div>        
           @if (Auth::guest())
@@ -394,33 +424,22 @@ header h1 {
                 <verificar-email></verificar-email>
               @endif   
               <b-navbar-nav class="ml-auto">
-            <notifications></notifications>
-            <div style="display: flex;">
+            <notifications class="notify-mb"></notifications>
+            <div class="miperfil">
             <i class="fa fa-user-circle" style="margin-top: 12px; color:#fff;"></i>
-            <b-nav-item-dropdown style="font-weight: bold; "  text="Mi Perfil"  right>
-            
+            <b-nav-item-dropdown  text="Mi Perfil"  right>
               <b-dropdown-item style="background-color:gainsboro; z-index: 9999 !important;">
                 <i class="fa fa-user-circle"></i> {{auth()->user()->name}}</b-dropdown-item>
-                <!-- <b-dropdown-item href="{{ route('misproductos') }}" >Mi Productos</b-dropdown-item> -->
                 <b-dropdown-item href="{{ route('perfil') }}" >Mis Datos</b-dropdown-item>
                 <b-dropdown-item href="{{ route('favoritos') }}" >Mis Favoritos</b-dropdown-item>
                 <b-dropdown-item @click="logout()" >Salir</b-dropdown-item>
             </b-nav-item-dropdown>
-
-            <b-nav-item href="{{ route('miscompras') }}">Mis Compras</b-nav-item>
             </div>
+            <b-nav-item href="{{ route('miscompras') }}">Mis Compras</b-nav-item>
           @endif      
-          <!-- <b-nav-item href="route('tiendas')">Tiendas</b-nav-item> -->
           <b-nav-item href="{{route('carrito')}}" class="d-lg-block" style="display: none;"> 
-            <!-- <b-button  style=""> -->
-            <!-- <button type="button" class="btn btn-primary"> -->
-                <!-- <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:20px;"></i> -->
-                <!-- <span class="badge bg-secondary">9</span> -->
-            <!-- </b-button> -->
             <img src="{{ url('/shopi.png')}}" style="height: 34px;width: 54px;" title="ver el Carrito de Compras" width="29">
-
             </b-nav-item>
-
           <b-nav-item href="{{route('carrito')}}" class="d-lg-none">
               Mi Carrito 
             <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:17px;"></i>
@@ -428,11 +447,12 @@ header h1 {
         </b-navbar-nav>
     </b-collapse>
     </b-navbar> 
-      <div style="margin-bottom: 10%;">
+    <div id="page-container">
+      <div id="content-wrap">
       @yield('content')
       </div>
-
-    <s-footer></s-footer>
+      <s-footer></s-footer>
+    </div>
   </v-app>
     <!-- Scripts -->
 

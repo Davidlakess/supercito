@@ -43,7 +43,7 @@
 <script type="text/javascript">
 	export default {
 
-		props:['propina','items','issetdomicilio','precioenvio','idcarrito'],
+		props:['propina','items','precioenvio','idcarrito'],
     data() {
       return {
         domicilioset:0,
@@ -57,7 +57,7 @@
       }
     },
     mounted() {
-      this.domicilioset= this.issetdomicilio;
+  
       this.envio=this.precioenvio;
       this.getresumen();
     },
@@ -76,11 +76,10 @@
     methods: {
     finalizarpedido(){
     	eventBus.$on('finpedido', () => {
-        	this.hacer_pedido();	
+        	this.hacer_pedido()
       })
     },	
     hacer_pedido(){
-      if(this.domicilioset==1){
         // alert('holi');
     	   swal.fire({
                 title: '¡estas a punto de enviar tu pedido!',
@@ -96,20 +95,9 @@
                 if (result.value) {
                    // this.recogercambio();
                  	 this.enviar_pedido(0);
-                 }else if(result.dismiss=='cancel') {
-                 	 
-                 
+                 }else if(result.dismiss=='cancel') {   
                  }
           	})
-          }else{
-
-             swal.fire(
-                '¡Agrega el Domicilio de Envio!',
-                '',
-                'info'
-                )
-
-          }
 	},enviar_pedido(cambio){
 
     eventBus.$emit('btn-disable'); 

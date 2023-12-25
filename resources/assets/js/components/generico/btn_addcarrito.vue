@@ -31,7 +31,9 @@
     props:['id','logeado','block','cant','small'],
     data(){
       return{
-        ruta:url
+        ruta:url,
+        text1: ' unidad agregada al carrito',
+        text2: ' unidades agregadas al carrito'
       }
     },
     methods: {
@@ -40,7 +42,7 @@
           if(data.data.res){
            toast.fire({
             icon:'success',
-            title: 'Producto agregado!'
+            title: (this.cant >= 1) ? '¡Exito! '+this.cant + this.text1: '¡Exito! '+this.cant + this.text2
             })
           }else{
             toast.fire({

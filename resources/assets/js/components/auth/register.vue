@@ -178,11 +178,11 @@
                 </v-layout>
               </v-container>
             </v-card-text>
-            <v-card-actions style ="margin-bottom: 20px;">
+            <v-card-actions style ="margin-bottom:0">
                 <v-layout row>
               <v-container>
                 <div id="recaptcha-container"></div>
-               <v-btn block color="primary" dark @click="validate()">Registrarme</v-btn>
+               <v-btn block style="background-color: #000 !important;" dark @click="validate()">Registrarme</v-btn>
              </v-container>
            </v-layout>
             </v-card-actions>
@@ -375,5 +375,9 @@ export default {
    .pading-left{
     padding-left: 10px;
    }
+}
+
+.v-btn:not(.v-btn--depressed):not(.v-btn--flat) {
+  background-color: #c9f0c9 !important;
 }
 </style>

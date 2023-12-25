@@ -5,7 +5,7 @@
         <v-flex md4 style="padding-right: 15px;">
             <v-card height="auto"> 
             <a :href="formaturl(titulo,idc)">
-                <img :src="ruta+'/uploads/'+img" loading="lazy" >
+                <img :src="ruta+'uploads/'+img" loading="lazy" >
               </a>
           <!-- TITULO DE LA CATEGORIA -->
           <v-card-actions>

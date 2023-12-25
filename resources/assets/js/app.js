@@ -21,6 +21,14 @@ window.formatPrice = function (value) {
   let val = (value / 1).toFixed(2).replace(',', '.')
   return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
+window.isMobil = function () {
+          if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+             return true
+           } else {
+             return false
+           }
+      }
+
 // Vue.component('register', require('./components/auth/register.vue').default)
 // Vue.component('usuarios', require('./components/admin/usuarios.vue').default)
 // Vue.component('c-table', require('./components/c-table.vue').default)
@@ -49,13 +57,16 @@ Vue.component('producto-carousel', require('./components/Generico/producto_carou
 Vue.component('wishlist', require('./components/generico/wishlist.vue').default);
 Vue.component('producto-detalle', require('./components/productos/producto_detalle.vue').default);
 Vue.component('notifications', require('./components/notificacion/notifications.vue').default);
-Vue.component('buscar-producto', require('./components/categorias/buscar_producto.vue').default);
+Vue.component('buscar-producto', require('./components/productos/buscar_producto.vue').default);
 Vue.component('verificar-email', require('./components/generico/verificar_correo.vue').default);
 Vue.component('message-error-busqueda', require('./components/Generico/message_error_busqueda.vue').default);
 Vue.component('table-carrito', require('./components/carrito/table-carrito.vue').default)
 Vue.component('resumen-compra', require('./components/checkout/resumen_compra.vue').default);
 Vue.component('items-pagar', require('./components/checkout/items_pagar.vue').default);
 Vue.component('item-pagar', require('./components/checkout/item_pagar.vue').default);
+Vue.component('detalle-compra', require('./components/compras/detalle_compra.vue').default);
+Vue.component('ckeckoutmobil', require('./components/mobile/ckeckoutmobil.vue').default);
+Vue.component('wiewpagar', require('./components/viewpagar.vue').default);
 
 // detalle
 // Vue.component('carousel', require('./components/mycarousel.vue').default);
@@ -64,7 +75,6 @@ Vue.component('item-pagar', require('./components/checkout/item_pagar.vue').defa
 
 // Vue.component('producto-card-btn', require('./components/Generico/producto_card_btn.vue').default);
 // Vue.component('producto-card-btn', require('./components/Generico/producto_card_btn.vue').default);
-
 // Vue.component('s-carousel-item', require('./components/Carousel/carousel_generico.vue').default);
 // Vue.component('s-carousel-item-slide', require('./components/Carousel/carousel_item_slider.vue').default);
 // Vue.component('s-carousel', require('./components/Carousel/carousel.vue').default)
@@ -79,8 +89,7 @@ Vue.component('item-pagar', require('./components/checkout/item_pagar.vue').defa
 // Vue.component('registrodomicilio', require('./components/checkout/registrodomicilio.vue').default);
 // Vue.component('content-domicilio', require('./components/checkout/content_domicilio.vue').default);
 
-// Vue.component('detalle-compra', require('./components/compras/detalle_compra.vue').default);
-// Vue.component('all-categorias', require('./components/categorias/all_categorias.vue').default)
+Vue.component('all-categorias', require('./components/categorias/all_categorias.vue').default)
 
 Vue.use(BootstrapVue)
 import * as VueGoogleMaps from 'vue2-google-maps'
@@ -92,35 +101,16 @@ import * as VueGoogleMaps from 'vue2-google-maps'
           });
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyBCKiIqCdZGrVxx06LSbe7uG3zXOq1Cz5k',
+    key: process.env.VUE_APP_APY_GOOGLE,
     libraries: 'places',
   },
 })
-// new Vue({
-//   el: '#app',
-//   head: {
-//     meta: [
-//       {
-//         name: 'viewport',
-//         content: 'width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover'
-//       }
-//     ]
-//   },
-//   ...App
-// })
-
+console.log(process.env.NODE_ENV)
 const app = new Vue({
     el: '#app',
     methods:{
       logout(){
         document.getElementById('logout-form').submit();
-      },
-      isMobil() {
-          if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-             return true
-           } else {
-             return false
-           }
       }
     }
 });

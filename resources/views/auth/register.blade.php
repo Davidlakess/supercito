@@ -5,8 +5,3 @@
 <script type="text/javascript">
   document.title ='Crear Mi Usuario de Supercito'
 </script>
-<style>
-#foot1 {
-    position: static; !important;
-}
-</style>

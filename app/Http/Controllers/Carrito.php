@@ -69,7 +69,8 @@ class Carrito extends Controller
                 'propina'=>$propina,
                 'envio'=>(isset($ev->name))?$ev->envio:0,
                 'id_carrito'=>$id,
-                'adress'=> $adr
+                'adress'=> $adr,
+                'ismobil'=>CarritoModel::isMobil()
             );  
      
             return view('pagarview')->with('detalle',$detalle);

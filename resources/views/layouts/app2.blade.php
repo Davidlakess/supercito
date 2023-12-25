@@ -27,10 +27,12 @@
       <logo-app></logo-app>
     </b-navbar-brand>
 </b-navbar>
-        <main  style="margin-bottom: 15%;">
-            @yield('content')
+        <div id="page-container">
+          <div id="content-wrap">
+          @yield('content')
+          </div>
         <s-footer></s-footer>
-        </main>
+        </div>
     </v-app>
     <script type="text/javascript">
         var url= document.head.querySelector('meta[name="base_url"]').content+'/';
@@ -39,7 +41,48 @@
         body{
             background-color: #ebebeb;
         }
-   
+@media (max-width: 768px) {
+    #page-container {
+        min-height: 100% !important;
+    }
+    #content-wrap {
+        padding-bottom: 4.5rem !important;    /* Footer height */
+    }
+    #ancho-contacto{
+        padding: 0 !important;
+    }
+    .page-title {
+    font-size: 33px;
+    color: #404262;
+    font-weight: bold;
+  }
+  .subtitle-contacto{
+    display: grid;
+    text-align: center;
+    line-height: 1.98;
+    font-size: 13px;
+    margin: 4%;
+  }
+}
+#ancho-contacto{
+    padding: 4% 15% 10% 15%;
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;    /* Footer height */
+}
+
+#footer {
+/*  position: absolute;*/
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;            /* Footer height */
+}
     </style>
 </body>
 </html>

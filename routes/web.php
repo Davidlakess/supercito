@@ -48,6 +48,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/autorizarpedido',[App\Http\Controllers\AdminController::class,'autorizar_pedido']);
 // admin routes Fin
 
+    Route::get('contacto',[App\Http\Controllers\WelcomeController::class,'contactoview'])->name('contacto');
+    Route::post('addcontacto',[App\Http\Controllers\WelcomeController::class,'addcontacto'])->name('addcontacto');
     Route::post('/coleccion',[App\Http\Controllers\WelcomeController::class,'cambiar_collection']);
     Route::get('item/{id}',[App\Http\Controllers\DetalleController::class,'index'])->name('item');
     Route::get('getcategorias',[App\Http\Controllers\Categorias::class,'getcategorias'])->name('getcategorias');

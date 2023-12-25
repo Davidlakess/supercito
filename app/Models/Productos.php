@@ -228,5 +228,6 @@ public static function getproductos_nuevos(){
            
         return  DB::select($slq, array($str, $str,1,'30'));    
     
-    }  
+    }
+ 
 }

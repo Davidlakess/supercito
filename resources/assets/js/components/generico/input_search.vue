@@ -19,9 +19,6 @@ export default {
 				// mdruta:"/middlecarrito",
 			}
 		},
-		mounted (){
-			// console.log(this.mdruta)
-		},
 	methods:{
 	    async search(input) {
 	    this.value=input;

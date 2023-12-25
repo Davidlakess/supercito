@@ -1,5 +1,5 @@
 <template>
-  <v-footer height="auto" dark :absolute="absolute">
+  <v-footer height="auto" dark id="footer" absolute>
     <v-layout
       justify-center
       row
@@ -35,7 +35,7 @@
       })
     },
     data: () => ({
-      absolute: true,
+      absolute: false,
       ruta:url,
       links: [
         {name:'Inicio',ruta:''},

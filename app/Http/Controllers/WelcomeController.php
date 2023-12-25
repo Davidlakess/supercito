@@ -10,22 +10,22 @@ class WelcomeController extends Controller
 {
      public function welcome(Request $request){
             
-            $browser=$_SERVER['HTTP_USER_AGENT'];
-            $ref=isset($_SERVER['HTTP_REFERER']);
-            $ip=$request->ip();
+            // $browser=$_SERVER['HTTP_USER_AGENT'];
+            // $ref=isset($_SERVER['HTTP_REFERER']);
+            // $ip=$request->ip();
 
-            $log=logs::select('ip')
-            ->where('ip',$ip)
-            ->get();
+            // $log=logs::select('ip')
+            // ->where('ip',$ip)
+            // ->get();
             
-            if(!isset($log[0])){
-                $logs=new logs();
-                $logs->navegador=$browser;
-                $logs->url_referencia=$ref;
-                $logs->ip=$ip;
-                $logs->tipo_log='visitante';
-                $logs->save();
-            }
+            // if(!isset($log[0])){
+            //     $logs=new logs();
+            //     $logs->navegador=$browser;
+            //     $logs->url_referencia=$ref;
+            //     $logs->ip=$ip;
+            //     $logs->tipo_log='visitante';
+            //     $logs->save();
+            // }
 
             $limit=12;
             $limitcat=24;
@@ -35,6 +35,12 @@ class WelcomeController extends Controller
          
             // dd($datos);
             return view('welcome')->with('data',$datos);
+
+        }
+        public function contactoview () {
+            return view('contacto');
+        }
+        public function addcontacto () {
 
         }
         public function cambiar_collection(Request $request){

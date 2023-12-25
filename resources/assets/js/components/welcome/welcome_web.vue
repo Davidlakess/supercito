@@ -27,6 +27,7 @@
 	      </b-carousel-slide>
 	    </b-carousel>
 		
+		
 		<b-container id="content-p"  fluid>
   		<b-row align-h="center">
 		 <b-col md="12" v-if="historial.length!=0">
@@ -153,7 +154,7 @@
 </template>
 <script>
 	import coleccion_categoria  from '../categorias/coleccion_categoria.vue'
- 	import productosnuevos from '../welcome/productos_nuevos.vue'
+ 	import productosnuevos from '../productos/productos_nuevos.vue'
  	import welcomcategori from '../Generico/welcome_categorias.vue'
 
 	export default {

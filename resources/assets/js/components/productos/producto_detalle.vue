@@ -1,5 +1,13 @@
 <template>		
-      <div class="ancho-ideal" >  
+      <div v-if="isMobil" >  
+        <detalle-mobil 
+          :características="características"
+          :producto="producto"
+          :extras="extras"
+          :logeado="logeado"
+        ></detalle-mobil>
+    </div>
+      <div v-else class="ancho-ideal" >  
         <productos-detalleweb
           :producto="producto"
           :nav="nav"
@@ -12,9 +20,11 @@
 </template>
 <script>
     import detalleweb from './producto_detalle_web.vue'
+    import detallemobil from '../mobile/productos_detalle_mobil.vue'
   export default {
     components:{
     'productos-detalleweb':detalleweb,
+    'detalle-mobil':detallemobil
     },
     props:[
     'producto',
@@ -33,6 +43,9 @@
     computed:{
       getimgs(){
         return this.producto.imgs.split(',');
+      },
+      isMobil() {
+        return window.isMobil()
       }
     },
     methods: {

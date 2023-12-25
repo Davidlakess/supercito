@@ -1,5 +1,8 @@
 <template>
-	<div>
+	<div v-if="isMobil">
+			<compras-mobil :compras="compras" :domicilio="domicilio" ></compras-mobil>
+	</div>
+	<div v-else>
 	<b-container  class="mc-content" fluid>
 		<b-row align-h="center" style="margin-bottom: 15px;">
 		  <b-col cols="11" >
@@ -25,34 +28,20 @@
 </template>
 <script type="text/javascript">
   import comprasweb from '../compras/compras_items.vue'
+  import comprasmobil from '../mobile/mis_compras_mobil.vue'
 	export default {
-		  components:{
-		    'compras-items':comprasweb
-		    },
+		components:{
+	    'compras-items':comprasweb,
+	    'compras-mobil':comprasmobil
+		},
 		props:['compras','domicilio'],
-		 data() {  	
-      return {
-    		
-      }
-    },
-
-    mounted() {
-    
-    },
-    created() {
-        
-    },
-	methods: {
-    	isMobil() {
-          if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-             return true
-           } else {
-             return false
-           }
-      }
+		computed:{
+			isMobil() {
+       // return true
+         return window.isMobil()
+    	}
+		}
 	}
-	}
-
 </script>
 
 

@@ -1,5 +1,5 @@
 
-<footer id="foot1">
+<footer >
         <div class="container-fluid text-center">
             <p>© 2024 <b>Supercito</b> <!-- by <a href="https://kingstudio.ro" target="_blank">Lakess005 estudios</a> -->. Todos los Derechos Reservados.</p>
         </div><!-- / container-fluid -->

@@ -43,10 +43,7 @@
             </b-form-checkbox>
           </b-form-group>
           <b-form-group>
-    
-           <b-button type="submit" variant="primary">
-                    Ingresar
-            </b-button>
+            <v-btn block type="submit" dark style="background-color: #000 !important;margin-bottom: 10px;">Ingresar</v-btn>
          </b-form-group>
         </b-form >
 

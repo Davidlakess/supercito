@@ -24,7 +24,7 @@
 	        </template>
 	      </b-carousel-slide>
 	    </b-carousel>
-		<v-container fluid id="content-p">
+		<v-container fluid id="content-p" style="cursor: default;">
   		<v-layout row wrap>
 			<template v-if="historial">
 				<div class="super-titulo"><span>Productos Vistos Recientemente</span></div>
@@ -198,7 +198,7 @@
 <script>
 
 	import coleccion_categoria  from '../components/categorias/coleccion_categoria.vue'
- 	import productosnuevos from '../components/welcome/productos_nuevos.vue'
+ 	import productosnuevos from '../components/productos/productos_nuevos.vue'
  	import welcomcategori from '../components/Generico/welcome_categorias.vue'
 	export default {
 		components: {
@@ -357,6 +357,4 @@ body #wrapper ul li div {
   font-weight: 600;
   font-size: 13px;
 }
-
-
 </style>

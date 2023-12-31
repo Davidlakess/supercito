@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Auth;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+// Route::group(['middleware' => 'admin'], function () {
+// });
+Route::post('/storage/create',[App\Http\Controllers\StorageController::class ,'save']);
+Route::post('/login',[App\Http\Controllers\Auth\LoginController::class ,'AdminLogin']);
 
         
 Route::get('/sms', [App\Http\Controllers\SmsController::class, 'sendSms']);

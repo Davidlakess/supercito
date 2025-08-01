@@ -24,7 +24,6 @@ Route::get('/new-message', function () {
 Route::get('auth/{provider}', [App\Http\Controllers\Auth\SocialAuthController::class,'redirectToProvider'])->name('social.auth');
         
 Route::get('auth/{provider}/callback',[App\Http\Controllers\Auth\SocialAuthController::class,'handleProviderCallback']);
-
 Route::get('/',[App\Http\Controllers\WelcomeController::class,'welcome']);
 Auth::routes();
 Route::get('pedido/{id}','AdminController@detalle_pedido')->name('pedido');

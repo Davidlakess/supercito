@@ -13,7 +13,7 @@
                   <b-row align-h="justify">                
               <b-col  col="6" class="p-0">
                 <div class="img-wrap-m"> 
-                  <a-img :to="pro.ids" :src="pro.img" :name="pro.name"></a-img>
+                  <a-img :to="pro.ids" :src="pro.img" :name="pro.name" height="auto"></a-img>
                 </div>
               </b-col>
               <b-col col="6" class="p-0">
@@ -32,14 +32,14 @@
   		
       <b-col col="12"  class="my-1" style="display: contents;
 text-align: center;">
-          <b-pagination
-          style="margin-bottom: 10px !important;"
-            @change="onPageChanged"
-            :total-rows="totalRows"
-            :per-page="perPage"
-            v-model="currentPage"
-            class="my-0"
-          />
+         <v-pagination
+          @input="PageChanged"
+          :length="pages"
+          v-model="currentPage"
+          :total-visible="7"
+          circle
+          color="red"
+        ></v-pagination>
    	 </b-col>  
     </b-row>
 </div>
@@ -56,42 +56,35 @@ data(){
         perPage: 15,
         totalRows: 0,
         paginatedItems:[],
+        pages:0
       }
     },
     mounted() {
-        this.paginatedItems=this.productos ;
-          this.totalRows= this.paginatedItems.length;
-          this.paginate(this.perPage, 0);
+        // this.paginatedItems=this.productos ;
+        //   this.totalRows= this.paginatedItems.length;
+        //   this.paginate(this.perPage, 0);
+        //   this.paginatedItems = this.productos 
+        
+        this.totalRows = this.paginatedItems.length
+        if (this.perPage == null || this.totalRows == null) {
+          this.pages = 0
+        } else {
+          this.pages = Math.ceil(this.totalRows / this.perPage)
+        }
+        this.paginate(this.perPage, 0)
     },
   methods:{
-    paginate(page_size, page_number) {
-      let itemsToParse = this.productos;
-      this.paginatedItems = itemsToParse.slice(
-        page_number * page_size,
-        (page_number + 1) * page_size
-      );
-    },
-    onPageChanged(page) {
-      this.paginate(this.perPage, page - 1);
-    },
+     paginate(page_size, page_number) {
+          let itemsToParse = this.productos;
+          this.paginatedItems = itemsToParse.slice(
+            page_number * page_size,
+            (page_number + 1) * page_size
+          );
+        },
+        PageChanged(page) {
+          this.paginate(this.perPage, page - 1);
+          window.scrollTo(0, 0)
+        },
   }
 }
 </script>
-<style>
-	html{
-		overflow-x: hidden;
-	}
-
-	 .img-wrap-m {
-    border-radius: 3px 3px 0 0;
-    overflow: hidden;
-    position: relative;
-    height: 145px;
-    text-align: center; }
-  
-  .img-wrap-m img {
-      max-height: 100%;
-      max-width: 100%;
-      object-fit: cover; 
-  }
-</style>

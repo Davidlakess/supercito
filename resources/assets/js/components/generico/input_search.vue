@@ -1,7 +1,8 @@
 <template>	
+
 	<autocomplete
 	    :search="search"
-	    placeholder="Buscar en MynegocioLocal"
+	    placeholder="Buscar en Supercito "
 	    @submit="handleSubmit"
 	    v-on:keyup.enter="handleSubmit({name: value})"
 	    :get-result-value="getResultValue"
@@ -16,6 +17,7 @@ export default {
 				busqueda:[],
 				value:"",
 				ruta:url,
+				drawer: null
 				// mdruta:"/middlecarrito",
 			}
 		},

@@ -1,5 +1,5 @@
 <template>
-  <div>    
+  <div style="margin-bottom: 7%;">    
     <b-card no-body class="overflow-hidden" style="cursor: auto;">
           <span style="text-align: center;margin-top:15px;font-size: 25px;font-weight: bold;">
             <p>Tu Carrito de Compras</p>
@@ -131,7 +131,7 @@ export default {
     data(){
       return {
           ruta: url,
-          propina:5,
+          propina:2,
           total:0,
           id:this.data[0].id_carrito,
           cantidades:1,
@@ -143,6 +143,7 @@ export default {
           currentPage: 1,
           perPage: 7,
           totalRows: 0,
+          auxsubtotal: 0
       }
     },
      computed: {
@@ -171,8 +172,9 @@ export default {
            window.location.href=url; 
       },
       checkout(){
-
-            if(this.subtotal>=100){
+            console.log(parseFloat(this.auxsubtotal))
+            console.log(parseFloat(this.auxsubtotal) >= 100)
+            if(parseFloat(this.auxsubtotal) >= 100){
 
               this.$refs.checkout.submit();
             } else{
@@ -274,7 +276,7 @@ export default {
 
               dat.append('id_detalle',id_detalle);
               dat.append('size',size);
-              axios.post("api/removeitem",dat).then(data => {
+              axios.post("removeitem",dat).then(data => {
               
                 const toast = swal.mixin({
                   toast: true,
@@ -308,12 +310,12 @@ export default {
              if (result.value) {
               dat.append('id_carrito',this.id);
               dat.append('size',size);
-              axios.post("api/removeitem",dat);
+              axios.post("removeitem",dat);
               this.removeitemtable(id_detalle);     
               
-              Vue.nextTick().then(() =>{ 
+              this.$nextTick().then(() =>{ 
               
-              window.location.href=url+'carrito';
+              window.location.href=url;
 
               });
             }
@@ -353,7 +355,9 @@ export default {
           // this.total+= this.this.subtotalotal;
           // this.subtotal=this.subtotal;
           
-        this.subtotal= this.formatPrice(subto);
+        this.subtotal = this.formatPrice(subto)
+        this.auxsubtotal = subto
+        
         // console.log(this.subtotal)
         // console.log('to',this.subto)
         

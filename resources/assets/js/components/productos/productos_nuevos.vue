@@ -1,5 +1,5 @@
 <template>
-	<div v-if="items.length!=0" style="margin-top: 15px;">
+	<div v-if="items.length!=0" style="margin-top: 15px; width: 100%;">
 		<div class="super-titulo"><span>Productos nuevos en Supercito...</span></div>
 		<v-carousel  :cycle="false" class ="carousel-pro" :interval="6000"  light hide-delimiters Default style="box-shadow: none;">
 		<template v-for="(item,indx) in items"> 

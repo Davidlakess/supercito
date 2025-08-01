@@ -1,67 +1,21 @@
 <template>
-	<b-col cols="11"  style="margin-bottom: 15px;">
+	<b-col cols="11"  style="margin-bottom: 5%;">
 		<b-card style="border-radius: 11px; border-left: 5px solid #ffce0e4d;">
 			<b-row  style="padding-bottom: 15px;">
-		    	<template v-if="status==1">
+		    
 					<b-col  cols="12" lg="6" class="text-lg-left" >
-			  		 	    <b-badge pill variant="success">Por Entregar..</b-badge>
+			  		 	<v-chip  :color="get_variante(status)" text-color="white">{{get_Estatus(status)}}</v-chip>
 			  		</b-col>
 			  		<b-col cols="12" lg="6" class="text-lg-right btn-v-c">
 			  				<div style="display: inline-grid;">	
-			  		 	    <b-badge pill variant="warning" style="margin-bottom: 10px;">Pendiente</b-badge>
-			  		 	    <b-button :href="'/detallecompra/'+id_venta" variant="outline-primary" >
+			  		 	    <v-chip  :color="get_variante(status)" text-color="white">{{get_Estatus(status)}}</v-chip>
+			  		 	    <b-button :href="ruta+'detallecompra/'+id_venta" variant="outline-primary" >
 				            	Ver Detalle
 				          	</b-button>
 		  				</div>
 		  		</b-col>
-				</template>
-
-		    	<template v-if="status==2">
-					<b-col  cols="12" lg="6" class="text-lg-left" >
-			  		 	    <b-badge pill variant="info">Enviado</b-badge>
-			  		</b-col>
-			  		<b-col cols="12" lg="6" class="text-lg-right btn-v-c">
-			  				<div style="display: inline-grid;">	
-			  		 	    <b-badge pill variant="primary" style="margin-bottom: 10px;">En camino..</b-badge>
-			  		 	    <b-button :href="'/detallecompra/'+id_venta" variant="outline-primary" >
-				            	Ver Detalle
-				          	</b-button>
-		  				</div>
-		  		</b-col>
-				</template>
-
-		    	<template v-if="status==3">
-					<b-col  cols="12" lg="6" class="text-lg-left" >
-			  		 	  <b-badge pill variant="success">Entregado</b-badge><span style="font-size: 18px;"> el {{getfecha()}}</span>
-			  		</b-col>
-			  		<b-col cols="12" lg="6" class="text-lg-right btn-v-c">
-			  				<div style="display: inline-grid;">	
-			  		 	    <!-- <b-badge pill variant="warning" style="margin-bottom: 10px;">Pendiente</b-badge> -->
-			  		 	    <b-button :href="'/detallecompra/'+id_venta" variant="outline-primary" >
-				            	Ver Detalle
-				          	</b-button>
-		  				</div>
-		  		</b-col>
-				</template>
-
-
-	    		<template v-if="status==4">
-					<b-col  cols="12" lg="6" class="text-lg-left" >
-			  		 	    <b-badge pill variant="danger">Cancelado</b-badge>
-			  		</b-col>
-			  		<b-col cols="12" lg="6" class="text-lg-right btn-v-c">
-			  				<!-- <div style="display: inline-grid;">	 -->
-			  		 	    <!-- <b-badge pill variant="warning" style="margin-bottom: 10px;">Pendiente</b-badge> -->
-
-			  		 	    <b-button :href="'/detallecompra/'+id_venta" variant="outline-primary" >
-				            	Ver Detalle
-				          	</b-button>
-			  				<!-- </div> -->
-			  		</b-col>
-				</template>
-	  		</b-row>
-
-			 <b-row align-h="justify">
+		  	</b-row>
+			<b-row align-h="justify">
 			 	<b-col cols="12" lg="2">
 	          <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:30px;"></i>
 			 	</b-col>
@@ -95,7 +49,7 @@
 
 		 data() {  	
       return {
-    		
+    		ruta:url
       }
     },
 
@@ -106,7 +60,41 @@
         
     },
 	methods: { 
-      getfecha(){
+		get_variante(estatus){
+      switch (estatus) {
+        case 1:
+          return "warning"
+          break;
+        case 2:
+          return "blue"
+          break;
+        
+        case 3:
+          return "green"
+          break;
+        case 4:
+          return "red"
+          break;
+      }
+    },
+    get_Estatus(estatus){
+      switch (estatus) {
+        case 1:
+          return "Pendiente"
+          break;
+        case 2:
+          return "Enviado"
+          break;
+        
+        case 3:
+          return "Entregado"
+          break;
+        case 4:
+          return "Cancelado"
+          break;             
+      }
+    },
+    getfecha(){
 
         moment.locale('es');
         return  moment(this.fecha).format('dddd LL');

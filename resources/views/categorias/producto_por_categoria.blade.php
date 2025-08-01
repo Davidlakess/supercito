@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-   @if ($response['productos'])
-   <div style="display: flex;">   
+   @if ($response['productos'])   
                  <productocategoria 
                 :productos="{{$response['productos']}}" 
                 :categorias="{{$response['categorias']}}" 
@@ -10,7 +9,6 @@
                 query="{{$response['query']}}"
                 :logeado="{{(Auth::guest()== 1) ? 'false' : 'true'}}" 
                 ></productocategoria>
-   </div>
         @else
          
           <div style="background: #ebebeb">

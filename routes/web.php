@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Events\NewMessage;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,11 +17,20 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('/new-message', function () {
+    event(new NewMessage("Nuevo mensaje de pruebas"));
+});
+
+Route::get('auth/{provider}', [App\Http\Controllers\Auth\SocialAuthController::class,'redirectToProvider'])->name('social.auth');
+        
+Route::get('auth/{provider}/callback',[App\Http\Controllers\Auth\SocialAuthController::class,'handleProviderCallback']);
 
 Route::get('/',[App\Http\Controllers\WelcomeController::class,'welcome']);
 Auth::routes();
-
+Route::get('pedido/{id}','AdminController@detalle_pedido')->name('pedido');
 Route::group(['middleware' => 'auth'], function () {
+   
+    Route::post('/removeitem', [App\Http\Controllers\Carrito::class, 'remove_carrito_item']);
     Route::get('carrito',[App\Http\Controllers\Carrito::class,'index'])->name('carrito');;
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
     Route::get('/misproductos', [App\Http\Controllers\MisProductosController::class,'index'])->name('misproductos');
@@ -34,6 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('delfavoritos', [App\Http\Controllers\Carrito::class, 'delfavoritos'])->name('delfavoritos');
     Route::get('checkout/pagarview/', [App\Http\Controllers\Carrito::class, 'checkoutweb']);
     Route::get('detallecompra/{id}/', [App\Http\Controllers\MisComprasController::class,'detalle_compras']);
+    Route::post('/pedido', [App\Http\Controllers\VentasController::class, 'AgregarVenta']);
 });
 // admin routes
     Route::get('/usuarios',[App\Http\Controllers\AdminController::class,'usuarios']);

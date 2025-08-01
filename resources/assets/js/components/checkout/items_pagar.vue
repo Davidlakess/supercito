@@ -22,18 +22,6 @@
 			</template>	
 		</b-row>
 	</b-card>
-		<b-row style="margin-bottom: 25px !important;margin-top: 4% !important; display: none;" class="d-lg-block">
-				<b-col cols="12" style="text-align: end;">
-					<b-button variant="primary" :disabled="btn" size="lg" v-on:click.stop="hacer_pedido" >
-						<div v-if="!btn">
-						Finalizar
-						</div>
-						<div v-else>
-	        				<b-spinner></b-spinner>
-	      				</div>
-					</b-button>		
-				</b-col>
-		</b-row>
 	</div>
 </template>
 <script type="text/javascript">

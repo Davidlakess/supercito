@@ -1,5 +1,14 @@
 <template>	
-	<div>	
+<div v-if="isMobil()" >
+	<welcome-mobil
+			:productos="productos"
+			:productosnuevos="pronuevos"
+			:historial="historial"
+			:logeado="logeado"
+		>
+		</welcome-mobil>
+</div>
+<div v-else>
 	    <b-carousel
 	        id="carousel-slide"
 	        :interval="3000"
@@ -24,9 +33,26 @@
 	        </template>
 	      </b-carousel-slide>
 	    </b-carousel>
+	    <v-container fluid id="content-p" style="cursor: default;">
+  		<v-layout row wrap>
+
+  						<v-flex xs12 md4>
+  							<img style="width: 350;" src="/uploads/compra.jpg" alt="">
+  						</v-flex>
+  						<v-flex xs12 md4>
+  							<img style="width: 350;" src="/uploads/compra.jpg" alt="">
+  						</v-flex>
+  						<v-flex xs12 md4>
+  							<img  style="width: 350;" src="/uploads/compra.jpg" alt="">
+  						</v-flex>
+  			</v-layout>
+  		</v-container>
 		<v-container fluid id="content-p" style="cursor: default;">
   		<v-layout row wrap>
-			<template v-if="historial">
+  			 <div class="card flex justify-center">
+        <Button label="Verify" />
+    </div>
+			<template v-if="historial !=0">
 				<div class="super-titulo"><span>Productos Vistos Recientemente</span></div>
 				<v-carousel  :cycle="false" class ="carousel-pro" :interval="6000"  light hide-delimiters Default style="box-shadow: none; margin-bottom: 5%;">
 				<template v-for="(item,indx) in historialchunk"> 
@@ -200,11 +226,13 @@
 	import coleccion_categoria  from '../components/categorias/coleccion_categoria.vue'
  	import productosnuevos from '../components/productos/productos_nuevos.vue'
  	import welcomcategori from '../components/Generico/welcome_categorias.vue'
+ 	import welcome_mobil  from '../components/mobile/welcome_mobil.vue'
 	export default {
 		components: {
 			 	'coleccion-cetgoria':coleccion_categoria,
 			 	'productos-nuevos':productosnuevos,
-			 	'welcome-categorias':welcomcategori
+			 	'welcome-categorias':welcomcategori,
+			 	'welcome-mobil':welcome_mobil
 		},
 	props:['productos','pronuevos','categorias','collection','historial','logeado'],
 	computed:{
@@ -230,7 +258,7 @@
 			        options: [
 			        {name:'Despensa',id:'MNL6841'},
 			        {name:'Hogar y Lavanderia',id:'MNL1636'},
-			        {name:'Higiene Personal',id:'MNL7890'}]
+			        {name:'Higiene Personal',id:'MNL7890'},{name:'Bebes',id:'MNL3554'}]
 			}
 		},
 		created() {
@@ -255,6 +283,9 @@
 	          R.push(array.slice(i, i + chunkSize));
 	        return R;
 			},
+			isMobil() {
+          return window.isMobil()
+    	},
       onselected(){	
       	axios.post(url+"coleccion",{id:this.selected}).then(data => {
  		    if(data.status==200){

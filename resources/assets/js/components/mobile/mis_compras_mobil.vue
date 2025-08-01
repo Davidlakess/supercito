@@ -8,7 +8,7 @@
 				<b-row>
 				  <template v-if="compra.status==1">
 					<b-col  cols="6" class="text-lg-left" >
-			  		 	    <b-badge pill variant="success">Por Entregar..</b-badge>
+			  		 	    <b-badge pill variant="info">Por Entregar..</b-badge>
 			  		</b-col>
 			  		<b-col cols="6" style="text-align: end;">
 			  			<div style="display: inline-grid;">	
@@ -27,7 +27,7 @@
 			  		<b-col cols="6"  style="text-align: end;">
 			  				<div style="display: inline-grid;">	
 			  		 	    <b-badge pill variant="primary" style="margin-bottom: 10px;">En camino..</b-badge>
-			  		 	    <b-button size="sm" style="text-align: end;"  :href="ruta + '/detallecompra/'+compra.id_venta" variant="outline-primary" >
+			  		 	    <b-button size="sm" style="text-align: end;"  :href="ruta + 'detallecompra/'+compra.id_venta" variant="outline-primary" >
 				            	Ver Detalle
 				          	</b-button>
 		  				</div>
@@ -45,7 +45,7 @@
 			  		<b-col cols="6" style="text-align: end;">
 			  				<div style="display: inline-grid;">	
 			  		 	
-			  		 	    <b-button size="sm" style="text-align: end;" :href="'/detallecompra/'+compra.id_venta" variant="outline-primary" >
+			  		 	    <b-button size="sm" style="text-align: end;" :href="'detallecompra/'+compra.id_venta" variant="outline-primary" >
 				            	Ver Detalle
 				          	</b-button>
 		  				</div>
@@ -58,7 +58,7 @@
 			  		 	    <b-badge pill variant="danger">Cancelado</b-badge>
 			  		</b-col>
 			  		<b-col cols="6" style="text-align: end;" >
-			  		 	    <b-button size="sm" style="text-align: end;"  :href="ruta + '/detallecompra/'+compra.id_venta" variant="outline-primary" >
+			  		 	    <b-button size="sm" style="text-align: end;"  :href="ruta + 'detallecompra/'+compra.id_venta" variant="outline-primary" >
 				            	Ver Detalle
 				          	</b-button>
 			  		</b-col>

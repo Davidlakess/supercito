@@ -75,7 +75,7 @@ margin-right: 15px">$ {{item.precio}}</span>
  },
     methods: {
        addcarrito(id){
-        axios.post(url+"addcarrito",{id:id,cant:1}).then(data => {
+        axios.post(url+"addcarrito",{id_producto:id,cant:1}).then(data => {
           if(data.data.res){
            toast.fire({
             icon:'success',

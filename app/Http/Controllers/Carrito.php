@@ -45,17 +45,19 @@ class Carrito extends Controller
         // $this->add_Notificacion($carrito);
 
             $domicilio = domicilio_envio::select(
+
                 'domicilio_envio.calle',
+                'domicilio_envio.id_domicilio',
                 'domicilio_envio.numero_e',
                 'domicilio_envio.numero_i',
                 'domicilio_envio.calle_1',
                 'domicilio_envio.calle_2',
-                'domicilio_envio.id_localidad'  
+                'domicilio_envio.id_localidad',
+                'domicilio_envio.referencia'  
             )
             ->where('id_usuario',auth()->id())->first();
-
+                $adr =[];
                 $ev=[];
-                $adr='0';
                 if(isset($domicilio['id_localidad'])){
                     $ev = domicilio_envio::from('localidades')->select('envio','name')
                     ->where('id_localidad',$domicilio->id_localidad)->first();

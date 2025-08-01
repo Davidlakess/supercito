@@ -22,6 +22,40 @@ class Productos extends Model
 
         return $result;
     }
+
+    public static function getProductos () {
+         return Productos::select('id as id_producto','name','precio','stock','status')->orderBy('status', 'desc')->get();
+    }
+    public static function getproductosolo ($IdProducto) {
+            return Productos::from('productos as p')->select(
+                'name',
+                'descripcion',
+                'precio',
+                'stock',
+                'id_categoria'
+            )
+            ->where('id','=',$IdProducto)
+            ->first();
+    }
+    public static function getImgs ($IdProducto) {
+         return Productos::select(DB::raw('imgs.src,false as visible'))
+           ->Join('imgs', 'productos.id', '=','imgs.id_producto' ,'left')
+           ->where('productos.id','=',$IdProducto)->get(); 
+    }
+    public static function getAtributosProducto ($IdProducto) {
+         return Productos::from('atributos_producto as atp')
+          ->select(DB::raw('atc.id, atp.id_atributo,atp.valor as name,att.unidades'))
+          ->Join('atributos_categoria as atc', 'atp.id_atributo', '=','atc.id' ,'left')
+          ->Join('atributos as att', 'atc.id_atributo', '=','att.id_atributo' ,'left')
+          ->where('atp.id_producto','=',$IdProducto)->get();   
+    }
+
+    public static function getProductosbajos () {
+         return Productos::select('id as ids','name','precio','stock')
+         ->orderBy('name', 'desc')
+         ->where('stock','<=', 3)
+         ->get();
+    }
     public static function get_productodetalle($id){
             $id_user=auth()->id();
 
@@ -29,8 +63,7 @@ class Productos extends Model
                 ->Join('imgs', 'p.id', '=','imgs.id_producto' ,'left')
               ->where('p.id','=',$id)
               ->where('p.status','=',1)
-              ->groupBy('p.id')->get();
-               
+              ->groupBy('p.id')->get();               
     }
     public static function getcollection_categoria($id){
             $categorias=CategoriasModel::from('categorias as c')
@@ -188,16 +221,16 @@ class Productos extends Model
 public static function getproductos_nuevos(){
        
         $fecha_actual = date("Y-m-d");
-        $nuevafecha = strtotime ( "-10 day" , strtotime ( $fecha_actual ));
+        $nuevafecha = strtotime ( "+10 day" , strtotime ( $fecha_actual ));
         $nuevafecha =date ( "Y-m-j" , $nuevafecha );
-        $fechahoy=strtotime ( "+1 day" , strtotime ( $fecha_actual ));
+        $fechahoy=strtotime ( "-1 day" , strtotime ( $fecha_actual ));
         $fechahoy=date ( "Y-m-j" , $fechahoy );
         $productos_nuevos=null;
 
 
         $productos_nuevos= Productos::select('id as id_producto','name','imgs.src as img','precio')
           ->Join('imgs', 'productos.id', '=','imgs.id_producto' ,'left')
-          ->whereBetween('productos.created_at', array($nuevafecha,$fechahoy))
+          ->whereBetween('productos.created_at', array($fechahoy,$nuevafecha))
           ->where('status','=',1)
            ->orderBy('productos.created_at', 'desc')
             ->limit(24)

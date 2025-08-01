@@ -14,9 +14,16 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-        
+Route::post('/login',[App\Http\Controllers\Auth\LoginController::class ,'AdminLogin']);
+Route::get('/categorias',[App\Http\Controllers\Admin\AdminController::class ,'getcategorias']);
+Route::get('/productos',[App\Http\Controllers\Admin\AdminController::class ,'getproductos']);
+Route::get('/bajos',[App\Http\Controllers\Admin\AdminController::class ,'getProductosbajos']);
+Route::get('/productod/{id}',[App\Http\Controllers\Admin\AdminController::class ,'getProducto']);
+
+
 Route::get('/sms', [App\Http\Controllers\SmsController::class, 'sendSms']);
 Route::post('/verifycode', [App\Http\Controllers\SmsController::class, 'verify']);
+
 Route::post('/sanctum/token',[App\Http\Controllers\Auth\LoginController::class, 'logindevice']);
 Route::get('/producto/{id}/', [App\Http\Controllers\Products::class, 'getproducto']);
 Route::get('/productosextra', [App\Http\Controllers\Products::class, 'getextras']);
@@ -26,7 +33,12 @@ Route::get('/allcategorias', [App\Http\Controllers\Categorias::class, 'getAllCat
 Route::get('/getlocalidades',[App\Http\Controllers\Categorias::class,'getlocalidades']);
 Route::post('registrar',[App\Http\Controllers\Auth\RegisterController::class, 'registrar']);
 Route::get('/noty', [App\Http\Controllers\SmsController::class, 'noty']);
+
 Route::group(['middleware' => 'auth:sanctum'], function () {
+Route::post('/storage/create',[App\Http\Controllers\StorageController::class ,'save']);
+Route::get('/ventas',[App\Http\Controllers\Admin\AdminController::class ,'getVentas']);
+Route::get('/venta/{id}',[App\Http\Controllers\Admin\AdminController::class ,'getVentadetalle']);
+    Route::get('/users',[App\Http\Controllers\Admin\AdminController::class ,'getUsers']);
     Route::get('/user', function (Request $request) {
         return response()->json(Auth::user());
     });
@@ -46,7 +58,15 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/password', [App\Http\Controllers\Users::class, 'CambiarPassword']);
     Route::get('/domicilio', [App\Http\Controllers\Users::class, 'getDomicilio']);
     Route::post('/pedido', [App\Http\Controllers\VentasController::class, 'AgregarVenta']);
+       Route::post('/cancelarproducto', [App\Http\Controllers\Admin\AdminController::class, 'cancelar_producto']);
+   Route::post('/authorizarproducto', [App\Http\Controllers\Admin\AdminController::class, 'autorizar_producto']);
+    Route::get('/getnewproducto', [App\Http\Controllers\Admin\AdminController::class, 'getnewproducto']);
+    Route::get('/newproducto', [App\Http\Controllers\Admin\AdminController::class, 'newproducto']);
 
+   // Route::post('cancelarventa', [App\Http\Controllers\Admin\AdminController::class ,'AgregarVenta']);
+    //Route::post('authorizarpedido', [App\Http\Controllers\Admin\AdminController::class ,'AgregarVenta']);
+
+     
 });
     Route::get('/productosnuevos', [App\Http\Controllers\WelcomeController::class, 'ProductosNuevos']);
     Route::get('/historial', [App\Http\Controllers\WelcomeController::class, 'HistorialProductos']);

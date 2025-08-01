@@ -17,11 +17,12 @@
           >
           </buscar-productoweb>
 
-
+          <div style="padding-bottom: 7%;">
           <productos-extra 
           :prodm="prodm" 
           :prodo="prodo"
           ></productos-extra>  
+          </div>
         </b-container>
       </div>
 </template>

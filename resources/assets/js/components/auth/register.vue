@@ -1,6 +1,6 @@
 <template>
   <v-layout row>
-    <v-flex xs12 sm8 offset-sm2 lg8 offset-lg2>
+    <v-flex xs12 sm8 offset-sm2 lg8 offset-lg2 style="margin-bottom:10%;">
       <v-card >
         <v-container>
           <v-form
@@ -66,7 +66,8 @@
                   :type="passhow1 ? 'text' : 'password'"
                   label="Contraseña"
                   hint="la Contraseña debe tener almenos 8 caracteres"
-                  :rules="[() => !!newUser.password || 'la contraseña es  requerida',]"
+                  :rules="[() => !!newUser.password || 'la contraseña es  requerida',
+                  () => newUser.password.length > 7 ||'la Contraseña debe tener almenos 8 caracteres']" 
                   counter
                   v-model="newUser.password"
                   outline
@@ -227,14 +228,16 @@ import * as firebaseui from 'firebaseui'
 import 'firebaseui/dist/firebaseui.css'
 
 import firebase from 'firebase/compat/app';
+      // authDomain: "mynegociolocal-ff456.firebaseapp.com",
+      // storageBucket: "mynegociolocal-ff456.appspot.com",
+      // messagingSenderId: "1065896843167",
+      // appId: "1:1065896843167:web:91450dadf9ed723b0f8faa",
+// apiKey: "AIzaSyAUhiNd9lLFuj7xDYbR4K9BZXaydWWSOd0",
+      // measurementId: "G-YMZ8Z9T8E5"
+
 firebase.initializeApp({
-      apiKey: "AIzaSyAUhiNd9lLFuj7xDYbR4K9BZXaydWWSOd0",
-      authDomain: "mynegociolocal-ff456.firebaseapp.com",
+      apiKey: "AIzaSyDo-ZR5SUf-oOVuEmilXJZLheYgw2jhnNU",
       projectId: "mynegociolocal-ff456",
-      storageBucket: "mynegociolocal-ff456.appspot.com",
-      messagingSenderId: "1065896843167",
-      appId: "1:1065896843167:web:91450dadf9ed723b0f8faa",
-      measurementId: "G-YMZ8Z9T8E5"
 })
       
 import axios from 'axios'
@@ -252,16 +255,16 @@ export default {
     error: false,
     errortel: false,
     newUser: {
-      name: 'Alex david',
+      name: 'alex dewitt',
       ubicacion: {lat: '', long: ''},
-      email: 'lakess00511@gmail.com',
+      email: 'alexdewitt005@hotmail.com',
       telefono: '4434126238',
-      id_localidad: null,
+      id_localidad: 2,
       password: 'alfa1*33',
-      referencia: 'casa amarilla porton negro',
-      calle: 'pipila',
-      calle_1: 'benito juarez',
-      calle_2: 'niños heroes',
+      referencia: 'calle y un centro de salud',
+      calle: 'venemerito',
+      calle_1: 'rosalia',
+      calle_2: 'chinito de china',
       numero_e: '13',
       numero_i: '',
       tel_verify: false
@@ -279,6 +282,7 @@ export default {
         this.dialog = false
         this.newUser.tel_verify = true
         this.register()
+        //window.location.href=url;
     })
   },
   mounted() {
@@ -302,7 +306,7 @@ export default {
           }
         },
         signInOptions: [{
-            provider: window.FirebasePlugin.auth.PhoneAuthProvider.PROVIDER_ID,
+            provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
             defaultCountry: 'MX',
             defaultNationalNumber: this.newUser.telefono,
           }
@@ -313,10 +317,14 @@ export default {
         
         }
       };
+        //quitar en produccion
+        const auth = firebase.auth()
+        auth.useEmulator("http://127.0.0.1:9099")
+        //hata aqui
+
         var ui = new firebaseui.auth.AuthUI(firebase.auth());
         ui.start('#firebaseui-auth-container', uiConfig)
     },
-
     validate () {
       if (this.$refs.formregister.validate()) {
           this.register();
@@ -325,12 +333,10 @@ export default {
       }
     },
     register () {
-
       axios.post(this.ruta + 'registrar', this.newUser).then((data) => {
         if (data.status == 200) {
             this.errortel = false
             this.error = false
-            
             if ('email' in data.data.errors) {
               // this.$nextTick(()=>{
                 this.$refs.emailregister.$refs.input.focus()
@@ -347,6 +353,9 @@ export default {
              this.verificartelefono()
              // alert('correcto') 
             }
+            //else{
+              //window.location.href=url+'login'; 
+            //}
         } else {
           alert('hubo un error')
         }
@@ -377,7 +386,7 @@ export default {
    }
 }
 
-.v-btn:not(.v-btn--depressed):not(.v-btn--flat) {
+/*.v-btn:not(.v-btn--depressed):not(.v-btn--flat) {
   background-color: #c9f0c9 !important;
-}
+}*/
 </style>

@@ -16,8 +16,19 @@ public static function getcategoriasmenu(){
      //        ->whereIn('c.ids',['MNL5523','MNL1636','MNL6841','MNL5092'])
      //        ->groupBy('c.ids')->limit(4)->orderBy('child.name', 'asc')->get();
    
-
-
+    }
+    public static function attributo_categoria($IdCatergoria){
+        return CategoriasModel::from('atributos_categoria as atc')
+            ->select(DB::raw('att.id_atributo as id,att.name,att.unidades AS unidad'))
+            ->Join('atributos as att', 'atc.id_atributo', '=','att.id_atributo' ,'left')
+            ->where('atc.id_categoria','=',$IdCatergoria)
+            ->get();
+    }
+    public static function getCategorias(){
+         return CategoriasModel::select('name','ids','status')
+        ->where('status',1)
+        ->where('nivel',1)
+        ->get();
     }
 
     public static function getallcategorias(){
@@ -170,4 +181,10 @@ static private function count_categoria_general_per_producto(){
                     ->where('c.parent_id','=','0')
                     ->get();
 }
+   public static function getselectCategorias(){
+         return CategoriasModel::select('name','ids as id_categoria','nivel')
+        ->where('status',1)
+        ->where('nivel','>=',3)
+        ->get();
+    }
 }

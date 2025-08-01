@@ -15,7 +15,7 @@
    :envio="{{$detalle['envio']}}" 
    :propina="{{$detalle['propina']}}" 
    :items="{{$detalle['carrito']}}"
-   :adres="{{$detalle['adress']}}"
+   :adress="{{$detalle['adress']}}"
 	></wiewpagar>
 
 		@endsection		            

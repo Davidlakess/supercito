@@ -1,5 +1,5 @@
 <template>
-	<div  style="margin: 20px 14px;">   
+	<div >   
       <ul class="list-group list-group-flush" >
         <li class="list-group-item" >
           <span style="font-weight: bold; font-size: 17px;"> Productos de {{categoria.name}}</span>
@@ -7,6 +7,7 @@
         <li class="list-group-item" >
           <ul class="list-group list-group-flush">
             <li class="list-group-item" v-for="pro in items">
+              
               <b-row align-h="justify" class="poner-borde">                
                 <b-col  col="6" class="p-0">
                   <div class="img-wrap"> 

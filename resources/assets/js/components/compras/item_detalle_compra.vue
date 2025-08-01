@@ -2,13 +2,14 @@
   <div style="margin: 10px;">
       <b-row  style="padding-bottom: 15px;">
   		 	<b-col cols="12" lg="6" class="text-lg-left" >
-            <b-badge v-if="statuspro==0" pill variant="warning" class="f14">Pendiente</b-badge>
-  		 	    <b-badge v-if="statuspro==1" pill variant="success" class="f14">Entregado</b-badge>
-            <b-badge v-if="statuspro==2" pill variant="danger"  class="f14">No Enviado</b-badge>
+  		 	    <b-badge v-if="statuspro==1" pill  variant="warning" class="f14">Pendiente</b-badge>
+            <b-badge v-if="statuspro==2" pill variant="info"  class="f14">Enviado</b-badge>
+            <b-badge v-if="statuspro==3" pill variant="success" class="f14">Entregado</b-badge>
+            <b-badge v-if="statuspro==4" pill variant="danger" class="f14">Cancelado</b-badge>
   		 	</b-col>
 
   		 	<b-col cols="12" lg="6" class="text-lg-right btn-v-c">
-  		 	   <b-button v-if="statuspro==1" variant="outline-primary" :href="ruta+'item/'+id+'-'+descripcion">
+  		 	   <b-button v-if="statuspro==2" variant="outline-primary" :href="ruta+'item/'+id+'-'+descripcion">
             Volver a Comprar
           </b-button>
   		 	</b-col>

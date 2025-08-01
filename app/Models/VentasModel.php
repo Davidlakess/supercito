@@ -8,6 +8,7 @@ use App\Models\domicilio_envio;
 use App\Models\DetalleCarritos;
 use App\Models\CarritoModel;
 use App\Models\DetalleVentas;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 class VentasModel extends Model
 {
@@ -15,7 +16,66 @@ class VentasModel extends Model
 
     protected $table = "ventas";
     
-    static public function Agregarventa ($propina,$id_localidad, $TipoEntrega, $tipo_pago, $fecha_entrega, $id_domicilio) {
+    public static function getVentas () {
+        return VentasModel::select(
+                'ventas.status_entrega',
+                'ventas.created_at as fecha',
+                'ventas.envio',
+                'ventas.propina',
+                'ventas.id_venta',
+                'users.name as name_user'
+            )   
+         ->Join('users', 'ventas.id_usuario', '=','users.id' ,'left')
+            ->get();
+    }
+    
+    public static function getVenta($id_venta){
+        return VentasModel::select(
+            'users.name',
+            'users.telefono',
+            'ventas.id_venta',
+            'ventas.tipo_entrega',
+            'ventas.fecha_entrega',
+            'ventas.envio',
+            'ventas.propina',
+            'ventas.id_usuario',
+            'ventas.created_at as fecha'
+        )
+        ->Join('users', 'users.id', '=', 'ventas.id_usuario','left')
+        ->where('ventas.id_venta',$id_venta)->first();
+    }
+    
+    public static function getProductosEnVenta($id_venta){
+        return DetalleVentas::select(
+          'productos.name',
+          'detalle_ventas.precio',
+          'detalle_ventas.cantidad',
+          'detalle_ventas.status',
+          'detalle_ventas.id_detalle',
+          'imgs.src'
+        )
+        ->Join('productos', 'productos.id', '=', 'detalle_ventas.id_producto','left')
+        ->Join('imgs', 'productos.id', '=','imgs.id_producto' ,'left')
+        ->where('detalle_ventas.id_venta',$id_venta)->get();
+    }
+    
+    public static function getDomicilioVenta($id_usuario){
+        return domicilio_envio::select(
+            'calle',
+            'numero_e',
+            'numero_i',
+            'calle_1',
+            'calle_2',
+            'long',
+            'referencia',
+            'lat',
+            'name'
+        )
+         ->Join('localidades', 'localidades.id_localidad', '=', 'domicilio_envio.id_localidad','left')
+        ->where('domicilio_envio.id_usuario',$id_usuario)->first();
+    }
+
+    static public function Agregarventa ($propina,$id_localidad, $TipoEntrega, $fecha_entrega, $id_domicilio) {
         $fecha = '';
         if ($TipoEntrega == 1) {
              
@@ -33,11 +93,10 @@ class VentasModel extends Model
             $venta = new  VentasModel();
             $venta->id_usuario=auth()->id();
             $venta->propina=$propina;
-            $venta->envio=$envio->envio;
+            $venta->envio=$envio['envio'];
             $venta->id_domicilio = $id_domicilio;
             $venta->id_venta=$id_venta;
             $venta->fecha_entrega=$fecha;
-            $venta->tipo_pago = $tipo_pago;
             $venta->save();
             return $id_venta;
             //descomentar en servidor
@@ -155,5 +214,23 @@ class VentasModel extends Model
         ->get();
 
         return $ventas;
+    }
+    static public function cancelar_producto_pedido($id_detalle){
+
+            try {
+
+            $sql="update detalle_ventas set status_entrega =  ? where id_detalle = ? ";
+            
+            return DB::update($sql, array(4,$id_detalle));
+
+            } catch (Exception $e) {
+                
+            }
+
+    }
+    static public function authorizar_producto_pedido(){
+
+
+
     }
 }

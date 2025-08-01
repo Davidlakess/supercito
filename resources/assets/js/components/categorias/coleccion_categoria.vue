@@ -1,9 +1,8 @@
 <template>
-  <v-container fluid>
       <v-layout wrap style="width: 100%;">
           <!-- IMAGEN DE LA CATEGORIA -->
         <v-flex md4 style="padding-right: 15px;">
-            <v-card height="auto"> 
+            <v-card height="auto" style="width: 108%;"> 
             <a :href="formaturl(titulo,idc)">
                 <img :src="ruta+'uploads/'+img" loading="lazy" >
               </a>
@@ -20,20 +19,18 @@
       <v-layout row wrap>
         <template v-for="(item,key) in pro" >
             <v-flex style="margin:3px; max-width: 24%;">
-              <v-card height="auto" class="card-collection" :key="key"> 
-                  <div>
+              <v-card height="auto" class="card-collection " :key="key" > 
                     <!-- <a :href="formaturlItem(item.name,item.ids)">
                         <img style="height: 215px;" :src="ruta+'/uploads/'+item.img" loading="lazy" >
                     </a> -->
                     <a-img height="215" :to="item.ids" :src="item.img" :name="item.name"></a-img>
-                  </div>
+
               </v-card>
             </v-flex>
         </template>
       </v-layout>
     </v-flex>
 </v-layout>
-</v-container>
 </template>
  <script type="text/javascript">
 export default {
@@ -69,6 +66,10 @@ export default {
  -->
  <style>
    .card-collection{
-    width: 200px;
+    /*width: 200px;*/
+    height: 188px; 
+    width: 188px;
+    margin-left: 16%;
    }
  </style>
+

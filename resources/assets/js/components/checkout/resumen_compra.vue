@@ -114,22 +114,14 @@
                       'Te enviamos el detalle a tu correo ¡Gracias!',
                       'success'
                       ).then(() =>{ 
-                       
-
-
-                        // BLOQUEAR EL BOTON DE ENVIAR PARA QUE NO SE PUEDA ENVIAR DE NUEVO
                           window.location.href=url+'miscompras'; 
-                      
                       })
-   
               }else{
-
                 swal.fire(
                   '¡Ooops!',
                   'Algo salio mal :(',
                   'error'
                   )
-
               }
               
             }).catch(error => {

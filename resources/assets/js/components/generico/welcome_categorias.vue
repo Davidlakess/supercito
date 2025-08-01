@@ -40,9 +40,9 @@
 
 
 
-.v-btn:not(.v-btn--depressed):not(.v-btn--flat) {
+/*.v-btn:not(.v-btn--depressed):not(.v-btn--flat) {
   background-color: #c9f0c9 !important;
-}
+}*/
 .v-carousel__prev .v-btn:hover, .v-carousel__next .v-btn:hover {
  background-color: #e1e1e1 !important;
 }

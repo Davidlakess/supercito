@@ -1,5 +1,5 @@
 <template>
-<div style="display: flex;">
+<div style="display: flex;margin-bottom: 10%;">
     <b-container id="content-p" class="ancho-ideal" fluid>
       <b-row align-h="center">
           <b-col md="12">
@@ -23,7 +23,7 @@
         <b-col md="10" style="margin-top: 10px; padding-left: 75px">
   					<b-row align-h="center">
       				<template v-for="pro in paginatedItems">
-               <b-col md="4" style="margin-bottom: 18px;padding-left: 0px;">
+               <b-col md="3" style="margin-bottom: 18px;padding-left: 0px;">
                   <producto-solo
                   :img="pro.img"
                   :name="pro.name"
@@ -111,7 +111,7 @@ export default {
       // },
       PageChanged (page) {
         this.paginate(this.perPage, page - 1)
-      },
+      }
   }
 }
 </script>

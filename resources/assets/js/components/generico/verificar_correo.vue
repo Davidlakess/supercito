@@ -1,6 +1,6 @@
 <template>
 	<div> 
-	  	<b-button style="background-color: transparent;" @click="enviarcodigoemail()" class="confirm_correo" >Verificar correoo </b-button>
+	  	<b-button style="background-color: transparent;" @click="enviarcodigoemail()" class="confirm_correo" >Verificar correo </b-button>
 	</div>
 </template>
 <script type="text/javascript">

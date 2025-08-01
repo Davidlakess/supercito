@@ -15,6 +15,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Mail;
 use Twilio\Rest\Client;
 use Twilio\Jwt\ClientToken;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -78,6 +79,9 @@ class RegisterController extends Controller
         }else{
            if($datap['tel_verify']){
                 $this->create($datap);
+                
+              Auth::attempt(['email' => $datap['email'], 'password' => $datap['password']]);
+                
                 return response()->json(array('errors' => $validator->errors(), 'res' =>true));
            }else {
                 return response()->json(array('errors' => $validator->errors(),'res' =>'verify'));
@@ -123,6 +127,7 @@ class RegisterController extends Controller
         $domicilio->save();
         event(new Registered($user));
         
+
         // Enviar SMS
         // $token = getenv("TWILIO_TOKEN");
         // $twilio_sid = getenv("TWILIO_SID");

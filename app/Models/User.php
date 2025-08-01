@@ -43,4 +43,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function getUsers(){
+        return User::select('id','name','email','telefono','email_confirm')
+        ->where('isAdmin','0')
+        ->get();
+    }
 }

@@ -1,5 +1,13 @@
 <template>	
 <div>	
+    <v-flex xs12 sm12 v-if="nav">
+        <v-breadcrumbs :items="nav">
+          <template v-slot:item="props">
+            <!-- <v-router-link :to="props.item.name" >{{props.item.name}}</v-router-link> -->
+            <a :href="formaturl(props.item.name,props.item.id)" style="font-size: 10px;" :class="[props.item.disabled && 'disabled']">{{ props.item.name.toUpperCase() }}</a>
+          </template>
+        </v-breadcrumbs>
+      </v-flex>
 	<b-card style="border:0;" class="c">
           <b-col md="12" lg="12" style="padding: 15px;">
             <div style="display: flex; flex-direction: column;"> 
@@ -155,9 +163,10 @@ import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css'
 components: {
     CoolLightBox,
   },
-props:['características','logeado','producto','extras'],
+props:['características','logeado','producto','extras','nav'],
     data() {
       return {
+      ruta:url,
       index: null,
       fields: ['clave', 'valor'],
       selected:'1',
@@ -213,7 +222,11 @@ props:['características','logeado','producto','extras'],
          addsaltos(str){
           var texto = str.replace(/\n/g, "<br />");
           return texto;
-      },
+        },
+        formaturl(value,id){
+            let result=this.ruta+'c/'+value+'/'+id;
+            return result;
+        },
       addcantidad(){
           if(this.cantextra <= this.producto.stock){
               

@@ -15,7 +15,7 @@ this is de place red hot
     indicators
     controls
     background="#ababab"
-    img-width="984"
+  
     img-height="450"
     style="text-shadow: 1px 1px 2px #333; margin:0; padding: 0;"
   >    
@@ -26,8 +26,7 @@ this is de place red hot
       >
     </b-carousel-slide>   
   </b-carousel>
-
-  <template v-if="historial.length!=0">  
+<template v-if="historial">  
       <div class="super-titulo-m" style="padding-left: 15px;"><span>Productos vistos recientemente</span>
       </div>
       <div class="carousel-h">
@@ -41,11 +40,10 @@ this is de place red hot
         </div>
       </div>
   </template>
-
     <template v-if="productosnuevos">  
       <div class="super-titulo-m" style="padding-left: 15px;"><span>Productos nuevos</span>
       </div>
-      <div class="carousel-h" style=" margin-bottom: 10px;">
+      <div class="carousel-h">
         <div  v-for="pro in productosnuevos">
            <productos-swiper 
           :name="pro.name"
@@ -56,12 +54,8 @@ this is de place red hot
         </div>
       </div>
     </template>
-   <!--  <pre>
-      
-    {{productos}}
-    </pre> -->
     <template v-for="item in productos">  
-      <producto-card-mobil v-if="item.items.length!=0" :items="item.items" :categoria="item.categoria">
+      <producto-card-mobil v-if="item.items.length!=0" :items="item.items[0]" :categoria="item.categoria">
       </producto-card-mobil>
     </template>
 

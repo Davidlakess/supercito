@@ -14,7 +14,7 @@
 
   	  <div v-else>	
 	  <span class="wish-icon" v-b-tooltip.hover title="Agregar a tu lista de favoritos">
-	  	<a href="/middlewishlist">
+	  	<a href="/favoritos">
 	   <i class="fa fa-heart-o wish-clase"></i>
 	  	</a>
 	  </span>

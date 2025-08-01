@@ -44,6 +44,13 @@ public $categoria;
           return response()->json($categorias);
 
     }
+   public function attributo_categoria($IdCatergoria){
+    return CategoriasModel::from('atributos_categoria as atc')
+        ->select(DB::raw('atc.id,att.name,att.unidades AS unidad'))
+        ->Join('atributos as att', 'atc.id_atributo', '=','att.id_atributo' ,'left')
+        ->where('atc.id_categoria','=',$IdCatergoria)
+        ->get();
+    }
     public function getlocalidades(){
 
         

@@ -71,13 +71,10 @@ class CarritoModel extends Model
             ->where('id_usuario',auth()->id())->first();
 
                 $ev=[];
-                $adr='0';
-                if($domicilio['id_localidad'] != null){
-                    $ev = domicilio_envio::from('localidades')->select('envio','name')
-                    ->where('id_localidad',$domicilio->id_localidad)->first();
-                    $adr=$domicilio;
-                    $adr->name=$ev->name;
-                }
+                $ev = domicilio_envio::from('localidades')->select('envio','name')
+                ->where('id_localidad',$domicilio->id_localidad)->first();
+                $adr=$domicilio;
+                $adr->name=$ev->name;
 
             return $detalle= array(
                 'carrito' =>$carrito,
@@ -125,11 +122,16 @@ class CarritoModel extends Model
     }
     public static function  addfavoritos($IdProducto){
             
-        $id=auth()->id();
-        $favorito=new FavoritosModel();
-        $favorito->id_producto=$IdProducto;
-        $favorito->id_usuario=$id;
-        $favorito->save();
+        $id = FavoritosModel::select('id_producto')
+        ->where('id_producto',$IdProducto)->first();   
+
+        if(!$id){
+            $id=auth()->id();
+            $favorito=new FavoritosModel();
+            $favorito->id_producto=$IdProducto;
+            $favorito->id_usuario=$id;
+            $favorito->save();
+        }
 
     }
     
@@ -137,7 +139,7 @@ class CarritoModel extends Model
 
         $id=auth()->id();
         $id_fav= FavoritosModel::select('id_wish')
-         ->where('id_producto',$request->id)
+         ->where('id_producto',$IdProducto)
          ->where('id_usuario',$id)    
          ->get(); 
 

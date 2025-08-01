@@ -4,6 +4,8 @@
           :características="características"
           :producto="producto"
           :extras="extras"
+          :pro="pro"
+          :nav="nav"
           :logeado="logeado"
         ></detalle-mobil>
     </div>
@@ -13,6 +15,7 @@
           :nav="nav"
           :caracter="características"
           :extras="chunk(extras,4)"
+          :pro="chunk(pro,4)"
           :logeado="logeado"
         ></productos-detalleweb>
       </div>
@@ -28,6 +31,7 @@
     },
     props:[
     'producto',
+    'pro',
     'extras',
     'logeado',
     'nav',

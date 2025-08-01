@@ -1,5 +1,6 @@
 <template>
-			<b-card style="margin-bottom: 30%;">
+    <!-- style="margin-bottom: 30%;" -->
+			<b-card >
 				<div style="font-size: 23px; text-align: center;font-weight: 600;">Detallado de Pedido</div>
 				<b-col cols="12" style="margin-top: 10px;">
 					<div style="display: flex;flex-direction: column;text-align: center;font-size: 16px;">
@@ -23,13 +24,14 @@
                 <b-row>
                     <b-col cols="6" >
 
-                      <b-badge v-if="item.status==0" pill variant="warning" class="f14">Pendiente</b-badge>
-                      <b-badge v-if="item.status==1" pill variant="success" class="f14">Entregado</b-badge>
-                      <b-badge v-if="item.status==2" pill variant="danger"  class="f14">No Entregado</b-badge>
+                       <b-badge v-if="item.status==1" pill  variant="warning" class="f14">Pendiente</b-badge>
+            <b-badge v-if="item.status==2" pill variant="info"  class="f14">Enviado</b-badge>
+            <b-badge v-if="item.status==3" pill variant="success" class="f14">Entregado</b-badge>
+            <b-badge v-if="item.status==4" pill variant="danger" class="f14">Cancelado</b-badge>
                     </b-col>
 
                     <b-col cols="6" style="text-align: end;padding-right: 0;">
-                       <b-button v-if="item.status==1" size="sm" variant="outline-primary" :href="ruta+'item/'+item.ids+'-'+item.descripcion">
+                       <b-button v-if="item.status==2" size="sm" variant="outline-primary" :href="ruta+'item/'+item.ids+'-'+item.descripcion">
                         Volver a Comprar
                       </b-button>
                     </b-col>

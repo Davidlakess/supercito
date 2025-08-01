@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
      <link href='https://fonts.googleapis.com/css?family=Roboto:400,700|Material+Icons' rel="stylesheet" type="text/css">
+
     <!-- Styles -->
     <style>
 /*  Carousel precio y descripcion*/
@@ -220,7 +221,9 @@ header h1 {
   cursor: pointer;
 
 }
-
+#menu {
+background-color: rgb(236, 2, 2);
+}
 /*.bar1, .bar2, .bar3 {
   width: 35px;
   height: 5px;
@@ -398,8 +401,14 @@ header h1 {
   </form>
 
   <v-app id="app">
+    <v-toolbar dark color="dark" height="25">
 
-  <b-navbar toggleable="lg"  class="menu" id="menu" style="background-color: rgb(236, 2, 2);">
+      <div style="text-align: center;font-size: 11px; width: 100%;">
+      <span ><i class="fa fa-truck "></i> ENTREGA GRATIS EN COMPRAS MAYORES A $499 MXN</span>
+      </div>
+    <!-- <v-toolbar-title class="white--text">Title</v-toolbar-title> -->
+  </v-toolbar>
+  <b-navbar toggleable="lg"  class="menu" id="menu" >
     <b-navbar-brand style="margin-left: 25px;color: #fff;" href="{{ url('/') }}">
       <!-- <img alt="" style="width: 50px;" src="/my.png"> -->
     <!-- {{ config('app.name', 'Laravel') }} -->
@@ -458,7 +467,6 @@ header h1 {
 
 <script type="text/javascript">
  var url= document.head.querySelector('meta[name="base_url"]').content+'/';
-
  // var url="http://192.168.1.72:8080/"; 
  
 // function myFunction(x) {
@@ -466,6 +474,6 @@ header h1 {
 // }
 
 </script>
-     <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

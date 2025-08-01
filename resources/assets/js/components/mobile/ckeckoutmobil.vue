@@ -84,16 +84,10 @@ export default {
     },
     mounted() {
     	this.direccion=this.adress;
-    	this.verificardomicilio();
     	this.envio=this.precioenvio;
     	this.getresumen();
     },
      created() {
-      eventBus.$on('adddomicilio', (data) => {
-        	this.domicilio_si=true;
-        	this.direccion=data;
-        	this.id_localidad=data.id_localidad;
-      })
     	eventBus.$on('setenvio', (envio) => {    
           this.envio=envio; 
 	    });

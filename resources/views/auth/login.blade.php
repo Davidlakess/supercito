@@ -1,17 +1,15 @@
 @extends('layouts.app2')
-
 @section('content')
 <b-container fluid>
   <b-row align-h="center">
     <b-col cols="12" md="6">
-      <b-card title="Iniciar sesión" class="my-3" >
+      <b-card title="Iniciar sesión" class="my-3" style="margin-bottom:  15% !important;">
         @if ($errors->any())
             <b-alert show variant="danger">
               <ul>
                 <li>{{$errors->first()}}</li>
               </ul>
             </b-alert>
-          
         @endif
         
          @if (isset($csrf_error))
@@ -48,7 +46,22 @@
         </b-form >
 
          <b-row align-h="center">
-              <b-col cols="12" class="text-md-right text-sm-center">
+            <b-col cols="12" sm="12">
+               <b-form-group>
+                <div style="text-align:center;">
+                  
+                   <v-btn round style="text-decoration: none;" color="primary" style="text-decoration: none;" dark href="{{ route('social.auth', 'facebook') }}" > <v-icon>facebook</v-icon> Iniciar con Facebook</v-btn>
+                </div>
+              
+              </b-form-group>
+            </b-col>
+
+               <b-col cols="6" class="text-md-left text-sm-center">
+                <b-button variant="link" href="{{ route('register') }}">
+                        Registrarme?
+                </b-button>
+          </b-col>
+              <b-col cols="6" class="text-md-right text-sm-center">
                 <b-button variant="link" href="{{ route('password.request') }}">
                         Olvidaste tu Contraseña?
                 </b-button>
@@ -64,3 +77,6 @@
   // window.eventBus.$emit('register',true)
   document.title ='Iniciar Sesion';
 </script>
+
+
+

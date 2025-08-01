@@ -27,10 +27,10 @@
 	      </b-carousel-slide>
 	    </b-carousel>
 		
-		
+		{{historial}}
 		<b-container id="content-p"  fluid>
   		<b-row align-h="center">
-		 <b-col md="12" v-if="historial.length!=0">
+		 <b-col md="12" v-if="historial.length !== 0">
 			<div class="super-titulo"><span>Productos Vistos Recientemente</span></div>
 			  <s-carousel>
 			    <template v-for="(item,indx) in historial">  
@@ -173,9 +173,11 @@
 				selected: 'MNL6841',
 				coleccion: [],
 			        options: [
-			        {name:'Despensa',id:'MNL6841'},
+			        {name:'Despens',id:'MNL6841'},
 			        {name:'Hogar y Lavanderia',id:'MNL1636'},
-			        {name:'Higiene Personal',id:'MNL7890'}]
+			        {name:'Higiene Personal',id:'MNL7890'},
+			        {name:'Bebes',id:'MNL4859'},
+			        ]
 			}
 		},
 		created() {

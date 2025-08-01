@@ -4,6 +4,7 @@
 <div>
    <producto-detalle  
    :producto="{{$data['producto']}}"  
+   :pro="{{$data['productos']}}"  
    :extras="{{$data['extra']}}"  
    :nav="{{$data['nav']}}"
    :características="{{$data['caracteristicas']}}"

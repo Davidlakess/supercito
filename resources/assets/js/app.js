@@ -8,6 +8,7 @@ require('./bootstrap');
 import  BootstrapVue from 'bootstrap-vue'
 import VueSweetalert2 from "vue-sweetalert2"
 import Vue from 'vue' 
+
 window.eventBus = new Vue()
 import Vuetify from 'vuetify'
 // import 'vuetify/dist/vuetify.min.css'
@@ -28,7 +29,7 @@ window.isMobil = function () {
              return false
            }
       }
-
+      
 // Vue.component('register', require('./components/auth/register.vue').default)
 // Vue.component('usuarios', require('./components/admin/usuarios.vue').default)
 // Vue.component('c-table', require('./components/c-table.vue').default)
@@ -69,6 +70,12 @@ Vue.component('ckeckoutmobil', require('./components/mobile/ckeckoutmobil.vue').
 Vue.component('wiewpagar', require('./components/viewpagar.vue').default);
 Vue.component('productocategoria', require('./components/productos/producto_por_categoria.vue').default);
 
+
+
+// Vue.component('component-resumen', require('./components/admin/Ventas/componet_resumen.vue').default);
+Vue.component('component-direccion', require('./components/admin/Ventas/component_direccion.vue').default);
+Vue.component('component-detalle-producto', require('./components/admin/Ventas/component_detalle_productos.vue').default);
+
 // detalle
 // Vue.component('carousel', require('./components/mycarousel.vue').default);
 // Vue.component('carousel-mini', require('./components/Generico/carousel/carousel_mini.vue').default);
@@ -88,24 +95,24 @@ Vue.component('productocategoria', require('./components/productos/producto_por_
 
 // Chekout
 // Vue.component('registrodomicilio', require('./components/checkout/registrodomicilio.vue').default);
-// Vue.component('content-domicilio', require('./components/checkout/content_domicilio.vue').default);
+Vue.component('content-domicilio', require('./components/checkout/content_domicilio.vue').default);
 
 Vue.component('all-categorias', require('./components/categorias/all_categorias.vue').default)
 
 Vue.use(BootstrapVue)
-import * as VueGoogleMaps from 'vue2-google-maps'
+//import * as VueGoogleMaps from 'vue2-google-maps'
  const toast = window.toast= swal.mixin({
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
             timer: 3000
           });
-Vue.use(VueGoogleMaps, {
-  load: {
-    key: process.env.VUE_APP_APY_GOOGLE,
-    libraries: 'places',
-  },
-})
+// Vue.use(VueGoogleMaps, {
+//   load: {
+//     key: 'AIzaSyBCKiIqCdZGrVxx06LSbe7uG3zXOq1Cz5k',
+//     libraries: 'places',
+//   },
+// })
 console.log(process.env.NODE_ENV)
 const app = new Vue({
     el: '#app',

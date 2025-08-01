@@ -168,8 +168,9 @@
       </b-col>
     </b-row> 
  	</b-card>
-      <v-carousel  class ="carousel-pro" :interval="6000"  light hide-delimiters Default style="box-shadow: none;">
-        <template v-for="(item,indx) in  productos"> 
+    <div class="super-titulo"><span>Productos que te pueden interesar.... </span></div>
+    <v-carousel  class ="carousel-pro" :interval="8000"  light hide-delimiters Default style="box-shadow: none;">
+        <template v-for="(item,indx) in  pro"> 
       <v-carousel-item :key="indx">
         <v-container fluid grid-list-sm>
           <v-layout>
@@ -177,7 +178,7 @@
             <v-flex xs3 md3 :key="key">
               <v-card height="auto" style=" margin: 9px; box-shadow: none;"> 
                 <producto-carousel
-                :idproducto="slider.id_producto"
+                :idproducto="slider.ids"
                 :img="slider.img"
                 :name="slider.name"
                 :precio="slider.precio"
@@ -212,6 +213,7 @@ export default{
   },
     props:[
     'producto',
+    'pro',
     'extras',
     'logeado',
     'nav',
@@ -224,74 +226,12 @@ export default{
           ruta:url,
           selected:'1',
           cantextra:1,
-          options: [],
-          productos: [
-            [
-          {
-            ids: 1,
-            img: 'MNL0b742Tj_1638082561.jpg',
-            name: 'rico pollo sobre 100gr',
-            precio: 10,
-            stock: 2
-          },
-          {
-            ids: 2,
-            img: 'MNL0DmEs7J_1638083022.webp',
-            name: 'algun producto por ahi',
-            precio: 30,
-            stock: 3
-          },
-          {
-            ids: 2,
-            img: 'MNL1O2harq_1638082939.webp',
-            name: 'precios',
-            precio: 30,
-            stock: 3
-          },
-          {
-            ids: 2,
-            img: 'MNL1O2harq_1638082939.webp',
-            name: 'precios',
-            precio: 30,
-            stock: 3
-          }
-          ],
-          [
-            {
-            ids: 1,
-            img: 'MNL2D10Fcq_1626468106.jpg',
-            name: 'rico pollo sobre 100gr',
-            precio: 10,
-            stock: 2
-          },
-          {
-            ids: 2,
-            img: 'MNL2jthb8H_1628461484.jpg',
-            name: 'algun producto por ahi',
-            precio: 30,
-            stock: 3
-          },
-          {
-            ids: 2,
-            img: 'MNL4Hg0CDT_1638082934.jpg',
-            name: 'pros y contras',
-            precio: 30,
-            stock: '0.00'
-          },
-          {
-            ids: 2,
-            img: 'MNL4Hg0CDT_1638082934.jpg',
-            name: 'productos',
-            precio: 30,
-            stock: 3
-          }
-          ]
-        ]
+          options: []
+          
       }
     },
 
     mounted(){
-
           this.producto.stock=parseInt(this.producto.stock);
           document.title =this.producto.name;
 
@@ -360,7 +300,7 @@ export default{
         if (item.status === 'awesome') return 'table-success'
       },
       
-      formaturl(value,id){
+    formaturl(value,id){
         let result=this.ruta+'c/'+value+'/'+id;
         return result;
     },

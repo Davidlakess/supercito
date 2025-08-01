@@ -42,7 +42,7 @@
           if(data.data.res){
            toast.fire({
             icon:'success',
-            title: (this.cant >= 1) ? '¡Exito! '+this.cant + this.text1: '¡Exito! '+this.cant + this.text2
+            title: (this.cant == 1) ? '¡Exito! '+this.cant + this.text1: '¡Exito! '+this.cant + this.text2
             })
           }else{
             toast.fire({

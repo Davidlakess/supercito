@@ -13,11 +13,13 @@ class DetalleController extends Controller
 
         $aux=explode("-", $ids);
         $id=$aux[0];
+        $productos=[];
         $producto=[];
         $logeado=\auth::check();
 
         if($logeado){
-               $producto=Productos::get_productodetalle($id);
+            $producto=Productos::get_productodetalle($id);
+
         }else{
 
         $producto=Productos::from('productos as p')->select(DB::raw('p.id as ids,p.name,p.descripcion AS des,p.precio,p.stock,p.id_categoria AS id_c ,GROUP_CONCAT(imgs.src SEPARATOR ",") AS imgs,0 as wish'))
@@ -25,6 +27,7 @@ class DetalleController extends Controller
             ->where('p.id','=',$id)
             ->groupBy('p.id')
             ->get();
+
         }
 
         // print_r($producto[0]);
@@ -38,16 +41,22 @@ class DetalleController extends Controller
             ->Join('atributos_categoria as atc', 'atp.id_atributo', '=','atc.id' ,'left')
             ->Join('atributos as att', 'atc.id_atributo', '=','att.id_atributo' ,'left')
             ->where('atp.id_producto','=',$producto[0]->ids)->get();
-
+            
             $proextra= Productos::select('id as ids','name','stock','src as img' ,'precio','id_categoria')
             ->Join('imgs', 'id', '=','id_producto' ,'left')
             ->where('id','!=',$producto[0]->ids)
             ->where('id_categoria','=',$producto[0]->id_c)
             ->inRandomOrder()->limit(20)->get();
 
+            $productos= Productos::select('id as ids','name','stock','src as img' ,'precio','id_categoria')
+            ->Join('imgs', 'id', '=','id_producto' ,'left')
+            ->where('id_categoria','!=',$producto[0]->id_c)
+            ->inRandomOrder()->limit(20)->get();
+
             $detalle=array(
                 'producto'=>json_encode($producto[0]),
                 'caracteristicas'=>json_encode($infoproducto),
+                'productos'=>json_encode($productos),
                 'nav'=>($breadcum)?json_encode($breadcum):'false',
                 'extra'=>json_encode($proextra)
             );

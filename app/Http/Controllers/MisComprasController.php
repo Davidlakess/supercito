@@ -49,6 +49,7 @@ class MisComprasController extends Controller
     {
             $venta = VentasModel::select(
                 'status as statusventa',
+                'status_entrega',
                 'created_at as fecha',
                 'envio',
                 'propina'
@@ -64,7 +65,7 @@ class MisComprasController extends Controller
             'productos.id as ids',
     		'detalle_ventas.cantidad',
     		'detalle_ventas.precio',
-            'detalle_ventas.status',
+            'detalle_ventas.status_entrega as status',
     		'users.name',
             'users.telefono',
     		'imgs.src as img'

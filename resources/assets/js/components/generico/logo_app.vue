@@ -8,7 +8,7 @@
 	export default{
 		data () {
 			return {
-				ruta: url
+				ruta: window.url
 			}
 		}
 	}

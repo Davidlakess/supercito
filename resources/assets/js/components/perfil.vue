@@ -1,89 +1,90 @@
 <template>
- <div id="animation_box" class="animated fadeInLeft">
-    <b-container id="content-p" style="display: inline; vertical-align: middle;"> 
-     <div class="super-title">
-        <b-row align-h="center">
-          <b-col cols="12" >
-            <span>Mi Perfil</span>
-          </b-col>
-        </b-row>
-      </div>
-      <div class="card card-login mx-auto text-center">
-        <b-container>
-          <b-form method="POST" @submit.prevent="actualizarusuario()">
-	          <b-row align-h="center">
-	            <b-col cols="12" lg="6" class="text-justify" >
-	            	<span>Nombre del producto </span>
-	              <b-form-input 
-                placeholder="Nombre Usuario" v-model="name" autofocus></b-form-input>
-	            </b-col>
+<div style="margin-bottom: 10%;">
+    <v-container>
+      <v-layout>
+        <v-flex xs12 sm12 offset-sm1>
 
-              <b-col cols="12" lg="6"  class="text-justify"  style="margin-bottom: 25px;">
-                <span>E-Mail</span>  
-                <b-form-input placeholder="Correo electronico" readonly :value="user.email" ></b-form-input>
-              </b-col>
-         <!--      <b-col sm="12" lg="12"  class="text-center"  style="margin-bottom: 10px;">
-                <span>Dirección</span>  
-              </b-col> -->
+           <v-card>
+        <v-card-title>
+          <span class="headline">Datos de Usuario</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container grid-list-md>
+            <v-layout wrap>
+              <v-flex xs12 sm6 md6>
+                <v-text-field label="Nombre" outline ></v-text-field>
+              </v-flex>
+                <v-flex xs12 sm6 md6>
+                <v-text-field label="Telefono" outline ></v-text-field>
+              </v-flex>
+                  <v-flex xs12 sm12 md12>
+                <v-text-field label="Correo Electronico" outline ></v-text-field>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" flat @click="">Guardar</v-btn>
+        </v-card-actions>
+      </v-card>
+      <v-card>
+        <v-card-title>
+          <span class="headline">Datos de Domicilio</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container grid-list-md>
+            <v-layout wrap>
+            <v-flex xs12 sm6 md4 d-flex>
+                  <v-select
+                    :items="items"
+                    label="Localidad"
+                    outline
+                  ></v-select>
+                </v-flex>
+                <v-flex xs12 sm6 md4>
+                <v-text-field label="Calle" outline ></v-text-field>
+              </v-flex>
+                  <v-flex xs12 sm12 md4>
+                <v-text-field label="Numero Exterior" outline ></v-text-field>
+              </v-flex>
+                <v-flex xs12 sm12 md4>
+                <v-text-field label="Numero Interior" outline ></v-text-field>
+              </v-flex>
+                <v-flex xs12 sm12 md4>
+                <v-text-field label="Entre la Calle ?" outline ></v-text-field>
+              </v-flex>
+                <v-flex xs12 sm12 md4>
+                <v-text-field label="Y la calle ?" outline ></v-text-field>
+              </v-flex>
+                <v-flex xs12 sm12 md12>
 
-             <!--  <b-col sm="12" lg="4"  class="text-center"  style="margin-bottom: 10px;">
-                <span>Localidad</span>  
-                <b-form-input placeholder="" readonly v-model="user.localidad"></b-form-input>
-              </b-col>
-              <b-col sm="12" lg="4"  class="text-center"  style="margin-bottom: 10px;">
-                <span>telefono</span>  
-                <b-form-input placeholder="" readonly v-model="user.telefono"></b-form-input>
-              </b-col>
-              <b-col sm="12" lg="4"  class="text-center"  style="margin-bottom: 10px;">
-                <span>numero exterior</span>  
-                <b-form-input placeholder="Numero exterior" v-model="user.numero_e"></b-form-input>
-              </b-col>
-              <b-col sm="12" lg="4"  class="text-center"  style="margin-bottom: 10px;">
-                <span>numero interiror</span>  
-                <b-form-input placeholder="Numero interior" v-model="user.numero_i"></b-form-input>
-              </b-col>
-              <b-col sm="12" lg="8"  class="text-center"  style="margin-bottom: 10px;">
-                <span>Calle</span>  
-                <b-form-input placeholder="" v-model="user.calle" ></b-form-input>
-              </b-col>
-
-              <b-col sm="12" lg="12"  class="text-center"  style="margin-bottom: 10px;">
-                <span>entre las calles:</span>  
-              </b-col>
-              
-              <b-col sm="12" lg="6"  class="text-center"  style="margin-bottom: 10px;">
-                <span>calle 1</span>  
-                <b-form-input placeholder="" v-model="user.calle_1"></b-form-input>
-              </b-col>
-              <b-col sm="12" lg="6"  class="text-center"  style="margin-bottom: 10px;">
-                <span>calle 2</span>  
-                <b-form-input placeholder="" v-model="user.calle_2"></b-form-input>
-              </b-col> -->
-  <!-- 
-	            <b-col cols="12" class="text-justify">
-		           	<span>Avatar</span>  
-                <figure class="card card-product" style="width: 100px;">
-                  <div class="img-wrap"> 
-                    <img :src="'uploads/'+user.avatar" alt="imagen">
-                  </div>
-                </figure>
-              </b-col> -->
-
-              <b-col cols="12" >
-                <button type="submit"  class="btns btns-default" >Guardar</button>
-              </b-col>
-            </b-row>
-          </b-form>  
-        </b-container>
-      </div>
-    </b-container>
-  </div>
+                <v-textarea
+          label="Referencia"
+          outline
+          value=""
+          hint="Referencia de tu domicilio, ejemplo: porton negro o frente una escuela"
+        ></v-textarea>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" flat @click="">Guardar</v-btn>
+        </v-card-actions>
+      </v-card>
+      </v-flex>
+      </v-layout>
+    </v-container>
+</div>
 </template>
 <script type="text/javascript">
 	export default {
     data() {
       return{
-        name:''
+        name:'',
+        items: ['Alvaro', 'Singuio']
       }
     },
     mounted(){

@@ -14,60 +14,73 @@
 				<b-col cols="12" lg="8" style="padding-top: 0%;" >
 					<v-card>
 						<v-card-title primary-title>
-							<div style="  font-weight: 501;font-size: 18px; padding-left: 10px;margin-top: 15px;">Tipo de entrega...</div>
+							<div style="  font-weight: 501;font-size: 18px; padding-left: 10px;margin-top: 15px;">Tipo de entrega... {{adress}}</div>
 						</v-card-title>
 						 <v-card-text>
       			<v-expansion-panel>
+
+
          			<v-radio-group v-model="radioentrega" @change="a()" :mandatory="false">
         			<v-expansion-panel-content
-			          v-for="(item,i) in tiposentrega"
 			          :key="i"
 			          expand-icon="mdi-menu-down">
 			          <template v-slot:header>
-			            <v-radio class="pago" style="font-weight: bold; text-transform: uppercase;" :label="item.name" :value="item.id">
+			            <v-radio class="pago" style="font-weight: bold; text-transform: uppercase;" :label="tiposentrega[0].name" :value="tiposentrega[0].id">
 			            </v-radio>
 			          </template>
-          			<div v-if="item.id === 2 " style="margin-left: 30px; display:flex;">
-		          <v-menu
-		          v-model="menu"
-		          :close-on-content-click="false"
-		          full-width
-		          style="margin-right: 10px;"
-		        >
-		          <template v-slot:activator="{ on }">
-		            <v-text-field
-		              :value="computedDateFormattedMomentjs()"
-		              clearable
-		              prepend-icon="event"
-		              label="Fecha de entrega"
-		              readonly
-		              v-on="on"
-		            ></v-text-field>
-		          </template>
-		          <v-date-picker
+			          	<div v-if ="adress != 0">
+					         <div style="margin-bottom: 2%; font-size: 20px;margin-left: 25px;" cols="12">
+											<span>Enviar a...</span>		
+									</div>
+									<div style="display: grid;text-transform: uppercase; font-size: 13px; margin-left: 30px; margin-bottom: 10px;">
+			              <span><strong>Localidad: </strong> {{domicilio.name}} ,Michoacán</span>
+			              <span><strong>Calle: </strong> {{domicilio.calle}}</span>
+			              <span><strong>Numero Exterior: </strong> #{{domicilio.numero_e}}</span>
+			              <span><strong>Numero Interior: </strong> #{{domicilio.numero_i}} </span>
+			              <span><strong>Entre Calles: </strong> {{domicilio.calle_1}}</span>
+			              <span><strong>Y:</strong> {{domicilio.calle_2}}</span>
+			              <span><strong>Referencia: </strong> {{domicilio.referencia}}</span>
+										</div>
+     							</div>
+     	     	<div v-else >
+     	     		 <v-btn small color="primary" dark>Agrega una direccion</v-btn>
+     	     	</div>
+		        </v-expansion-panel-content>
 
-		            color="red lighten-1"
-		            v-model="date"
-		            :min="dateaux"
-		            @change="menu = false"
-		            locale="es"
-		          ></v-date-picker>
-		        </v-menu>
-		         </div>
-         	<div v-else >
-             	<div style="margin-bottom: 2%; font-size: 20px;margin-left: 25px;" cols="12">
-									<span>Enviar a...</span>		
-							</div>
-							<div style="display: grid;text-transform: uppercase; font-size: 13px; margin-left: 30px; margin-bottom: 10px;">
-	              <span><strong>Localidad: </strong> {{domicilio.name}} ,Michoacán</span>
-	              <span><strong>Calle: </strong> {{domicilio.calle}}</span>
-	              <span><strong>Numero Exterior: </strong> #{{domicilio.numero_e}}</span>
-	              <span><strong>Numero Interior: </strong> #{{domicilio.numero_i}} </span>
-	              <span><strong>Entre Calles: </strong> {{domicilio.calle_1}}</span>
-	              <span><strong>Y:</strong> {{domicilio.calle_2}}</span>
-	              <span><strong>Referencia: </strong> {{domicilio.referencia}}</span>
-								</div>
-					  	</div>
+		        	<v-expansion-panel-content
+			          :key="i"
+			          expand-icon="mdi-menu-down">
+			          <template v-slot:header>
+			            <v-radio class="pago" style="font-weight: bold; text-transform: uppercase;" :label="tiposentrega[1].name" :value="tiposentrega[1].id">
+			            </v-radio>
+			          </template>
+
+
+			          	  <v-menu
+					          v-model="menu"
+					          :close-on-content-click="false"
+					          full-width
+					          style="margin-right: 10px;"
+					        >
+					          <template v-slot:activator="{ on }">
+					            <v-text-field
+					              :value="computedDateFormattedMomentjs()"
+					              clearable
+					              prepend-icon="event"
+					              label="Fecha de entrega"
+					              readonly
+					              v-on="on"
+					            ></v-text-field>
+					          </template>
+					          <v-date-picker
+
+					            color="red lighten-1"
+					            v-model="date"
+					            :min="dateaux"
+					            @change="menu = false"
+					            locale="es"
+					          ></v-date-picker>
+					        </v-menu>
 		        </v-expansion-panel-content>
 		      </v-radio-group>
 		    </v-expansion-panel>
